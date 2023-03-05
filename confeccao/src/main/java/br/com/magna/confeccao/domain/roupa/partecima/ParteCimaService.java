@@ -28,7 +28,7 @@ public class ParteCimaService {
 		Manga manga = null;
 		Decote decote = null;
 	
-		if(!mangaRepository.existsById(dados.idManga())) {
+		if(mangaRepository.existsById(dados.idManga())) {
 			manga = mangaRepository.getReferenceById(dados.idManga());
 		}
 		if(decoteRepository.existsById(dados.idDecote())) {

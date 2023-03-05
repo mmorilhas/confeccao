@@ -1,5 +1,6 @@
 package br.com.magna.confeccao.domain.tecido;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.domain.fibra.Fibra;
 import br.com.magna.confeccao.domain.fibra.FibraRepository;
+import ch.qos.logback.core.encoder.ByteArrayUtil;
 
 @Service
 public class TecidoService {
@@ -41,15 +43,17 @@ public class TecidoService {
 	
 	
 	public Collection<Fibra> criarComposicao(Long[] ids) {
-		Collection<Fibra> composicao = new HashSet<>();
+		Collection<Fibra> fibras = new HashSet<>();
 		
 		for (Long dado : ids) {
 			if (fibraRepository.existsById(dado)) {
 				Fibra fibra = fibraRepository.getReferenceById(dado);
-				composicao.add(fibra);
+				fibras.add(fibra);
 			}
 
 		}
+		
+		Collection<Fibra> composicao = new ArrayList<>(fibras);
 
 		return composicao;
 	}

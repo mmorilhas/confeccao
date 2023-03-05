@@ -34,4 +34,7 @@ public class ParteDeCimaController {
 	public ResponseEntity listar(){
 		return ResponseEntity.status(HttpStatus.OK).body(parteCimaService.listagem());
 	}
+	
+	
+	
 }

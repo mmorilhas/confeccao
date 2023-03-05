@@ -33,7 +33,8 @@ public class Tecido {
 	private Long id;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private Collection<Fibra> composicao = new HashSet<>();
+	
+	private Collection<Fibra> composicao = new ArrayList<>();
 	
 	@Enumerated(EnumType.STRING)
 	private Construcao construcao;
