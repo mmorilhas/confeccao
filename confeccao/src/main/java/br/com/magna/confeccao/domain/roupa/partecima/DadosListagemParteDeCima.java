@@ -23,8 +23,5 @@ public record DadosListagemParteDeCima(
 		
 		) {
 	
-	public DadosListagemParteDeCima(ParteDeCima p) {
-		this(p.getId(), p.getNome(), p.getTamanho(), p.getGenero(), p.getCor(), p.getModelagem(), p.getTecido(),p.getTemEstampa(), p.getTemBordado(), p.getManga(), p.getDecote(), p.getCava(), p.getCapuz());
-	}
 
 }

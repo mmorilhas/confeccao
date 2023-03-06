@@ -16,8 +16,6 @@ ALTER TABLE roupas ADD CONSTRAINT fk_roupa_modelagem FOREIGN KEY (modelagem_id) 
 
 ALTER TABLE roupas ADD CONSTRAINT fk_roupa_tecido FOREIGN KEY (tecido_id) REFERENCES tecidos;
 
-ALTER TABLE parte_de_cima ADD CONSTRAINT fk_parteCima_decote FOREIGN KEY (decote_id) REFERENCES decotes;
+ALTER TABLE roupas ADD CONSTRAINT fk_roupa_decote FOREIGN KEY (decote_id) REFERENCES decotes;
 
-ALTER TABLE parte_de_cima ADD CONSTRAINT fk_parteCima_manga FOREIGN KEY (manga_id) REFERENCES mangas;
-
-ALTER TABLE parte_de_cima ADD CONSTRAINT fk_parteCima_roupa FOREIGN KEY (id) REFERENCES roupas;
+ALTER TABLE roupas ADD CONSTRAINT fk_roupa_manga FOREIGN KEY (manga_id) REFERENCES mangas;

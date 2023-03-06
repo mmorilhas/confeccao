@@ -94,18 +94,14 @@ CREATE TABLE roupas (
     tem_estampa boolean,
     modelagem_id bigint,
     tecido_id bigint,
-    primary key (id)
-);
-
-CREATE TABLE parte_de_cima (
-	capuz boolean,
-    cava varchar(50),
-    id bigint not null,
     decote_id bigint,
     manga_id bigint,
+    capuz boolean,
+    cava varchar(50),
+
+
     primary key (id)
 );
-
 
 
 

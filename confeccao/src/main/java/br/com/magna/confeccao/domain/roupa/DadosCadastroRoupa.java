@@ -1,6 +1,7 @@
 package br.com.magna.confeccao.domain.roupa;
 
 import br.com.magna.confeccao.domain.modelagem.DadosCadastroModelagem;
+import br.com.magna.confeccao.domain.roupa.partecima.DadosCadastroParteDeCima;
 import br.com.magna.confeccao.domain.tecido.DadosCadastroTecido;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +16,8 @@ public record DadosCadastroRoupa(
 		@NotNull @Valid DadosCadastroModelagem modelagem,
 		@NotNull @Valid DadosCadastroTecido tecido,
 		Boolean temEstampa,
-		Boolean temBordado
+		Boolean temBordado,
+		@NotNull @Valid DadosCadastroParteDeCima parteDeCima
 	
 		
 		) {

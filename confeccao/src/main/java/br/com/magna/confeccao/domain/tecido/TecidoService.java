@@ -9,16 +9,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.domain.fibra.Fibra;
 import br.com.magna.confeccao.domain.fibra.FibraRepository;
-import ch.qos.logback.core.encoder.ByteArrayUtil;
 
 @Service
 public class TecidoService {
 	@Autowired
 	private FibraRepository fibraRepository;
 
-	
-	@Autowired
-	private TecidoRepository tecidoRepository;
 	
 	public Tecido criarTecido(DadosCadastroTecido dados) {
 		var construcao = dados.construcao();

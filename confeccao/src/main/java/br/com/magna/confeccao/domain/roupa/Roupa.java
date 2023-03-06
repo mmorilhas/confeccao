@@ -1,10 +1,10 @@
 package br.com.magna.confeccao.domain.roupa;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
-import br.com.magna.confeccao.domain.tecido.DadosCadastroTecido;
+import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
-import br.com.magna.confeccao.domain.tecido.TecidoService;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,31 +31,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public abstract class Roupa{
+public class Roupa{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	private Long id;
 	
-	protected String nome;
+	private String nome;
 	
-	protected Integer tamanho;
+	private Integer tamanho;
 	
 	@Enumerated(EnumType.STRING)
-	protected Genero genero;
+	private Genero genero;
 	
-	protected String cor;
+	private String cor;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "modelagem_id")
-	protected Modelagem modelagem;
+	private Modelagem modelagem;
 	
-	protected Boolean temEstampa;
+	private Boolean temEstampa;
 	
-	protected Boolean temBordado;
+	private Boolean temBordado;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "tecido_id")
-	protected Tecido tecido;
+	private Tecido tecido;
+	
+	@Embedded
+	private ParteDeCima parteDeCima;
 
 	
 	

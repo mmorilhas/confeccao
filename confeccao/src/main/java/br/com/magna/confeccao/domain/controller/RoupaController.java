@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magna.confeccao.domain.roupa.partecima.DadosCadastroParteDeCima;
-import br.com.magna.confeccao.domain.roupa.partecima.ParteCimaService;
+import br.com.magna.confeccao.domain.roupa.DadosCadastroRoupa;
+import br.com.magna.confeccao.domain.roupa.partecima.RoupaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("confeccao")
-public class ParteDeCimaController {
+public class RoupaController {
 
 	
-	@Autowired private ParteCimaService parteCimaService;
+	@Autowired private RoupaService roupaService;
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroParteDeCima dados) {
-		parteCimaService.criarParteDeCima(dados);
+	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroRoupa dados) {
+		roupaService.criarRoupa(dados);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		
 	}
@@ -32,7 +32,7 @@ public class ParteDeCimaController {
 	
 	@GetMapping
 	public ResponseEntity listar(){
-		return ResponseEntity.status(HttpStatus.OK).body(parteCimaService.listagem());
+		return ResponseEntity.status(HttpStatus.OK).body(roupaService.listagem());
 	}
 	
 	
