@@ -29,7 +29,6 @@ import lombok.Setter;
 @Table(name = "roupas")
 @Entity (name = "Roupa")
 @Inheritance(strategy = InheritanceType.JOINED)
-
 @Getter
 @Setter
 @NoArgsConstructor

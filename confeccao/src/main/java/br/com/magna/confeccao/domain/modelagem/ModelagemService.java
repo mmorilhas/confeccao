@@ -3,8 +3,6 @@ package br.com.magna.confeccao.domain.modelagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.magna.confeccao.domain.roupa.DadosDetalhamentoRoupa;
-
 @Service
 public class ModelagemService {
 

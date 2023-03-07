@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.magna.confeccao.domain.fibra.Fibra;
 import jakarta.persistence.CascadeType;
@@ -32,6 +33,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tecido {
 
 	@Id

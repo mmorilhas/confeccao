@@ -3,7 +3,9 @@ package br.com.magna.confeccao.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.magna.confeccao.domain.roupa.DadosAtualizaRoupa;
 import br.com.magna.confeccao.domain.roupa.DadosCadastroRoupa;
 import br.com.magna.confeccao.domain.roupa.DadosDetalhamentoRoupa;
+import br.com.magna.confeccao.domain.roupa.RoupaRepository;
 import br.com.magna.confeccao.domain.roupa.partecima.RoupaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -44,6 +47,19 @@ public class RoupaController {
 		
 		return ResponseEntity.ok(roupaService.atualizar(dados));
 		
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity detalhar(@PathVariable Long id) {
+		
+		return ResponseEntity.ok(roupaService.detalharPorId(id));
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity deletar(@PathVariable Long id) {
+		roupaService.deletar(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 	
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
+import br.com.magna.confeccao.domain.modelagem.ModelagemRepository;
 import br.com.magna.confeccao.domain.modelagem.ModelagemService;
 import br.com.magna.confeccao.domain.roupa.DadosAtualizaRoupa;
 import br.com.magna.confeccao.domain.roupa.DadosCadastroRoupa;
@@ -13,6 +14,7 @@ import br.com.magna.confeccao.domain.roupa.DadosDetalhamentoRoupa;
 import br.com.magna.confeccao.domain.roupa.Roupa;
 import br.com.magna.confeccao.domain.roupa.RoupaRepository;
 import br.com.magna.confeccao.domain.tecido.Tecido;
+import br.com.magna.confeccao.domain.tecido.TecidoRepository;
 import br.com.magna.confeccao.domain.tecido.TecidoService;
 
 @Service
@@ -21,6 +23,8 @@ public class RoupaService {
 	
 	@Autowired private TecidoService tecidoService;
 	@Autowired private ModelagemService modelagemService;
+	@Autowired private ModelagemRepository modelagemRepository;
+	@Autowired private TecidoRepository tecidoRepository;
 	@Autowired private ParteDeCimaService parteDeCimaService;
 	
 	@Autowired private RoupaRepository roupaRepository;
@@ -46,6 +50,8 @@ public class RoupaService {
 	
 	public DadosDetalhamentoRoupa atualizar(DadosAtualizaRoupa dados) {
 		Roupa roupa = roupaRepository.getReferenceById(dados.id());
+		Long idModelagem = roupa.getModelagem().getId();
+		Long idTecido = roupa.getTecido().getId();
 		
 		if(dados.nome() != null) {
 			roupa.setNome(dados.nome());
@@ -67,13 +73,23 @@ public class RoupaService {
 		}
 		
 		if(dados.modelagem() != null) {
-			Modelagem modelagem = modelagemService.atualizaModelagem(dados.modelagem());
-			roupa.setModelagem(modelagem);
+			if(dados.modelagem().id() != idModelagem) {
+				Modelagem modelagem = modelagemRepository.getReferenceById(dados.modelagem().id());
+				roupa.setModelagem(modelagem);
+			} else {
+				Modelagem modelagem = modelagemService.atualizaModelagem(dados.modelagem());
+				roupa.setModelagem(modelagem);
+			}
 		}
 		
 		if(dados.tecido() != null) {
-			Tecido tecido = tecidoService.atualizaTecido(dados.tecido());
-			roupa.setTecido(tecido);
+			if(dados.tecido().id() != idTecido) {
+				Tecido tecido = tecidoRepository.getReferenceById(dados.tecido().id());
+				roupa.setTecido(tecido);
+			}else {
+				Tecido tecido = tecidoService.atualizaTecido(dados.tecido());
+				roupa.setTecido(tecido);
+			}
 		}
 		
 		if(dados.parteDeCima() != null) {
@@ -88,5 +104,21 @@ public class RoupaService {
 		
 		return dadosDetalhamentoRoupa;
 			
+	}
+	
+	
+	public DadosDetalhamentoRoupa detalharPorId(Long id) {
+		Roupa roupa = roupaRepository.getReferenceById(id);
+		
+		DadosDetalhamentoRoupa dadosDetalhamentoRoupa = new DadosDetalhamentoRoupa(roupa);
+
+		return dadosDetalhamentoRoupa;
+	}
+	
+	
+	public void deletar(Long id) {
+		Roupa roupa = roupaRepository.getReferenceById(id);
+		
+		roupaRepository.delete(roupa);
 	}
 }
