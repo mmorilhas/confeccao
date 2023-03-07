@@ -4,7 +4,7 @@ import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
 
-public record DadosListagemRoupa(
+public record DadosDetalhamentoRoupa(
 	
 		
 		Long id,
@@ -21,7 +21,7 @@ public record DadosListagemRoupa(
 		
 		) {
 
-	public DadosListagemRoupa(Roupa roupa) {
+	public DadosDetalhamentoRoupa(Roupa roupa) {
 		this(roupa.getId(), roupa.getNome(), roupa.getTamanho(), roupa.getGenero(), roupa.getCor(), roupa.getModelagem(), roupa.getTecido(), roupa.getTemEstampa(), roupa.getTemBordado(), roupa.getParteDeCima());
 	}
 	

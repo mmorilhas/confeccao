@@ -2,7 +2,7 @@ package br.com.magna.confeccao.domain.modelagem;
 
 public record DadosDetalhamentoModelagem(
 		
-		
+		Long id,
 		Silhueta silhueta, 
 		Fechamento fechamento,
 		
@@ -24,6 +24,10 @@ public record DadosDetalhamentoModelagem(
 		
 		
 		) {
+	
+	public DadosDetalhamentoModelagem(Modelagem modelagem) {
+		this(modelagem.getId(), modelagem.getSilhueta(), modelagem.getFechamento(), modelagem.getCinto(), modelagem.getPassantes(), modelagem.getPences(), modelagem.getPala(), modelagem.getPrega(), modelagem.getBabado(), modelagem.getFenda(), modelagem.getBolsos(), modelagem.getForro(), modelagem.getBarra());
+	}
 
 
 }

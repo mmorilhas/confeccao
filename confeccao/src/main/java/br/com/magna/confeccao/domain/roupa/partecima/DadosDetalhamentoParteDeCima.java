@@ -1,10 +1,10 @@
 package br.com.magna.confeccao.domain.roupa.partecima;
 
-import br.com.magna.confeccao.domain.roupa.DadosListagemRoupa;
+import br.com.magna.confeccao.domain.roupa.DadosDetalhamentoRoupa;
 
 public record DadosDetalhamentoParteDeCima(
 		
-		DadosListagemRoupa roupa,
+		DadosDetalhamentoRoupa roupa,
 		Manga manga,
 		Decote decote,
 		String cava,

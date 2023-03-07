@@ -1,6 +1,8 @@
 ALTER TABLE fibras ADD CONSTRAINT nomeUnicoFibra unique (nome_fibra);
 
-ALTER TABLE tecidos_composicao ADD CONSTRAINT fk_composicao_fibra FOREIGN KEY (composicao_id) REFERENCES fibras;
+--ALTER TABLE tecidos ADD CONSTRAINT fk_tecido_composicao FOREIGN KEY  (id) REFERENCES tecidos_composicao;
+
+ALTER TABLE tecidos_composicao ADD CONSTRAINT fk_composicao_fibra FOREIGN KEY (fibras_id) REFERENCES fibras;
 
 ALTER TABLE tecidos_composicao ADD CONSTRAINT fk_composicao_tecido FOREIGN KEY (tecido_id) REFERENCES tecidos;
 

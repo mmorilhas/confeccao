@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.domain.roupa;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Table(name = "roupas")
@@ -28,6 +31,7 @@ import lombok.NoArgsConstructor;
 @Inheritance(strategy = InheritanceType.JOINED)
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")

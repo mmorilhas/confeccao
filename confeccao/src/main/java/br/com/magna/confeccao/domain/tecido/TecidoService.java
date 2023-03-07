@@ -15,11 +15,13 @@ public class TecidoService {
 	@Autowired
 	private FibraRepository fibraRepository;
 
-	
-	public Tecido criarTecido(DadosCadastroTecido dados) {
-		var construcao = dados.construcao();
+	@Autowired
+	TecidoRepository tecidoRepository;
 
-		var composicao = criarComposicao(dados.idDasFibras());
+	public Tecido criarTecido(DadosCadastroTecido dados) {
+		Construcao construcao = dados.construcao();
+
+		Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
 		String tipoTecido = calcularTipoTecido(composicao);
 		String tempoSecagem = calcularTempoSecagem(composicao);
 		Boolean respiravel = calcularEhRespiravel(composicao);
@@ -27,20 +29,42 @@ public class TecidoService {
 		String elasticidade = calcularElasticidade(composicao);
 		String comportamentoTermico = calcularComportamentoTermico(composicao);
 		String resistencia = calcularResistencia(composicao);
-		
-		var tecido = new Tecido(construcao, composicao, tipoTecido,tempoSecagem, respiravel, absorcaoAgua, elasticidade, comportamentoTermico, resistencia);
-		
-		
-		
+
+		Tecido tecido = new Tecido(construcao, composicao, tipoTecido, tempoSecagem, respiravel, absorcaoAgua,
+				elasticidade, comportamentoTermico, resistencia);
+
 		return tecido;
-		
-	
+
 	}
-	
-	
+
+	public Tecido atualizaTecido(DadosAtualizaTecido dados) {
+		Tecido tecido = tecidoRepository.getReferenceById(dados.id());
+
+		if (dados.idDasFibras() != null && dados.idDasFibras().length > 0) {
+			Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
+			tecido.setComposicao(composicao);
+			tecido.setTipoDeTecido(calcularTipoTecido(composicao));
+			tecido.setTempoSecagem(calcularTempoSecagem(composicao));
+			tecido.setRespiravel(calcularEhRespiravel(composicao));
+			tecido.setAbsorcaoAgua(calcularAbsorcaoAgua(composicao));
+			tecido.setElasticidade(calcularElasticidade(composicao));
+			tecido.setComportamentoTermico(calcularComportamentoTermico(composicao));
+			tecido.setResistencia(calcularResistencia(composicao));
+
+		}
+
+		if (dados.construcao() != null) {
+			tecido.setConstrucao(dados.construcao());
+		}
+
+		tecidoRepository.save(tecido);
+
+		return tecido;
+	}
+
 	public Collection<Fibra> criarComposicao(Long[] ids) {
 		Collection<Fibra> fibras = new HashSet<>();
-		
+
 		for (Long dado : ids) {
 			if (fibraRepository.existsById(dado)) {
 				Fibra fibra = fibraRepository.getReferenceById(dado);
@@ -48,7 +72,7 @@ public class TecidoService {
 			}
 
 		}
-		
+
 		Collection<Fibra> composicao = new ArrayList<>(fibras);
 
 		return composicao;
@@ -56,195 +80,187 @@ public class TecidoService {
 
 	public String calcularTipoTecido(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
-		
+
 		String tipoTecido;
 		String natural = "natural";
 		String artificial = "artificial";
 		String sintetica = "sintetica";
-		
+
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getTipoFibra();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.contains(natural)) {
-				
-			if(caracteristicas.size() > 1) {
+
+		if (caracteristicas.contains(natural)) {
+
+			if (caracteristicas.size() > 1) {
 				tipoTecido = "misto";
 			} else {
 				tipoTecido = "natural";
 			}
-			
-		}else {
-			
+
+		} else {
+
 			tipoTecido = "sintetico";
 		}
-			
+
 		return tipoTecido;
 	}
-	
+
 	public String calcularTempoSecagem(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
 		String tempoSecagem;
-		
-		String t1= "rapido";
+
+		String t1 = "rapido";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getTempoSecagem();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.size() > 1) {
+
+		if (caracteristicas.size() > 1) {
 			tempoSecagem = "mediano";
-			
+
 		} else {
-			if(caracteristicas.contains(t1)) {
+			if (caracteristicas.contains(t1)) {
 				tempoSecagem = "rapido";
 			} else {
 				tempoSecagem = "lento";
 			}
 		}
 
-		
 		return tempoSecagem;
 	}
-	
+
 	public Boolean calcularEhRespiravel(Collection<Fibra> composicao) {
 		Boolean respiravel;
 		Integer trues = 0;
 		Integer falses = 0;
-		
-		
+
 		for (Fibra fibra : composicao) {
 			Boolean dado = fibra.getRespiravel();
-			if(dado == true) {
+			if (dado == true) {
 				trues++;
 			} else {
 				falses++;
 			}
 		}
-		
-		if(trues >= falses) {
+
+		if (trues >= falses) {
 			respiravel = true;
 		} else {
 			respiravel = false;
 		}
-		
+
 		return respiravel;
-	
-	
+
 	}
 
 	public String calcularAbsorcaoAgua(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
 		String absorcaoAgua;
-		
-		String a1= "hidrofobico";
+
+		String a1 = "hidrofobico";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getAbsorcaoAgua();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.size() > 1) {
+
+		if (caracteristicas.size() > 1) {
 			absorcaoAgua = "absorve agua moderadamente";
-			
+
 		} else {
-			if(caracteristicas.contains(a1)) {
+			if (caracteristicas.contains(a1)) {
 				absorcaoAgua = "hidrofobico";
 			} else {
 				absorcaoAgua = "hidrofilico";
 			}
 		}
 
-		
 		return absorcaoAgua;
 	}
-	
+
 	public String calcularElasticidade(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
 		String elasticidade;
-		
-		String e1= "baixa";
+
+		String e1 = "baixa";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getElasticidade();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.size() > 1) {
+
+		if (caracteristicas.size() > 1) {
 			elasticidade = "moderada";
-			
+
 		} else {
-			if(caracteristicas.contains(e1)) {
+			if (caracteristicas.contains(e1)) {
 				elasticidade = "baixa";
 			} else {
 				elasticidade = "alta";
 			}
 		}
 
-		
 		return elasticidade;
 	}
 
 	public String calcularComportamentoTermico(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
 		String compTermico;
-		
-		String ct1= "boa conservacao de calor";
+
+		String ct1 = "boa conservacao de calor";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getComportamentoTermico();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.size() > 1) {
+
+		if (caracteristicas.size() > 1) {
 			compTermico = "regulacao de calor moderada";
-			
+
 		} else {
-			if(caracteristicas.contains(ct1)) {
+			if (caracteristicas.contains(ct1)) {
 				compTermico = "boa conservacao de calor";
 			} else {
 				compTermico = "boa regulacao de calor";
 			}
 		}
 
-		
 		return compTermico;
 	}
 
 	public String calcularResistencia(Collection<Fibra> composicao) {
 		Collection<String> caracteristicas = new HashSet<>();
 		String resistencia;
-		
+
 		String rModerada = "moderada";
 		String rBaixa = "baixa";
-		String rAlta= "alta";
-
+		String rAlta = "alta";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getResistencia();
 			caracteristicas.add(dado);
 		}
-		
-		if(caracteristicas.size() > 1) {
-			if(caracteristicas.contains(rBaixa)) {
+
+		if (caracteristicas.size() > 1) {
+			if (caracteristicas.contains(rBaixa)) {
 				resistencia = "moderada";
 			} else {
 				resistencia = "alta";
 			}
-			
+
 		} else {
-			if(caracteristicas.contains(rBaixa)) {
+			if (caracteristicas.contains(rBaixa)) {
 				resistencia = "baixa";
-			} else if (caracteristicas.contains(rModerada)){
+			} else if (caracteristicas.contains(rModerada)) {
 				resistencia = "moderada";
 			} else {
 				resistencia = "alta";
 			}
 		}
 
-		
 		return resistencia;
 	}
 }

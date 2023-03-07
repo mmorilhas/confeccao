@@ -1,7 +1,10 @@
 package br.com.magna.confeccao.domain.modelagem;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,13 +15,16 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "modelagens")
 @Entity(name = "Modelagem")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Modelagem {
 
 	@Id
@@ -48,9 +54,13 @@ public class Modelagem {
 	private Boolean cinto;
 	private Boolean passantes;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL
+			//, fetch = FetchType.EAGER
+			)
 	@JoinColumn(name = "silhueta_id")
 	private Silhueta silhueta;
 
 
+
+	
 }

@@ -64,7 +64,8 @@ CREATE TABLE tecidos (
 
 CREATE TABLE tecidos_composicao (
 	tecido_id bigint not null,
-	composicao_id bigint not null
+	fibras_id bigint not null
+
 );
 
 CREATE TABLE modelagens (
