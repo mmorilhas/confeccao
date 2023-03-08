@@ -1,7 +1,5 @@
 package br.com.magna.confeccao.domain.roupa;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;

@@ -3,6 +3,8 @@ package br.com.magna.confeccao.domain.roupa.partecima;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
@@ -46,6 +48,11 @@ public class RoupaService {
 		
 		return roupas;
 		
+	}
+	
+	public Pageable listar(Pageable paginacao) {
+		Page<Object> page = roupaRepository.findAll(paginacao).map(DadosDetalhamentoRoupa::new);
+		return paginacao;
 	}
 	
 	public DadosDetalhamentoRoupa atualizar(DadosAtualizaRoupa dados) {
