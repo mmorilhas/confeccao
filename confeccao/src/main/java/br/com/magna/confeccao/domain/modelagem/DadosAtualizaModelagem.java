@@ -1,10 +1,7 @@
 package br.com.magna.confeccao.domain.modelagem;
 
-import jakarta.validation.constraints.NotNull;
-
 public record DadosAtualizaModelagem(
 		
-		@NotNull Long id,
 		Long idSilhueta, 
 		Long idFechamento,
 		

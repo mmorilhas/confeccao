@@ -46,8 +46,7 @@ public class Roupa{
 	
 	private String cor;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "modelagem_id")
+	@Embedded
 	private Modelagem modelagem;
 	
 	private Boolean temEstampa;

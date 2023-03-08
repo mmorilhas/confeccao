@@ -38,7 +38,7 @@ public class ModelagemService {
 			prega = pregaRepository.getReferenceById(dados.idPrega());
 		}
 
-		Modelagem modelagem = new Modelagem(null, dados.bolsos(), fechamento, barra, dados.pala(), prega,
+		Modelagem modelagem = new Modelagem(dados.bolsos(), fechamento, barra, dados.pala(), prega,
 				dados.pences(), dados.fenda(), dados.forro(), dados.babado(), dados.cinto(), dados.passantes(),
 				silhueta);
 
@@ -47,9 +47,7 @@ public class ModelagemService {
 	}
 
 	public Modelagem atualizaModelagem(DadosAtualizaModelagem dados) {
-		Modelagem modelagem = modelagemRepository.getReferenceById(dados.id());
-		
-
+		Modelagem modelagem = new Modelagem();
 
 		if (dados.idSilhueta() != null) {
 			Silhueta silhueta = verificaSilhueta(dados.idSilhueta());
@@ -92,8 +90,6 @@ public class ModelagemService {
 			modelagem.setForro(dados.forro());
 		}
 		
-
-		modelagemRepository.save(modelagem);
 		
 		return modelagem;
 	}

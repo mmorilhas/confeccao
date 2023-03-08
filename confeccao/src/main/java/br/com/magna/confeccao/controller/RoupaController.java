@@ -1,10 +1,6 @@
 package br.com.magna.confeccao.controller;
 
-import java.awt.print.Pageable;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.domain.roupa.DadosAtualizaRoupa;
 import br.com.magna.confeccao.domain.roupa.DadosCadastroRoupa;
-import br.com.magna.confeccao.domain.roupa.DadosDetalhamentoRoupa;
-import br.com.magna.confeccao.domain.roupa.partecima.RoupaService;
+import br.com.magna.confeccao.domain.roupa.RoupaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
