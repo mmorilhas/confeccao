@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 public class ModelagemService {
 
 	@Autowired
-	ModelagemRepository modelagemRepository;
-	@Autowired
 	FechamentoRepository fechamentoRepository;
 	@Autowired
 	BarraRepository barraRepository;

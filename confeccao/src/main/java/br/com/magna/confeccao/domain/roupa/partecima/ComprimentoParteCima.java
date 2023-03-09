@@ -12,18 +12,20 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "cavas")
-@Entity(name = "Cava")
+
+@Table(name= "comprimentos_parte_de_cima")
+@Entity(name = "ComprimentoParteCima")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Cava {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class ComprimentoParteCima {
+		
+		@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+		private Long id;
+		
+		private String descricao;
+		
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	private String descricao;
 }

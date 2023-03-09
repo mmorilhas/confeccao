@@ -25,16 +25,54 @@ CREATE TABLE tipos_pregas(
 
 CREATE TABLE mangas (
 	id bigserial not null,
-    comprimento varchar(150),
+   comprimento varchar(150),
     tipo varchar(200),
     primary key (id)
- );
+);
+ 
+ 
+-- CREATE TABLE mangas (
+--	id bigserial not null,
+--   comprimento_id bigint,
+--    tipo_id bigint,
+--    primary key (id)
+-- );
+ 
+ 
+ --CREATE TABLE mangas_comprimento (
+--	id bigserial not null,
+--   comprimento varchar(150),
+--   primary key (id)
+-- );
+
+--CREATE TABLE mangas_tipo (
+--	id bigserial not null,
+--   tipo varchar(200),
+--    primary key (id)
+-- );
+ 
  
  CREATE TABLE decotes (
 	id bigserial not null,
     descricao varchar(100),
     primary key (id)
 );
+
+ CREATE TABLE cavas (
+	id bigserial not null,
+    descricao varchar(100),
+    primary key (id)
+);
+
+
+--- COMPRIMENTO
+CREATE TABLE comprimentos_parte_de_cima (
+	id bigserial not null,
+	descricao varchar (200),
+	
+	primary key(id)
+);
+
 
 CREATE TABLE fibras (
 	id bigserial not null,
@@ -68,22 +106,6 @@ CREATE TABLE tecidos_composicao (
 
 );
 
-CREATE TABLE modelagens (
-	id bigserial not null,
-    babado boolean,
-    bolsos integer,
-    cinto boolean,
-    fenda boolean,
-    forro boolean,
-    pala boolean,
-    passantes boolean,
-    pences boolean,
-    barra_id bigint,
-    fechamento_id bigint,
-    prega_id bigint,
-    silhueta_id bigint,
-    primary key (id)
-);
 
 CREATE TABLE roupas (
 	id bigserial not null,
@@ -93,12 +115,28 @@ CREATE TABLE roupas (
     tamanho integer,
     tem_bordado boolean,
     tem_estampa boolean,
-    modelagem_id bigint,
-    tecido_id bigint,
+	
+	silhueta_id bigint, 
+	fechamento_id bigint, 
+	cinto boolean,
+	passantes boolean,
+	pences boolean,
+	pala boolean, 
+	prega_id bigint,
+	babado boolean,
+	fenda boolean,
+	bolsos integer,
+	forro boolean,
+	barra_id bigint,
+    
     decote_id bigint,
     manga_id bigint,
     capuz boolean,
-    cava varchar(50),
+    cava_id bigint,
+	comprimento_id bigint,
+	
+	tecido_id bigint,
+	
 
 
     primary key (id)
@@ -106,9 +144,3 @@ CREATE TABLE roupas (
 
 
 
-
-
-
-
-
- 

@@ -25,9 +25,15 @@ public class ParteDeCima{
 	@JoinColumn(name = "decote_id")
 	private Decote decote;
 	
-	private String cava;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "cava_id")
+	private Cava cava;
 	
 	private Boolean capuz;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "comprimento_id")
+	private ComprimentoParteCima comprimento;
 	
 	
 	

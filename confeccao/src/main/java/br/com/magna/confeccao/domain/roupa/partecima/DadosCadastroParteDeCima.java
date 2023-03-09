@@ -6,8 +6,9 @@ public record DadosCadastroParteDeCima(
 		
 		@NotNull Long idManga,
 		@NotNull Long idDecote,
-		@NotNull String cava,
-		@NotNull Boolean capuz
+		@NotNull Long idCava,
+		@NotNull Boolean capuz,
+		@NotNull Long idComprimento
 		
 		
 		

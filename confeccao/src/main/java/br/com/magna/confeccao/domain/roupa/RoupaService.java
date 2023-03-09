@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
-import br.com.magna.confeccao.domain.modelagem.ModelagemRepository;
 import br.com.magna.confeccao.domain.modelagem.ModelagemService;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCimaService;

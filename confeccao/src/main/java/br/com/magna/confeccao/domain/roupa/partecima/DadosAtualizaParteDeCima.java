@@ -4,7 +4,7 @@ public record DadosAtualizaParteDeCima(
 		
 		Long idManga,
 		Long idDecote,
-		String cava,
+		Long idCava,
 		Boolean capuz
 		
 		) {
