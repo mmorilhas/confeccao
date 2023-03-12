@@ -3,65 +3,60 @@ package br.com.magna.confeccao.domain.modelagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.magna.confeccao.domain.ValidacaoException;
+import br.com.magna.confeccao.domain.roupa.Roupa;
+import br.com.magna.confeccao.domain.roupa.RoupaRepository;
+
 @Service
 public class ModelagemService {
 
 	@Autowired
-	FechamentoRepository fechamentoRepository;
+	private FechamentoRepository fechamentoRepository;
 	@Autowired
-	BarraRepository barraRepository;
+	private BarraRepository barraRepository;
 	@Autowired
-	SilhuetaRepository silhuetaRepository;
+	private SilhuetaRepository silhuetaRepository;
 	@Autowired
-	PregaRepository pregaRepository;
+	private PregaRepository pregaRepository;
+	@Autowired 
+	private RoupaRepository roupaRepository;
 
 	public Modelagem criarModelagem(DadosCadastroModelagem dados) {
-		Silhueta silhueta = null;
-		Fechamento fechamento = null;
-		Barra barra = null;
-		Prega prega = null;
-
-		if (fechamentoRepository.existsById(dados.idFechamento())) {
-			fechamento = fechamentoRepository.getReferenceById(dados.idFechamento());
-		}
-
-		if (barraRepository.existsById(dados.idBarra())) {
-			barra = barraRepository.getReferenceById(dados.idBarra());
-		}
-
-		if (silhuetaRepository.existsById(dados.idSilhueta())) {
-			silhueta = silhuetaRepository.getReferenceById(dados.idSilhueta());
-		}
-		if (pregaRepository.existsById(dados.idPrega())) {
-			prega = pregaRepository.getReferenceById(dados.idPrega());
-		}
-
-		Modelagem modelagem = new Modelagem(dados.bolsos(), fechamento, barra, dados.pala(), prega,
-				dados.pences(), dados.fenda(), dados.forro(), dados.babado(), dados.cinto(), dados.passantes(),
-				silhueta);
+		
+		Modelagem modelagem = new Modelagem(
+				verificaEPegaSilhueta(dados.idSilhueta()),
+				verificaEPegaFechamento(dados.idFechamento()),
+				dados.cinto(), 
+				dados.passantes(),
+				dados.pences(), 
+				dados.pala(),
+				verificaEPegaPrega(dados.idPrega()),
+				dados.babado(), 
+				dados.fenda(), 
+				dados.bolsos(),
+				dados.forro(), 
+				verificaEPegaBarra(dados.idBarra())
+				);
 
 		return modelagem;
 
 	}
 
-	public Modelagem atualizaModelagem(DadosAtualizaModelagem dados) {
-		Modelagem modelagem = new Modelagem();
+	public Modelagem atualizaModelagem(Long idRoupa, DadosAtualizaModelagem dados) {
+		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
+		Modelagem modelagem = roupa.getModelagem();
 
 		if (dados.idSilhueta() != null) {
-			Silhueta silhueta = verificaSilhueta(dados.idSilhueta());
-			modelagem.setSilhueta(silhueta);
+			modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
 		}
 		if (dados.idFechamento() != null) {
-			Fechamento fechamento = verifcaFechamento(dados.idFechamento());
-			modelagem.setFechamento(fechamento);
+			modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
 		}
 		if (dados.idPrega() != null) {
-			Prega prega = verificaPrega(dados.idPrega());
-			modelagem.setPrega(prega);
+			modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
 		}
 		if (dados.idBarra() != null) {
-			Barra barra = verificaBarra(dados.idBarra());
-			modelagem.setBarra(barra);
+			modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
 		}
 		if(dados.cinto() != null) {
 			modelagem.setCinto(dados.cinto());
@@ -92,9 +87,9 @@ public class ModelagemService {
 		return modelagem;
 	}
 
-	public Silhueta verificaSilhueta(Long idSilhueta) {
+	private Silhueta verificaEPegaSilhueta(Long idSilhueta) {
 		if (!silhuetaRepository.existsById(idSilhueta)) {
-			throw new RuntimeException();
+			throw new ValidacaoException("Id de Silhueta informado não existe");
 		}
 
 		Silhueta silhueta = silhuetaRepository.getReferenceById(idSilhueta);
@@ -102,29 +97,26 @@ public class ModelagemService {
 		return silhueta;
 	}
 
-	public Fechamento verifcaFechamento(Long idFechamento) {
+	private Fechamento verificaEPegaFechamento(Long idFechamento) {
 		if (!fechamentoRepository.existsById(idFechamento)) {
-			throw new RuntimeException();
+			throw new ValidacaoException("Id de Fechamento informado não existe");
 		}
 
 		Fechamento fechamento = fechamentoRepository.getReferenceById(idFechamento);
-
 		return fechamento;
 	}
 
-	private Barra verificaBarra(Long idBarra) {
+	private Barra verificaEPegaBarra(Long idBarra) {
 		if (!barraRepository.existsById(idBarra)) {
-			throw new RuntimeException();
+			throw new ValidacaoException("Id de Barra informado não existe");
 		}
 		Barra barra = barraRepository.getReferenceById(idBarra);
-		;
-
 		return barra;
 	}
 
-	private Prega verificaPrega(Long idPrega) {
+	private Prega verificaEPegaPrega(Long idPrega) {
 		if (!pregaRepository.existsById(idPrega)) {
-			throw new RuntimeException();
+			throw new ValidacaoException("Id de tipo Prega informado não existe");
 		}
 
 		Prega prega = pregaRepository.getReferenceById(idPrega);

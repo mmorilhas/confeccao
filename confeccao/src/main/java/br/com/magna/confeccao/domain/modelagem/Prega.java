@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name= "tipos_pregas")
+@Table(name= "pregas")
 @Entity(name = "Prega")
 @Getter
 @NoArgsConstructor

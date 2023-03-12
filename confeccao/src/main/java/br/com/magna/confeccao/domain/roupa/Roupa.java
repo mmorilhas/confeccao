@@ -46,12 +46,13 @@ public class Roupa{
 	
 	private String cor;
 	
-	@Embedded
-	private Modelagem modelagem;
-	
 	private Boolean temEstampa;
 	
 	private Boolean temBordado;
+	
+	@Embedded
+	private Modelagem modelagem;
+	
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "tecido_id")
@@ -60,6 +61,21 @@ public class Roupa{
 	@Embedded
 	private ParteDeCima parteDeCima;
 
+	private boolean ativo;
+	
+	public Roupa(String nome, Integer tamanho, Genero genero, String cor, Boolean temEstampa, Boolean temBordado, Modelagem modelagem, Tecido tecido, ParteDeCima parteDeCima) {
+		this.nome = nome;
+		this.tamanho = tamanho;
+		this.genero = genero;
+		this.cor = cor;
+		this.temEstampa = temEstampa;
+		this.temBordado = temBordado;
+		this.modelagem = modelagem;
+		this.tecido = tecido;
+		this.parteDeCima = parteDeCima;
+		this.ativo = true;
+	}
+	
 	
 	
 }

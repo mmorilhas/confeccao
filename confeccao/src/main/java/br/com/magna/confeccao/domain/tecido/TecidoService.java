@@ -1,12 +1,12 @@
 package br.com.magna.confeccao.domain.tecido;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.magna.confeccao.domain.ValidacaoException;
 import br.com.magna.confeccao.domain.fibra.Fibra;
 import br.com.magna.confeccao.domain.fibra.FibraRepository;
 
@@ -19,19 +19,19 @@ public class TecidoService {
 	TecidoRepository tecidoRepository;
 
 	public Tecido criarTecido(DadosCadastroTecido dados) {
-		Construcao construcao = dados.construcao();
-
 		Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
-		String tipoTecido = calcularTipoTecido(composicao);
-		String tempoSecagem = calcularTempoSecagem(composicao);
-		Boolean respiravel = calcularEhRespiravel(composicao);
-		String absorcaoAgua = calcularAbsorcaoAgua(composicao);
-		String elasticidade = calcularElasticidade(composicao);
-		String comportamentoTermico = calcularComportamentoTermico(composicao);
-		String resistencia = calcularResistencia(composicao);
 
-		Tecido tecido = new Tecido(construcao, composicao, tipoTecido, tempoSecagem, respiravel, absorcaoAgua,
-				elasticidade, comportamentoTermico, resistencia);
+		Tecido tecido = new Tecido(null, 
+				composicao,
+				dados.construcao(),
+				calcularTipoTecido(composicao),
+				calcularTempoSecagem(composicao), 
+				calcularEhRespiravel(composicao), 
+				calcularAbsorcaoAgua(composicao),
+				calcularElasticidade(composicao), 
+				calcularComportamentoTermico(composicao),
+				calcularResistencia(composicao)
+				);
 
 		return tecido;
 
@@ -39,8 +39,8 @@ public class TecidoService {
 
 	public Tecido atualizaTecido(DadosAtualizaTecido dados) {
 		Tecido tecido = tecidoRepository.getReferenceById(dados.id());
-
-		if (dados.idDasFibras() != null && dados.idDasFibras().length > 0) {
+		
+		if (dados.idDasFibras() != null) {
 			Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
 			tecido.setComposicao(composicao);
 			tecido.setTipoDeTecido(calcularTipoTecido(composicao));
@@ -63,17 +63,19 @@ public class TecidoService {
 	}
 
 	public Collection<Fibra> criarComposicao(Long[] ids) {
-		Collection<Fibra> fibras = new HashSet<>();
+		if(ids.length == 0) {
+			throw new ValidacaoException("Necessário inserir pelo menos uma fibra na composição");
+		}
+		
+		Collection<Fibra> composicao = new HashSet<>();
 
 		for (Long dado : ids) {
 			if (fibraRepository.existsById(dado)) {
 				Fibra fibra = fibraRepository.getReferenceById(dado);
-				fibras.add(fibra);
+				composicao.add(fibra);
 			}
 
 		}
-
-		Collection<Fibra> composicao = new ArrayList<>(fibras);
 
 		return composicao;
 	}

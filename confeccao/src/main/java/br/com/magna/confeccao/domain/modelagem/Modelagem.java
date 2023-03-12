@@ -26,34 +26,41 @@ import lombok.Setter;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Modelagem {
 
-	private Integer bolsos;
-
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "fechamento_id")
-	private Fechamento fechamento;
-
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "barra_id")
-	private Barra barra;
-
-	private Boolean pala;
-
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "prega_id")
-	private Prega prega;
-
-	private Boolean pences;
-	private Boolean fenda;
-	private Boolean forro;
-	private Boolean babado;
-	private Boolean cinto;
-	private Boolean passantes;
-
 	@ManyToOne(cascade = CascadeType.ALL
 			//, fetch = FetchType.EAGER
 			)
 	@JoinColumn(name = "silhueta_id")
 	private Silhueta silhueta;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fechamento_id")
+	private Fechamento fechamento;
+	
+	private Boolean cinto;
+	private Boolean passantes;
+	
+	private Boolean pences;
+	
+	private Boolean pala;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "prega_id")
+	private Prega prega;
+
+	private Boolean babado;
+	
+	private Boolean fenda;
+	
+	private Integer bolsos;
+
+	private Boolean forro;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "barra_id")
+	private Barra barra;
+	
+	
+	
 
 
 

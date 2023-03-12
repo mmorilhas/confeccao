@@ -1,0 +1,20 @@
+INSERT INTO decotes
+(descricao)
+VALUES('canoa'),
+('gola alta'),
+('tomara que caia'),
+('v'),
+('u'),
+('quadrado'),
+('careca'),
+('oversized'),
+('colarinho ingles'),
+('colarinho americano'),
+('colarinho italiano'),
+('colarinho curto'),
+('colarinho mao'),
+('colarinho opera'),
+('colarinho quebrado'),
+('lapela xale'),
+('lapela quadrada'),
+('lapela pontuda');

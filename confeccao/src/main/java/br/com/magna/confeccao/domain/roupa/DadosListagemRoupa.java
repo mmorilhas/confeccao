@@ -2,9 +2,10 @@ package br.com.magna.confeccao.domain.roupa;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
+import br.com.magna.confeccao.domain.tecido.DadosListagemTecido;
 import br.com.magna.confeccao.domain.tecido.Tecido;
 
-public record DadosDetalhamentoRoupa(
+public record DadosListagemRoupa(
 	
 		
 		Long id,
@@ -15,23 +16,23 @@ public record DadosDetalhamentoRoupa(
 		Boolean temEstampa,
 		Boolean temBordado,
 	    Modelagem modelagem,
-		Tecido tecido,
-		ParteDeCima parteDecima
+		ParteDeCima parteDecima,
+		DadosListagemTecido tecido
 	
 		
 		) {
 
-	public DadosDetalhamentoRoupa(Roupa roupa) {
+	public DadosListagemRoupa(Roupa roupa) {
 		this(roupa.getId(),
-				roupa.getNome(),
+				roupa.getNome(), 
 				roupa.getTamanho(),
 				roupa.getGenero(),
 				roupa.getCor(),
 				roupa.getTemEstampa(),
 				roupa.getTemBordado(),
 				roupa.getModelagem(),
-				roupa.getTecido(),
-				roupa.getParteDeCima());
+				roupa.getParteDeCima(),
+				new DadosListagemTecido(roupa.getTecido()));
 	}
 	
 }
