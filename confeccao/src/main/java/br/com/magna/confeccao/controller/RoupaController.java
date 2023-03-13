@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magna.confeccao.domain.roupa.DadosAtualizaRoupa;
-import br.com.magna.confeccao.domain.roupa.DadosCadastroRoupa;
-import br.com.magna.confeccao.domain.roupa.DadosListagemRoupa;
-import br.com.magna.confeccao.domain.roupa.RoupaService;
+import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
+import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
+import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.service.RoupaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -31,29 +31,22 @@ public class RoupaController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroRoupa dados) {
+	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroRoupaDTO dados) {
 		roupaService.criarRoupa(dados);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	
-	/*
-	 * @GetMapping public ResponseEntity listar() {
-	 * 
-	 * return ResponseEntity.status(HttpStatus.OK).body(roupaService.listagem()); }
-	 */
 
-	
-	  @GetMapping public ResponseEntity<Page<DadosListagemRoupa>> listar(@PageableDefault (size = 3, sort = {"id", "nome", "tamanho"}) Pageable
-	  paginacao) {
-	  
-	  return ResponseEntity.ok(roupaService.listar(paginacao)); 
-	  }
-	 
+	@GetMapping
+	public ResponseEntity<Page<DadosListagemRoupaDTO>> listar(
+			@PageableDefault(size = 3, sort = { "id", "nome", "tamanho" }) Pageable paginacao) {
+
+		return ResponseEntity.ok(roupaService.listar(paginacao));
+	}
 
 	@PutMapping
 	@Transactional
-	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizaRoupa dados) {
+	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizaRoupaDTO dados) {
 		return ResponseEntity.ok(roupaService.atualizar(dados));
 	}
 
@@ -61,10 +54,12 @@ public class RoupaController {
 	public ResponseEntity buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok(roupaService.detalharPorId(id));
 	}
+	
 
 	@DeleteMapping("/{id}")
+	@Transactional
 	public ResponseEntity deletar(@PathVariable Long id) {
-		roupaService.deletar(id);
+		roupaService.tornarInativo(id);
 		return ResponseEntity.noContent().build();
 	}
 

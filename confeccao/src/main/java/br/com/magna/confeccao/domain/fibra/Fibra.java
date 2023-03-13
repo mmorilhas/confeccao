@@ -14,10 +14,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "fibras")
-@Entity(name = "Fibra")
+@Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode(of = "id") 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Fibra {

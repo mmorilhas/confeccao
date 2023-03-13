@@ -1,7 +1,7 @@
 package br.com.magna.confeccao.domain.roupa;
 
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
-import br.com.magna.confeccao.domain.roupa.partecima.ParteDeCima;
+import br.com.magna.confeccao.domain.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -30,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Roupa{
 
@@ -61,7 +61,7 @@ public class Roupa{
 	@Embedded
 	private ParteDeCima parteDeCima;
 
-	private boolean ativo;
+	private Boolean ativo;
 	
 	public Roupa(String nome, Integer tamanho, Genero genero, String cor, Boolean temEstampa, Boolean temBordado, Modelagem modelagem, Tecido tecido, ParteDeCima parteDeCima) {
 		this.nome = nome;
@@ -76,6 +76,9 @@ public class Roupa{
 		this.ativo = true;
 	}
 	
+	public void excluir() {
+		this.ativo = false;
+	}
 	
 	
 }
