@@ -26,7 +26,7 @@ class SilhuetaControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarSilhueta() {
+	    void testListarSilhueta() {
 	    	ResponseEntity<List<Silhueta>> response = restTemplate.exchange("/silhuetas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

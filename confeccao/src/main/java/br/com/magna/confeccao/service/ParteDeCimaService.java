@@ -30,13 +30,11 @@ public class ParteDeCimaService {
 	
 	public ParteDeCima criarParteDeCima(@Valid DadosCadastroParteDeCimaDTO dados) {
 		
-		ParteDeCima parteDeCima = new ParteDeCima(verificaEPegaManga(dados.idManga()),
+		return  new ParteDeCima(verificaEPegaManga(dados.idManga()),
 				verificaEPegaDecote(dados.idDecote()), 
 				verificaEPegaCava(dados.idCava()),
 				dados.capuz(), 
 				verificaEPegaComprimento(dados.idComprimento()));
-
-		return parteDeCima;
 	}
 	
 
@@ -64,32 +62,28 @@ public class ParteDeCimaService {
 		if (! mangaRepository.existsById(idManga)) {
 			throw new ValidacaoException("Id de Manga informado não existe");
 		}
-		Manga manga = mangaRepository.getReferenceById(idManga);
-		return manga;
+		return mangaRepository.getReferenceById(idManga);
 	}
 	
 	private Decote verificaEPegaDecote(Long idDecote) {
 		if (! decoteRepository.existsById(idDecote)) {
 			throw new ValidacaoException("Id de Decote informado não existe");
 		}
-		Decote decote = decoteRepository.getReferenceById(idDecote);
-		return decote;
+		return decoteRepository.getReferenceById(idDecote);
 	}
 	
 	private Cava verificaEPegaCava(Long idCava) {
 		if (! cavaRepository.existsById(idCava)) {
 			throw new ValidacaoException("Id de Cava informado não existe");
 		}
-		Cava cava =  cavaRepository.getReferenceById(idCava);
-		return cava;
+		return cavaRepository.getReferenceById(idCava);
 	}
 
 	private ComprimentoParteCima verificaEPegaComprimento(Long idComprimento) {
 		if (! comprimentoRepository.existsById(idComprimento)) {
 			throw new ValidacaoException("Id de Comprimento informado não existe");
 		}
-		ComprimentoParteCima comprimento =  comprimentoRepository.getReferenceById(idComprimento);
-		return comprimento;
+		return comprimentoRepository.getReferenceById(idComprimento);
 	}
 
 

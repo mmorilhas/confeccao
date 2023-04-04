@@ -4,7 +4,6 @@ import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.roupa.Genero;
 import br.com.magna.confeccao.domain.roupa.Roupa;
-import br.com.magna.confeccao.domain.tecido.Tecido;
 
 public record DadosListagemRoupaDTO(
 	

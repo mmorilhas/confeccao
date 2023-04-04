@@ -32,7 +32,7 @@ public class RoupaService {
 	@Autowired
 	private RoupaRepository roupaRepository;
 
-	public void criarRoupa(@Valid DadosCadastroRoupaDTO dados) {
+	public void criarRoupaECadastrar(@Valid DadosCadastroRoupaDTO dados) {
 
 		Modelagem modelagem = modelagemService.criarModelagem(dados.modelagem());
 		Tecido tecido = tecidoService.criarTecido(dados.tecido());
@@ -49,6 +49,14 @@ public class RoupaService {
 				tecido,
 				parteDeCima
 				);
+//				new Roupa();
+//		roupa.setNome(dados.nome());
+//		roupa.setCor(dados.cor());
+//		roupa.setModelagem(modelagem);
+//		roupa.setAtivo(true);
+//		
+//				
+				
 
 		roupaRepository.save(roupa);
 
@@ -56,8 +64,7 @@ public class RoupaService {
 
 
 	public Page<DadosListagemRoupaDTO> listar(Pageable paginacao) {
-		Page<DadosListagemRoupaDTO> page = roupaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemRoupaDTO::new);
-		return page;
+		return roupaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemRoupaDTO::new);
 	}
 	
 
@@ -91,7 +98,7 @@ public class RoupaService {
 		}
 
 		if (dados.tecido() != null) {
-			if (dados.tecido().id() != dados.id()) {
+			if (! dados.tecido().id().equals(dados.id())) {
 				Tecido tecido = tecidoRepository.getReferenceById(dados.tecido().id());
 				roupa.setTecido(tecido);
 			} else {
@@ -108,18 +115,14 @@ public class RoupaService {
 
 		roupaRepository.save(roupa);
 
-		DadosDetalhamentoRoupaDTO dadosDetalhamentoRoupa = new DadosDetalhamentoRoupaDTO(roupa);
-
-		return dadosDetalhamentoRoupa;
+		return new DadosDetalhamentoRoupaDTO(roupa);
 
 	}
 
 	public DadosDetalhamentoRoupaDTO detalharPorId(Long id) {
 		Roupa roupa = roupaRepository.getReferenceById(id);
 
-		DadosDetalhamentoRoupaDTO dadosDetalhamentoRoupa = new DadosDetalhamentoRoupaDTO(roupa);
-
-		return dadosDetalhamentoRoupa;
+		return new DadosDetalhamentoRoupaDTO(roupa);
 	}
 
 	

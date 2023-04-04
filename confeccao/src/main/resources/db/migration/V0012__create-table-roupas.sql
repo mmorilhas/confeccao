@@ -2,7 +2,7 @@ CREATE TABLE roupas (
 	id bigserial not null,
     cor varchar(80),
     genero varchar(50),
-    nome varchar(250),
+    nome varchar(250) not null,
     tamanho integer,
     tem_bordado boolean,
     tem_estampa boolean,

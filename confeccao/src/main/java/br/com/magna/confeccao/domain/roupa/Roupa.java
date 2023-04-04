@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.domain.roupa;
 
+import org.hibernate.validator.constraints.Range;
+
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
@@ -14,10 +16,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,8 +38,10 @@ public class Roupa{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String nome;
 	
+	@Range(min=10, max=70)
 	private Integer tamanho;
 	
 	@Enumerated(EnumType.STRING)
@@ -79,6 +82,7 @@ public class Roupa{
 	public void excluir() {
 		this.ativo = false;
 	}
+	
 	
 	
 }

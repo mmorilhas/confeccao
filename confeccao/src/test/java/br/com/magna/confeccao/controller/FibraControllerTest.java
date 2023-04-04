@@ -26,7 +26,7 @@ class FibraControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarFibras() {
+	    void testListarFibras() {
 	    	ResponseEntity<List<Fibra>> response = restTemplate.exchange("/fibras", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

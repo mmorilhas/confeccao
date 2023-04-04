@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.DadosListagemComprimentoDTO;
-import br.com.magna.confeccao.dto.DadosListagemSilhuetaDTO;
 import br.com.magna.confeccao.repository.ComprimentoRepository;
-import br.com.magna.confeccao.repository.SilhuetaRepository;
 
 @RestController
 @RequestMapping("comprimentos")
@@ -22,7 +20,7 @@ public class ComprimentosController {
 	ComprimentoRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemComprimentoDTO>> listar() {
 		List<DadosListagemComprimentoDTO> comprimentos = repository.findAll().stream().map(DadosListagemComprimentoDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(comprimentos);

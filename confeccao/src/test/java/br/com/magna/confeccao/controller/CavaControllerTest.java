@@ -26,7 +26,7 @@ class CavaControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarCava() {
+	    void testListarCava() {
 	    	ResponseEntity<List<Cava>> response = restTemplate.exchange("/cavas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

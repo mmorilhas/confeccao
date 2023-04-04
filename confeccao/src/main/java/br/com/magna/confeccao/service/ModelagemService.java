@@ -34,8 +34,8 @@ public class ModelagemService {
 	private RoupaRepository roupaRepository;
 
 	public Modelagem criarModelagem(@Valid DadosCadastroModelagemDTO dados) {
-		
-		Modelagem modelagem = new Modelagem(
+
+		return new Modelagem(
 				verificaEPegaSilhueta(dados.idSilhueta()),
 				verificaEPegaFechamento(dados.idFechamento()),
 				dados.cinto(), 
@@ -50,7 +50,6 @@ public class ModelagemService {
 				verificaEPegaBarra(dados.idBarra())
 				);
 
-		return modelagem;
 
 	}
 
@@ -104,9 +103,7 @@ public class ModelagemService {
 			throw new ValidacaoException("Id de Silhueta informado não existe");
 		}
 
-		Silhueta silhueta = silhuetaRepository.getReferenceById(idSilhueta);
-
-		return silhueta;
+		return silhuetaRepository.getReferenceById(idSilhueta);
 	}
 
 	private Fechamento verificaEPegaFechamento(Long idFechamento) {
@@ -114,16 +111,14 @@ public class ModelagemService {
 			throw new ValidacaoException("Id de Fechamento informado não existe");
 		}
 
-		Fechamento fechamento = fechamentoRepository.getReferenceById(idFechamento);
-		return fechamento;
+		return fechamentoRepository.getReferenceById(idFechamento);
 	}
 
 	private Barra verificaEPegaBarra(Long idBarra) {
 		if (!barraRepository.existsById(idBarra)) {
 			throw new ValidacaoException("Id de Barra informado não existe");
 		}
-		Barra barra = barraRepository.getReferenceById(idBarra);
-		return barra;
+		return barraRepository.getReferenceById(idBarra);
 	}
 
 	private Prega verificaEPegaPrega(Long idPrega) {
@@ -131,7 +126,6 @@ public class ModelagemService {
 			throw new ValidacaoException("Id de tipo Prega informado não existe");
 		}
 
-		Prega prega = pregaRepository.getReferenceById(idPrega);
-		return prega;
+		return pregaRepository.getReferenceById(idPrega);
 	}
 }

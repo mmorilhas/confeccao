@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magna.confeccao.dto.DadosListagemDecoteDTO;
 import br.com.magna.confeccao.dto.DadosListagemFechamentoDTO;
-import br.com.magna.confeccao.repository.DecoteRepository;
 import br.com.magna.confeccao.repository.FechamentoRepository;
 
 @RestController
@@ -22,7 +20,7 @@ public class FechamentoController {
 	FechamentoRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemFechamentoDTO>> listar() {
 		List<DadosListagemFechamentoDTO> fechamentos = repository.findAll().stream().map(DadosListagemFechamentoDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(fechamentos);

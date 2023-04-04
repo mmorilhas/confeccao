@@ -27,7 +27,7 @@ class ComprimentosControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarComprimentos() {
+	    void testListarComprimentos() {
 	    	ResponseEntity<List<ComprimentoParteCima>> response = restTemplate.exchange("/comprimentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

@@ -20,7 +20,7 @@ public class PregaController {
 	private PregaRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemPregaDTO>> listar() {
 
 		List<DadosListagemPregaDTO> pregas = repository.findAll().stream().map(DadosListagemPregaDTO::new).toList();
 		return ResponseEntity.status(HttpStatus.OK).body(pregas);

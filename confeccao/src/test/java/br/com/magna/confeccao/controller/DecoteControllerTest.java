@@ -26,7 +26,7 @@ class DecoteControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarDecote() {
+	    void testListarDecote() {
 	    	ResponseEntity<List<Decote>> response = restTemplate.exchange("/decotes", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

@@ -20,7 +20,7 @@ public class FibraController {
 	private FibraRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemFibraDTO>> listar() {
 		List<DadosListagemFibraDTO> fibras = repository.findAll().stream().map(DadosListagemFibraDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(fibras);

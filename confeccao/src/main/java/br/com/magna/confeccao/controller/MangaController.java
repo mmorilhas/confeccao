@@ -20,7 +20,7 @@ public class MangaController {
 	MangaRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemMangaDTO>> listar() {
 		List<DadosListagemMangaDTO> cavas = repository.findAll().stream().map(DadosListagemMangaDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(cavas);

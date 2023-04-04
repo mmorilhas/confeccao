@@ -20,7 +20,7 @@ public class SilhuetaController {
 	SilhuetaRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemSilhuetaDTO>> listar() {
 		List<DadosListagemSilhuetaDTO> silhuetas = repository.findAll().stream().map(DadosListagemSilhuetaDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(silhuetas);

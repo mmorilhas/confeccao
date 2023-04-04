@@ -5,7 +5,8 @@ public record DadosAtualizaParteDeCimaDTO(
 		Long idManga,
 		Long idDecote,
 		Long idCava,
-		Boolean capuz
+		Boolean capuz,
+		Long idComprimento
 		
 		) {
 

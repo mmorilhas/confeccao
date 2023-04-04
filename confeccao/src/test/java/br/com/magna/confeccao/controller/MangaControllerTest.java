@@ -26,7 +26,7 @@ class MangaControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarManga() {
+	    void testListarManga() {
 	    	ResponseEntity<List<Manga>> response = restTemplate.exchange("/mangas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

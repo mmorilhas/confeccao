@@ -20,7 +20,7 @@ public class BarraController {
 	BarraRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemBarraDTO>> listar() {
 		List<DadosListagemBarraDTO> barras = repository.findAll().stream().map(DadosListagemBarraDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(barras);

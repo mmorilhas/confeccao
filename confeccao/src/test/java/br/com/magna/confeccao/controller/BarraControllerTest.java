@@ -26,7 +26,7 @@ class BarraControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarBarra() {
+	    void testListarBarra() {
 	    	ResponseEntity<List<Barra>> response = restTemplate.exchange("/barras", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

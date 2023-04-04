@@ -3,15 +3,6 @@ package br.com.magna.confeccao.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.magna.confeccao.domain.partecima.ComprimentoParteCima;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 public interface ComprimentoRepository extends JpaRepository<ComprimentoParteCima, Long> {
 

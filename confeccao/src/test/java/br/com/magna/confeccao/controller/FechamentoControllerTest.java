@@ -27,7 +27,7 @@ class FechamentoControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarFechamento() {
+	    void testListarFechamento() {
 	    	ResponseEntity<List<Fechamento>> response = restTemplate.exchange("/fechamentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

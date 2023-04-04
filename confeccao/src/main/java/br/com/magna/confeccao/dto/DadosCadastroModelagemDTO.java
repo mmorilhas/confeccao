@@ -1,6 +1,7 @@
 package br.com.magna.confeccao.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public record DadosCadastroModelagemDTO(
 		
@@ -19,7 +20,7 @@ public record DadosCadastroModelagemDTO(
 		Boolean babado,
 		Boolean fenda,
 		
-		Integer bolsos,
+		@Positive Integer bolsos,
 		
 		@NotNull Boolean forro,
 		@NotNull Long idBarra

@@ -26,7 +26,7 @@ public class TecidoService {
 	public Tecido criarTecido(@Valid DadosCadastroTecidoDTO dados) {
 		Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
 
-		Tecido tecido = new Tecido(null, 
+		return new Tecido(null, 
 				composicao,
 				dados.construcao(),
 				calcularTipoTecido(composicao),
@@ -37,8 +37,6 @@ public class TecidoService {
 				calcularComportamentoTermico(composicao),
 				calcularResistencia(composicao)
 				);
-
-		return tecido;
 
 	}
 
@@ -90,8 +88,6 @@ public class TecidoService {
 
 		String tipoTecido;
 		String natural = "natural";
-		String artificial = "artificial";
-		String sintetica = "sintetica";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getTipoFibra();
@@ -146,7 +142,7 @@ public class TecidoService {
 
 		for (Fibra fibra : composicao) {
 			Boolean dado = fibra.getRespiravel();
-			if (dado == true) {
+			if (Boolean.TRUE.equals(dado)) {
 				trues++;
 			} else {
 				falses++;
@@ -192,7 +188,7 @@ public class TecidoService {
 		Collection<String> caracteristicas = new HashSet<>();
 		String elasticidade;
 
-		String e1 = "baixa";
+		String elasticidadeBaixa = "baixa";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getElasticidade();
@@ -203,7 +199,7 @@ public class TecidoService {
 			elasticidade = "moderada";
 
 		} else {
-			if (caracteristicas.contains(e1)) {
+			if (caracteristicas.contains(elasticidadeBaixa)) {
 				elasticidade = "baixa";
 			} else {
 				elasticidade = "alta";
@@ -244,7 +240,6 @@ public class TecidoService {
 
 		String rModerada = "moderada";
 		String rBaixa = "baixa";
-		String rAlta = "alta";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getResistencia();

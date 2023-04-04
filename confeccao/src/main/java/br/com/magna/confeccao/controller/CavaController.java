@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.DadosListagemCavaDTO;
-import br.com.magna.confeccao.dto.DadosListagemSilhuetaDTO;
 import br.com.magna.confeccao.repository.CavaRepository;
-import br.com.magna.confeccao.repository.SilhuetaRepository;
 
 @RestController
 @RequestMapping("cavas")
@@ -22,7 +20,7 @@ public class CavaController {
 	CavaRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemCavaDTO>> listar() {
 		List<DadosListagemCavaDTO> cavas = repository.findAll().stream().map(DadosListagemCavaDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(cavas);

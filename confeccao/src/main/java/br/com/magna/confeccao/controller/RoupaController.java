@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.magna.confeccao.domain.roupa.Roupa;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
+import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
 import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
 import br.com.magna.confeccao.service.RoupaService;
 import jakarta.transaction.Transactional;
@@ -31,34 +33,35 @@ public class RoupaController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroRoupaDTO dados) {
-		roupaService.criarRoupa(dados);
+	public ResponseEntity<Roupa> cadastrar(@RequestBody @Valid DadosCadastroRoupaDTO dados) {
+		roupaService.criarRoupaECadastrar(dados);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+		
 	}
 
 
-	@GetMapping
+	@GetMapping(value = "/listagem")
 	public ResponseEntity<Page<DadosListagemRoupaDTO>> listar(
 			@PageableDefault(size = 3, sort = { "id", "nome", "tamanho" }) Pageable paginacao) {
 
 		return ResponseEntity.ok(roupaService.listar(paginacao));
 	}
 
-	@PutMapping
+	@PutMapping(value = "/atualizar")
 	@Transactional
-	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizaRoupaDTO dados) {
+	public ResponseEntity<DadosDetalhamentoRoupaDTO> atualizar(@RequestBody @Valid DadosAtualizaRoupaDTO dados) {
 		return ResponseEntity.ok(roupaService.atualizar(dados));
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity buscarPorId(@PathVariable Long id) {
+	@GetMapping(value = "/listagem/{id}")
+	public ResponseEntity<DadosDetalhamentoRoupaDTO> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok(roupaService.detalharPorId(id));
 	}
 	
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity deletar(@PathVariable Long id) {
+	public ResponseEntity<Roupa> deletar(@PathVariable Long id) {
 		roupaService.tornarInativo(id);
 		return ResponseEntity.noContent().build();
 	}

@@ -26,7 +26,7 @@ class PregaControllerTest {
 	    private TestRestTemplate restTemplate;
 
 	    @Test
-	    public void testListarPrega() {
+	    void testListarPrega() {
 	    	ResponseEntity<List<Prega>> response = restTemplate.exchange("/pregas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    

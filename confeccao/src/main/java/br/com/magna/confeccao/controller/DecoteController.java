@@ -20,7 +20,7 @@ public class DecoteController {
 	DecoteRepository repository;
 
 	@GetMapping
-	public ResponseEntity listar() {
+	public ResponseEntity<List<DadosListagemDecoteDTO>> listar() {
 		List<DadosListagemDecoteDTO> decotes = repository.findAll().stream().map(DadosListagemDecoteDTO::new).toList();
 
 		return ResponseEntity.status(HttpStatus.OK).body(decotes);
