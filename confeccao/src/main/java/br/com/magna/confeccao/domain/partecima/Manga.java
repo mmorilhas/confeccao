@@ -7,18 +7,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
 @Table(name= "mangas")
 @Entity(name = "Manga")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Manga {
 
@@ -29,5 +25,19 @@ public class Manga {
 		private String comprimento;
 		
 		private String tipo;
+
+		public Long getId() {
+			return id;
+		}
+
+		public String getComprimento() {
+			return comprimento;
+		}
+
+		public String getTipo() {
+			return tipo;
+		}
+		
+		
 
 }

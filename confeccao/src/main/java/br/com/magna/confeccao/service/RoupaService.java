@@ -38,36 +38,26 @@ public class RoupaService {
 		Tecido tecido = tecidoService.criarTecido(dados.tecido());
 		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.parteDeCima());
 
-		Roupa roupa = new Roupa( 
-				dados.nome(), 
-				dados.tamanho(), 
-				dados.genero(), 
-				dados.cor(), 
-				dados.temEstampa(),
-				dados.temBordado(),
-				modelagem,
-				tecido,
-				parteDeCima
-				);
-//				new Roupa();
-//		roupa.setNome(dados.nome());
-//		roupa.setCor(dados.cor());
-//		roupa.setModelagem(modelagem);
-//		roupa.setAtivo(true);
-//		
-//				
-				
+		Roupa roupa = new Roupa();
+		roupa.setNome(dados.nome());
+		roupa.setTamanho(dados.tamanho());
+		roupa.setGenero(dados.genero());
+		roupa.setCor(dados.cor());
+		roupa.setTemEstampa(dados.temEstampa());
+		roupa.setTemBordado(dados.temBordado());
+		roupa.setModelagem(modelagem);
+		roupa.setTecido(tecido);
+		roupa.setParteDeCima(parteDeCima);
+		roupa.setAtivo(true);
+	
 
 		roupaRepository.save(roupa);
 
 	}
 
-
 	public Page<DadosListagemRoupaDTO> listar(Pageable paginacao) {
 		return roupaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemRoupaDTO::new);
 	}
-	
-
 
 	public DadosDetalhamentoRoupaDTO atualizar(@Valid DadosAtualizaRoupaDTO dados) {
 		Roupa roupa = roupaRepository.getReferenceById(dados.id());
@@ -98,7 +88,7 @@ public class RoupaService {
 		}
 
 		if (dados.tecido() != null) {
-			if (! dados.tecido().id().equals(dados.id())) {
+			if (!dados.tecido().id().equals(dados.id())) {
 				Tecido tecido = tecidoRepository.getReferenceById(dados.tecido().id());
 				roupa.setTecido(tecido);
 			} else {
@@ -108,7 +98,7 @@ public class RoupaService {
 		}
 
 		if (dados.parteDeCima() != null) {
-			ParteDeCima parteDeCima = parteDeCimaService.atualizaParteDeCima(dados.id() ,dados.parteDeCima());
+			ParteDeCima parteDeCima = parteDeCimaService.atualizaParteDeCima(dados.id(), dados.parteDeCima());
 			roupa.setParteDeCima(parteDeCima);
 
 		}
@@ -125,7 +115,6 @@ public class RoupaService {
 		return new DadosDetalhamentoRoupaDTO(roupa);
 	}
 
-	
 	public void tornarInativo(Long id) {
 		Roupa roupa = roupaRepository.getReferenceById(id);
 		roupa.excluir();

@@ -1,25 +1,27 @@
 package br.com.magna.confeccao.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DadosAtualizaModelagemDTO(
 		
-		Long idSilhueta, 
-		Long idFechamento,
+		@NotNull Long idSilhueta, 
+		@NotNull Long idFechamento,
 		
-		Boolean cinto,
-		Boolean passantes,
+		@NotNull Boolean cinto,
+		@NotNull Boolean passantes,
 		
-		Boolean pences,
-		Boolean pala,
+		@NotNull Boolean pences,
+		@NotNull Boolean pala,
 		
-		Long idPrega,
+		@NotNull Long idPrega,
 		
-		Boolean babado,
-		Boolean fenda,
+		@NotNull Boolean babado,
+		@NotNull Boolean fenda,
 		
-		Integer bolsos,
+		@NotNull Integer bolsos,
 		
-		Boolean forro,
-		Long idBarra
+		@NotNull Boolean forro,
+		@NotNull Long idBarra
 		
 		
 		) {

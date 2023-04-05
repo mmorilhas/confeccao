@@ -7,17 +7,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Table(name= "silhuetas")
 @Entity(name = "Silhueta")
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Silhueta {
 
@@ -26,5 +22,15 @@ public class Silhueta {
 		private Long id;
 		
 		private String descricao;
+
+		public Long getId() {
+			return id;
+		}
+
+		public String getDescricao() {
+			return descricao;
+		}
+		
+		
 	
 }

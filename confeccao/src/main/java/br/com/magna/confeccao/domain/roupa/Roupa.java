@@ -19,20 +19,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 @Table(name = "roupas")
 @Entity (name = "Roupa")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter
-@Setter
-@NoArgsConstructor
+//@Getter
+//@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 public class Roupa{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,22 +61,94 @@ public class Roupa{
 
 	private Boolean ativo;
 	
-	public Roupa(String nome, Integer tamanho, Genero genero, String cor, Boolean temEstampa, Boolean temBordado, Modelagem modelagem, Tecido tecido, ParteDeCima parteDeCima) {
-		this.nome = nome;
-		this.tamanho = tamanho;
-		this.genero = genero;
-		this.cor = cor;
-		this.temEstampa = temEstampa;
-		this.temBordado = temBordado;
-		this.modelagem = modelagem;
-		this.tecido = tecido;
-		this.parteDeCima = parteDeCima;
-		this.ativo = true;
-	}
 	
 	public void excluir() {
 		this.ativo = false;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setTamanho(Integer tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public void setTemEstampa(Boolean temEstampa) {
+		this.temEstampa = temEstampa;
+	}
+
+	public void setTemBordado(Boolean temBordado) {
+		this.temBordado = temBordado;
+	}
+
+	public void setModelagem(Modelagem modelagem) {
+		this.modelagem = modelagem;
+	}
+
+	public void setTecido(Tecido tecido) {
+		this.tecido = tecido;
+	}
+
+	public void setParteDeCima(ParteDeCima parteDeCima) {
+		this.parteDeCima = parteDeCima;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Integer getTamanho() {
+		return tamanho;
+	}
+
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public Boolean getTemEstampa() {
+		return temEstampa;
+	}
+
+	public Boolean getTemBordado() {
+		return temBordado;
+	}
+
+	public Modelagem getModelagem() {
+		return modelagem;
+	}
+
+	public Tecido getTecido() {
+		return tecido;
+	}
+
+	public ParteDeCima getParteDeCima() {
+		return parteDeCima;
+	}
+
+
+
+
 	
 	
 	

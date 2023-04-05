@@ -1,7 +1,6 @@
 package br.com.magna.confeccao.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.magna.confeccao.domain.roupa.Genero;
 import br.com.magna.confeccao.domain.roupa.Roupa;
@@ -43,7 +41,7 @@ class RoupaControllerTest {
 
 	@Test
 	void testListarRoupa() {
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao", Roupa.class);
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem", Roupa.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
 
@@ -94,7 +92,7 @@ class RoupaControllerTest {
 	@Test
 	@DisplayName("Atualizar: deveria devolver codigo http 200 quando infos estao validas")
 	void testAtualizarRoupa() {
-		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(2L, 2l, false, false, true, false, 1l,
+		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(2l, 2l, false, false, true, false, 1l,
 				false, false, 2, true, 1l);
 		Long[] fibras = { 1l, 2l, 3l };
 		DadosAtualizaTecidoDTO tecido = new DadosAtualizaTecidoDTO(2l, fibras, Construcao.MALHA);
@@ -104,7 +102,7 @@ class RoupaControllerTest {
 		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO(2l, "camisa", 34, Genero.FEMININO, "rosa", true, true,
 				modelagem, tecido, parteDeCima);
 
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao", HttpMethod.PUT,
+		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar", HttpMethod.PUT,
 				new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
@@ -129,7 +127,7 @@ class RoupaControllerTest {
 	@DisplayName("Detalhar: deveria devolver codigo http 200 quando infos estao validas")
 	void testPegarRoupaPorId() {
 
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/1", Roupa.class);
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/1", Roupa.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
 		assertEquals(1l,response.getBody().getId());
@@ -147,13 +145,14 @@ class RoupaControllerTest {
 	}
 
 	@Test
-	@DisplayName("Deletar: deveria devolver codigo http 200 quando infos estao validas")
+	@DisplayName("Deletar: deveria devolver codigo http 204 quando infos estao validas")
 	void testDeletarRoupa() {
+		
+			
+		restTemplate.delete("/confeccao/5");
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/5", Roupa.class);
 
-		restTemplate.delete("/confeccao/10");
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/1", Roupa.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
+		assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
 
 	}
 

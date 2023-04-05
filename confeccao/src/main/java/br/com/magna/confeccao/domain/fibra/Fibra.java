@@ -8,16 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 
 @Table(name = "fibras")
 @Entity
-@Getter
-@NoArgsConstructor
+//@Getter
+//@NoArgsConstructor
 //@AllArgsConstructor
-@EqualsAndHashCode(of = "id") 
+//@EqualsAndHashCode(of = "id") 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Fibra {
 	
@@ -36,5 +34,35 @@ public class Fibra {
 	private String elasticidade;
 	private String comportamentoTermico;
 	private String resistencia;
+	
+	public Long getId() {
+		return id;
+	}
+	public String getNomeFibra() {
+		return nomeFibra;
+	}
+	public String getTipoFibra() {
+		return tipoFibra;
+	}
+	public String getTempoSecagem() {
+		return tempoSecagem;
+	}
+	public Boolean getRespiravel() {
+		return respiravel;
+	}
+	public String getAbsorcaoAgua() {
+		return absorcaoAgua;
+	}
+	public String getElasticidade() {
+		return elasticidade;
+	}
+	public String getComportamentoTermico() {
+		return comportamentoTermico;
+	}
+	public String getResistencia() {
+		return resistencia;
+	}
+	
+	
 
 }

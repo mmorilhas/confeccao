@@ -13,4 +13,6 @@ public record DadosListagemDecoteDTO(
 	public DadosListagemDecoteDTO(Decote decote) {
 		this(decote.getId(), decote.getDescricao());
 	}
+
+	
 }

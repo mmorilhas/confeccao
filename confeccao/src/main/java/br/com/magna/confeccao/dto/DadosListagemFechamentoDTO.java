@@ -12,4 +12,6 @@ public record DadosListagemFechamentoDTO(
 	public DadosListagemFechamentoDTO(Fechamento fechamento) {
 		this(fechamento.getId(), fechamento.getAviamento(), fechamento.getLocal());
 	}
+
+
 }

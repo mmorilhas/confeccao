@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.partecima.Cava;
 import br.com.magna.confeccao.domain.partecima.ComprimentoParteCima;
 
 @RunWith(SpringRunner.class)

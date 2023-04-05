@@ -30,11 +30,14 @@ public class ParteDeCimaService {
 	
 	public ParteDeCima criarParteDeCima(@Valid DadosCadastroParteDeCimaDTO dados) {
 		
-		return  new ParteDeCima(verificaEPegaManga(dados.idManga()),
-				verificaEPegaDecote(dados.idDecote()), 
-				verificaEPegaCava(dados.idCava()),
-				dados.capuz(), 
-				verificaEPegaComprimento(dados.idComprimento()));
+		ParteDeCima parteDeCima = new ParteDeCima();
+		parteDeCima.setManga(verificaEPegaManga(dados.idManga()));
+		parteDeCima.setDecote(verificaEPegaDecote(dados.idDecote()));
+		parteDeCima.setCava(verificaEPegaCava(dados.idCava()));
+		parteDeCima.setCapuz(dados.capuz());
+		parteDeCima.setComprimento(verificaEPegaComprimento(dados.idComprimento()));
+		
+		return  parteDeCima;
 	}
 	
 

@@ -16,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.magna.confeccao.domain.modelagem.Fechamento;
-import br.com.magna.confeccao.domain.partecima.Cava;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")

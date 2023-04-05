@@ -22,21 +22,25 @@ public class TecidoService {
 
 	@Autowired
 	TecidoRepository tecidoRepository;
+	private String moderada = "moderada";
+	private String alta = "alta";
+	private String baixa = "baixa";
 
 	public Tecido criarTecido(@Valid DadosCadastroTecidoDTO dados) {
 		Collection<Fibra> composicao = criarComposicao(dados.idDasFibras());
-
-		return new Tecido(null, 
-				composicao,
-				dados.construcao(),
-				calcularTipoTecido(composicao),
-				calcularTempoSecagem(composicao), 
-				calcularEhRespiravel(composicao), 
-				calcularAbsorcaoAgua(composicao),
-				calcularElasticidade(composicao), 
-				calcularComportamentoTermico(composicao),
-				calcularResistencia(composicao)
-				);
+		
+		Tecido tecido = new Tecido();
+		tecido.setComposicao(composicao);
+		tecido.setConstrucao(dados.construcao());
+		tecido.setTipoDeTecido(calcularTipoTecido(composicao));
+		tecido.setTempoSecagem(calcularTempoSecagem(composicao));
+		tecido.setRespiravel(calcularEhRespiravel(composicao));
+		tecido.setAbsorcaoAgua(calcularAbsorcaoAgua(composicao));
+		tecido.setElasticidade(calcularElasticidade(composicao));
+		tecido.setComportamentoTermico(calcularComportamentoTermico(composicao));
+		tecido.setResistencia(calcularResistencia(composicao));
+		
+		return tecido;
 
 	}
 
@@ -99,7 +103,7 @@ public class TecidoService {
 			if (caracteristicas.size() > 1) {
 				tipoTecido = "misto";
 			} else {
-				tipoTecido = "natural";
+				tipoTecido = natural;
 			}
 
 		} else {
@@ -114,7 +118,7 @@ public class TecidoService {
 		Collection<String> caracteristicas = new HashSet<>();
 		String tempoSecagem;
 
-		String t1 = "rapido";
+		String rapido = "rapido";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getTempoSecagem();
@@ -125,8 +129,8 @@ public class TecidoService {
 			tempoSecagem = "mediano";
 
 		} else {
-			if (caracteristicas.contains(t1)) {
-				tempoSecagem = "rapido";
+			if (caracteristicas.contains(rapido)) {
+				tempoSecagem = rapido;
 			} else {
 				tempoSecagem = "lento";
 			}
@@ -163,7 +167,7 @@ public class TecidoService {
 		Collection<String> caracteristicas = new HashSet<>();
 		String absorcaoAgua;
 
-		String a1 = "hidrofobico";
+		String hidrofobico = "hidrofobico";
 
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getAbsorcaoAgua();
@@ -174,8 +178,8 @@ public class TecidoService {
 			absorcaoAgua = "absorve agua moderadamente";
 
 		} else {
-			if (caracteristicas.contains(a1)) {
-				absorcaoAgua = "hidrofobico";
+			if (caracteristicas.contains(hidrofobico)) {
+				absorcaoAgua = hidrofobico;
 			} else {
 				absorcaoAgua = "hidrofilico";
 			}
@@ -188,21 +192,19 @@ public class TecidoService {
 		Collection<String> caracteristicas = new HashSet<>();
 		String elasticidade;
 
-		String elasticidadeBaixa = "baixa";
-
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getElasticidade();
 			caracteristicas.add(dado);
 		}
 
 		if (caracteristicas.size() > 1) {
-			elasticidade = "moderada";
+			elasticidade = moderada;
 
 		} else {
-			if (caracteristicas.contains(elasticidadeBaixa)) {
-				elasticidade = "baixa";
+			if (caracteristicas.contains(baixa)) {
+				elasticidade = baixa;
 			} else {
-				elasticidade = "alta";
+				elasticidade = alta;
 			}
 		}
 
@@ -238,28 +240,25 @@ public class TecidoService {
 		Collection<String> caracteristicas = new HashSet<>();
 		String resistencia;
 
-		String rModerada = "moderada";
-		String rBaixa = "baixa";
-
 		for (Fibra fibra : composicao) {
 			String dado = fibra.getResistencia();
 			caracteristicas.add(dado);
 		}
 
 		if (caracteristicas.size() > 1) {
-			if (caracteristicas.contains(rBaixa)) {
-				resistencia = "moderada";
+			if (caracteristicas.contains(baixa)) {
+				resistencia = moderada;
 			} else {
-				resistencia = "alta";
+				resistencia = alta;
 			}
 
 		} else {
-			if (caracteristicas.contains(rBaixa)) {
-				resistencia = "baixa";
-			} else if (caracteristicas.contains(rModerada)) {
-				resistencia = "moderada";
+			if (caracteristicas.contains(baixa)) {
+				resistencia = baixa;
+			} else if (caracteristicas.contains(moderada)) {
+				resistencia = moderada;
 			} else {
-				resistencia = "alta";
+				resistencia = alta;
 			}
 		}
 

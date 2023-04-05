@@ -34,21 +34,21 @@ public class ModelagemService {
 	private RoupaRepository roupaRepository;
 
 	public Modelagem criarModelagem(@Valid DadosCadastroModelagemDTO dados) {
-
-		return new Modelagem(
-				verificaEPegaSilhueta(dados.idSilhueta()),
-				verificaEPegaFechamento(dados.idFechamento()),
-				dados.cinto(), 
-				dados.passantes(),
-				dados.pences(), 
-				dados.pala(),
-				verificaEPegaPrega(dados.idPrega()),
-				dados.babado(), 
-				dados.fenda(), 
-				dados.bolsos(),
-				dados.forro(), 
-				verificaEPegaBarra(dados.idBarra())
-				);
+		Modelagem modelagem = new Modelagem();
+		modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
+		modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
+		modelagem.setCinto(dados.cinto());
+		modelagem.setPassantes(dados.passantes());
+		modelagem.setPences(dados.pences());
+		modelagem.setPala(dados.pala());
+		modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
+		modelagem.setBabado(dados.babado());
+		modelagem.setFenda(dados.fenda());
+		modelagem.setBolsos(dados.bolsos());
+		modelagem.setForro(dados.forro());
+		modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
+		
+		return modelagem;
 
 
 	}
