@@ -20,10 +20,6 @@ import jakarta.persistence.Table;
 
 @Table(name = "tecidos")
 @Entity(name = "Tecido")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tecido {
 
@@ -32,10 +28,10 @@ public class Tecido {
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "tecidos_composicao", joinColumns = { @JoinColumn(name = "tecido_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "fibras_id") })
-
-	private Collection<Fibra> composicao = new HashSet<>();
+	@JoinTable(name = "tecidos_composicao", 
+	joinColumns = { @JoinColumn(name = "tecido_id") },
+	inverseJoinColumns = { @JoinColumn(name = "fibras_id") })
+	private Collection<Fibra> composicao;
 
 	@Enumerated(EnumType.STRING)
 	private Construcao construcao;

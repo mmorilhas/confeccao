@@ -24,10 +24,6 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "roupas")
 @Entity (name = "Roupa")
 @Inheritance(strategy = InheritanceType.JOINED)
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 public class Roupa{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,8 +98,8 @@ public class Roupa{
 		this.parteDeCima = parteDeCima;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setAtivo() {
+		this.ativo = true;
 	}
 
 	public Long getId() {

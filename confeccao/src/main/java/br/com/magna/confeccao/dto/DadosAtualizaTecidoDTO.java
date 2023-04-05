@@ -5,9 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizaTecidoDTO(
 		
-		@NotNull Long id,
-		Long[] idDasFibras,
-		Construcao construcao
+		@NotNull Long[] idDasFibras,
+		@NotNull Construcao construcao
 				
 		) {
 

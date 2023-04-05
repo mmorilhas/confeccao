@@ -10,10 +10,6 @@ import jakarta.persistence.Table;
 
 @Table(name = "cavas")
 @Entity(name = "Cava")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Cava {
 

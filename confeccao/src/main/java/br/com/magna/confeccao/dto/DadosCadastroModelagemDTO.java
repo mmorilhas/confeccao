@@ -7,20 +7,20 @@ public record DadosCadastroModelagemDTO(
 		
 		
 		@NotNull Long idSilhueta, 
-		Long idFechamento,
+		@NotNull Long idFechamento,
 		
-		Boolean cinto,
-		Boolean passantes,
+		@NotNull Boolean cinto,
+		@NotNull Boolean passantes,
 		
 		@NotNull Boolean pences,
-		Boolean pala,
+		@NotNull Boolean pala,
 		
-		Long idPrega,
+		@NotNull Long idPrega,
 		
-		Boolean babado,
-		Boolean fenda,
+		@NotNull Boolean babado,
+		@NotNull Boolean fenda,
 		
-		@Positive Integer bolsos,
+		@NotNull @Positive Integer bolsos,
 		
 		@NotNull Boolean forro,
 		@NotNull Long idBarra

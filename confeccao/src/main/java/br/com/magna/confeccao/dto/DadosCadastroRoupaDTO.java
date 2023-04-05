@@ -13,8 +13,8 @@ public record DadosCadastroRoupaDTO(
 		@NotNull @Range(min=10, max=70) Integer tamanho,
 		@NotNull Genero genero,
 		@NotBlank String cor,
-		Boolean temEstampa,
-		Boolean temBordado,
+		@NotNull Boolean temEstampa,
+		@NotNull Boolean temBordado,
 		@NotNull @Valid DadosCadastroModelagemDTO modelagem,
 		@NotNull @Valid DadosCadastroTecidoDTO tecido,
 		@NotNull @Valid DadosCadastroParteDeCimaDTO parteDeCima

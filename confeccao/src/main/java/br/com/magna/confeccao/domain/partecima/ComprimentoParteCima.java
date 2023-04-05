@@ -11,9 +11,6 @@ import jakarta.persistence.Table;
 
 @Table(name= "comprimentos_parte_de_cima")
 @Entity(name = "ComprimentoParteCima")
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ComprimentoParteCima {
 		

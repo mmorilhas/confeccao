@@ -4,4 +4,5 @@ VALUES
 ('simples'),
 ('macho'),
 ('femea'),
-('plissado');
+('plissado'),
+('sem prega');

@@ -5,8 +5,6 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-//@Getter
-//@NoArgsConstructor
 @Embeddable
 public class ParteDeCima{
 	
@@ -46,6 +44,26 @@ public class ParteDeCima{
 
 	public void setComprimento(ComprimentoParteCima comprimento) {
 		this.comprimento = comprimento;
+	}
+
+	public Manga getManga() {
+		return manga;
+	}
+
+	public Decote getDecote() {
+		return decote;
+	}
+
+	public Cava getCava() {
+		return cava;
+	}
+
+	public Boolean getCapuz() {
+		return capuz;
+	}
+
+	public ComprimentoParteCima getComprimento() {
+		return comprimento;
 	}
 	
 	

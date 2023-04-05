@@ -95,7 +95,7 @@ class RoupaControllerTest {
 		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(2l, 2l, false, false, true, false, 1l,
 				false, false, 2, true, 1l);
 		Long[] fibras = { 1l, 2l, 3l };
-		DadosAtualizaTecidoDTO tecido = new DadosAtualizaTecidoDTO(2l, fibras, Construcao.MALHA);
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
 
 		DadosAtualizaParteDeCimaDTO parteDeCima = new DadosAtualizaParteDeCimaDTO(2l, 2l, 2l, false, 2l);
 
@@ -171,7 +171,7 @@ class RoupaControllerTest {
 		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(20l, 2l, false, false, true, false, 1l,
 				false, false, 2, true, 1l);
 		Long[] fibras = { 1l, 2l, 3l };
-		DadosAtualizaTecidoDTO tecido = new DadosAtualizaTecidoDTO(2l, fibras, Construcao.MALHA);
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
 
 		DadosAtualizaParteDeCimaDTO parteDeCima = new DadosAtualizaParteDeCimaDTO(2l, 2l, 2l, false, 2l);
 

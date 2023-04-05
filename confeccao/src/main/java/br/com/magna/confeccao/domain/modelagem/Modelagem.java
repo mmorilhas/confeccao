@@ -9,16 +9,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Positive;
 
 @Embeddable
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode()
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Modelagem {
 
-	@ManyToOne(cascade = CascadeType.ALL
-			//, fetch = FetchType.EAGER
-			)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "silhueta_id")
 	private Silhueta silhueta;
 	

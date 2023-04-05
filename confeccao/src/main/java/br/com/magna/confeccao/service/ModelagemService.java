@@ -30,7 +30,7 @@ public class ModelagemService {
 	private SilhuetaRepository silhuetaRepository;
 	@Autowired
 	private PregaRepository pregaRepository;
-	@Autowired 
+	@Autowired
 	private RoupaRepository roupaRepository;
 
 	public Modelagem criarModelagem(@Valid DadosCadastroModelagemDTO dados) {
@@ -47,9 +47,8 @@ public class ModelagemService {
 		modelagem.setBolsos(dados.bolsos());
 		modelagem.setForro(dados.forro());
 		modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
-		
-		return modelagem;
 
+		return modelagem;
 
 	}
 
@@ -57,44 +56,19 @@ public class ModelagemService {
 		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
 		Modelagem modelagem = roupa.getModelagem();
 
-		if (dados.idSilhueta() != null) {
-			modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
-		}
-		if (dados.idFechamento() != null) {
-			modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
-		}
-		if (dados.idPrega() != null) {
-			modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
-		}
-		if (dados.idBarra() != null) {
-			modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
-		}
-		if(dados.cinto() != null) {
-			modelagem.setCinto(dados.cinto());
-		}
-		if(dados.passantes() != null) {
-			modelagem.setPassantes(dados.passantes());
-		}
-		if(dados.pences() != null) {
-			modelagem.setPences(dados.pences());
-		}
-		if(dados.pala() != null) {
-			modelagem.setPala(dados.pala());
-		}
-		if(dados.babado() != null) {
-			modelagem.setBabado(dados.babado());
-		}
-		if(dados.fenda() != null) {
-			modelagem.setFenda(dados.fenda());
-		}
-		if(dados.bolsos() != null) {
-			modelagem.setBolsos(dados.bolsos());
-		}
-		if(dados.forro() != null) {
-			modelagem.setForro(dados.forro());
-		}
-		
-		
+		modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
+		modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
+		modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
+		modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
+		modelagem.setCinto(dados.cinto());
+		modelagem.setPassantes(dados.passantes());
+		modelagem.setPences(dados.pences());
+		modelagem.setPala(dados.pala());
+		modelagem.setBabado(dados.babado());
+		modelagem.setFenda(dados.fenda());
+		modelagem.setBolsos(dados.bolsos());
+		modelagem.setForro(dados.forro());
+
 		return modelagem;
 	}
 

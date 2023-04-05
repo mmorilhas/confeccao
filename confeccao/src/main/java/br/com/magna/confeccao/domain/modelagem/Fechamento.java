@@ -10,10 +10,6 @@ import jakarta.persistence.Table;
 
 @Table(name= "fechamentos")
 @Entity(name = "Fechamento")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Fechamento {
 

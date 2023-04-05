@@ -1,15 +1,15 @@
 package br.com.magna.confeccao.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DadosAtualizaParteDeCimaDTO(
 		
-		Long idManga,
-		Long idDecote,
-		Long idCava,
-		Boolean capuz,
-		Long idComprimento
+		@NotNull Long idManga,
+		@NotNull Long idDecote,
+		@NotNull Long idCava,
+		@NotNull Boolean capuz,
+		@NotNull Long idComprimento
 		
 		) {
-
-	
 	
 }

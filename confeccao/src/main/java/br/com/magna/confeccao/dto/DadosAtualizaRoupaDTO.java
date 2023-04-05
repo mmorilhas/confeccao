@@ -7,14 +7,14 @@ import jakarta.validation.constraints.NotNull;
 public record DadosAtualizaRoupaDTO(
 		
 		@NotNull Long id,
-		String nome,
-		Integer tamanho,
-		Genero genero,
-		String cor,
-		Boolean temEstampa,
-		Boolean temBordado,
+		@NotNull String nome,
+		@NotNull Integer tamanho,
+		@NotNull Genero genero,
+		@NotNull String cor,
+		@NotNull Boolean temEstampa,
+		@NotNull Boolean temBordado,
 		@Valid DadosAtualizaModelagemDTO modelagem,
-		@Valid DadosAtualizaTecidoDTO tecido,
+		@Valid DadosCadastroTecidoDTO tecido,
 		@Valid DadosAtualizaParteDeCimaDTO parteDeCima
 	
 		

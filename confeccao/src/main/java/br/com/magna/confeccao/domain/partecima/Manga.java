@@ -11,10 +11,6 @@ import jakarta.persistence.Table;
 
 @Table(name= "mangas")
 @Entity(name = "Manga")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Manga {
 

@@ -11,4 +11,5 @@ VALUES('ziper', 'lateral'),
 ('colchete', 'frente'),
 ('fita', 'costas'),
 ('fita', 'lateral'),
-('fita', 'frente');
+('fita', 'frente'),
+('sem', 'sem');

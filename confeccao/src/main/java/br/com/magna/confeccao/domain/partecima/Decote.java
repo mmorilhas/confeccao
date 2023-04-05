@@ -11,10 +11,6 @@ import jakarta.persistence.Table;
 
 @Table(name= "decotes")
 @Entity(name = "Decote")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Decote {
 
