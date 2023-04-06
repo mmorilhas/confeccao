@@ -10,7 +10,6 @@ import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.modelagem.Prega;
 import br.com.magna.confeccao.domain.modelagem.Silhueta;
 import br.com.magna.confeccao.domain.roupa.Roupa;
-import br.com.magna.confeccao.dto.DadosAtualizaModelagemDTO;
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
 import br.com.magna.confeccao.repository.BarraRepository;
 import br.com.magna.confeccao.repository.FechamentoRepository;
@@ -52,7 +51,7 @@ public class ModelagemService {
 
 	}
 
-	public Modelagem atualizaModelagem(Long idRoupa, @Valid DadosAtualizaModelagemDTO dados) {
+	public Modelagem atualizaModelagem(Long idRoupa, @Valid DadosCadastroModelagemDTO dados) {
 		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
 		Modelagem modelagem = roupa.getModelagem();
 

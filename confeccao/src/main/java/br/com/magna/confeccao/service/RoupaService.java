@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,13 +10,13 @@ import org.springframework.stereotype.Service;
 import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.roupa.Roupa;
+import br.com.magna.confeccao.domain.roupa.validacoes.ValidadorRoupa;
 import br.com.magna.confeccao.domain.tecido.Tecido;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
 import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
 import br.com.magna.confeccao.repository.RoupaRepository;
-import br.com.magna.confeccao.repository.TecidoRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -29,9 +31,14 @@ public class RoupaService {
 
 	@Autowired
 	private RoupaRepository roupaRepository;
+	
+	@Autowired
+	private List<ValidadorRoupa> validadores;
 
 	public void criarRoupaECadastrar(@Valid DadosCadastroRoupaDTO dados) {
 
+		validadores.forEach(v -> v.validar(dados));
+		
 		Modelagem modelagem = modelagemService.criarModelagem(dados.modelagem());
 		Tecido tecido = tecidoService.criarTecido(dados.tecido());
 		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.parteDeCima());

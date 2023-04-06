@@ -13,9 +13,9 @@ public record DadosAtualizaRoupaDTO(
 		@NotNull String cor,
 		@NotNull Boolean temEstampa,
 		@NotNull Boolean temBordado,
-		@Valid DadosAtualizaModelagemDTO modelagem,
+		@Valid DadosCadastroModelagemDTO modelagem,
 		@Valid DadosCadastroTecidoDTO tecido,
-		@Valid DadosAtualizaParteDeCimaDTO parteDeCima
+		@Valid DadosCadastroParteDeCimaDTO parteDeCima
 	
 		
 		) {

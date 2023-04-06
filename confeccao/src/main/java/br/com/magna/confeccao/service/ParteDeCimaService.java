@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +11,8 @@ import br.com.magna.confeccao.domain.partecima.ComprimentoParteCima;
 import br.com.magna.confeccao.domain.partecima.Decote;
 import br.com.magna.confeccao.domain.partecima.Manga;
 import br.com.magna.confeccao.domain.partecima.ParteDeCima;
+import br.com.magna.confeccao.domain.partecima.validacoes.ValidadorParteCima;
 import br.com.magna.confeccao.domain.roupa.Roupa;
-import br.com.magna.confeccao.dto.DadosAtualizaParteDeCimaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
 import br.com.magna.confeccao.repository.CavaRepository;
 import br.com.magna.confeccao.repository.ComprimentoRepository;
@@ -32,9 +34,13 @@ public class ParteDeCimaService {
 	private ComprimentoRepository comprimentoRepository;
 	@Autowired
 	private RoupaRepository roupaRepository;
+	@Autowired
+	private List<ValidadorParteCima> validadores;
 
 	public ParteDeCima criarParteDeCima(@Valid DadosCadastroParteDeCimaDTO dados) {
 
+		validadores.forEach(v -> v.validar(dados));
+		
 		ParteDeCima parteDeCima = new ParteDeCima();
 		parteDeCima.setManga(verificaEPegaManga(dados.idManga()));
 		parteDeCima.setDecote(verificaEPegaDecote(dados.idDecote()));
@@ -45,7 +51,7 @@ public class ParteDeCimaService {
 		return parteDeCima;
 	}
 
-	public ParteDeCima atualizaParteDeCima(Long idRoupa, @Valid DadosAtualizaParteDeCimaDTO dados) {
+	public ParteDeCima atualizaParteDeCima(Long idRoupa, @Valid DadosCadastroParteDeCimaDTO dados) {
 		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
 		ParteDeCima parteDeCima = roupa.getParteDeCima();
 		parteDeCima.setManga(verificaEPegaManga(dados.idManga()));

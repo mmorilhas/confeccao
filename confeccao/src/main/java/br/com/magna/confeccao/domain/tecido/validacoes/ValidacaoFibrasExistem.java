@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.domain.ValidacaoException;
-import br.com.magna.confeccao.domain.fibra.Fibra;
 import br.com.magna.confeccao.dto.DadosCadastroTecidoDTO;
 import br.com.magna.confeccao.repository.FibraRepository;
 

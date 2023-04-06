@@ -21,10 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.magna.confeccao.domain.roupa.Genero;
 import br.com.magna.confeccao.domain.roupa.Roupa;
 import br.com.magna.confeccao.domain.tecido.Construcao;
-import br.com.magna.confeccao.dto.DadosAtualizaModelagemDTO;
-import br.com.magna.confeccao.dto.DadosAtualizaParteDeCimaDTO;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
-import br.com.magna.confeccao.dto.DadosAtualizaTecidoDTO;
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
@@ -49,11 +46,10 @@ class RoupaControllerTest {
 
 	@Test
 	@DisplayName("Cadastro: deveria devolver codigo http 200 quando infos estao validas")
-	void testCadastrarRoupa() {
-		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1L, 1l, false, false, true, false, 1l,
-				false, false, 2, true, 1l);
-		Long[] fibras = { 1l, 2l, 3l };
-		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.PLANO);
+	void testCadastrarRoupaInfosValidas() {
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 1l, true, true, true, true, 1l, true, true, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
 
 		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
 
@@ -64,11 +60,28 @@ class RoupaControllerTest {
 
 		assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
 	}
+	
+	@Test
+	@DisplayName("Cadastro: deveria devolver codigo http 200 quando infos estao validas")
+	void testCadastrarRoupaInfosValidas2() {
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 1l, true, true, true, true, 1l, true, true, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
+
+		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
+
+		DadosCadastroRoupaDTO roupa = new DadosCadastroRoupaDTO("camisa", null, Genero.FEMININO, "rosa", true, true,
+				modelagem, tecido, parteDeCima);
+
+		ResponseEntity<List> response = restTemplate.postForEntity("/confeccao", roupa, List.class);
+
+		assertTrue(response.getStatusCode().is4xxClientError());
+	}
 
 	
 	@Test
 	@DisplayName("Cadastro: deveria devolver codigo http 400 quando infos estao invalidas")
-	void testCadastrarRoupa2() throws Exception {
+	void testCadastrarRoupaInfosInvalidas() {
 		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(null, 1l, false, false, true, false, 1l,
 				false, false, 2, true, 1l);
 		Long[] fibras = { 1l, 2l, 3l };
@@ -84,34 +97,76 @@ class RoupaControllerTest {
 		
 
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-		assertTrue(response.getStatusCode().is4xxClientError());
+		
+		
+	}
+	
+	@Test
+	@DisplayName("Cadastro com Exceção De Sem Fechamento e Construção Tecido Diferente de Malha: deveria devolver mensagem de ValidacaoConstrucaoTecidoEFechamento")
+	void testCadastrarRoupaValidacaoFechamentoConstrucao() {
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 13l, false, false, true, false, 1l,
+				false, false, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.PLANO);
+
+		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
+
+		DadosCadastroRoupaDTO roupa = new DadosCadastroRoupaDTO("camisa", 34, Genero.FEMININO, "rosa", true, true,
+				modelagem, tecido, parteDeCima);
+
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao",HttpMethod.POST, new HttpEntity<>(roupa), String.class);
+		
+
+		assertEquals("Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha", 
+				response.getBody());
+		
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Cadastro com Exceção de Sem Fechamento e Construção Tecido Diferente de Malha: deveria devolver mensagem de ValidacaoConstrucaoTecidoEFechamento")
+	void testCadastrarRoupaValidacaoFechamentoSilhueta() {
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 13l, false, false, true, false, 1l,
+				false, false, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
+		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
+
+		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
+
+		DadosCadastroRoupaDTO roupa = new DadosCadastroRoupaDTO("camisa", 34, Genero.FEMININO, "rosa", true, true,
+				modelagem, tecido, parteDeCima);
+
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao",HttpMethod.POST, new HttpEntity<>(roupa), String.class);
+		
+
+		assertEquals("Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha", 
+				response.getBody());
 		
 		
 	}
 
+	
 	@Test
 	@DisplayName("Atualizar: deveria devolver codigo http 200 quando infos estao validas")
-	void testAtualizarRoupa() {
-		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(2l, 2l, false, false, true, false, 1l,
-				false, false, 2, true, 1l);
-		Long[] fibras = { 1l, 2l, 3l };
+	void testAtualizarRoupaInfosValidas() {
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 1l, true, true, true, true, 1l, true, true, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
 		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
-
-		DadosAtualizaParteDeCimaDTO parteDeCima = new DadosAtualizaParteDeCimaDTO(2l, 2l, 2l, false, 2l);
-
-		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO(2l, "camisa", 34, Genero.FEMININO, "rosa", true, true,
+		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
+		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO(1l, "alterei o nome", 34, Genero.FEMININO, "rosa", true, true,
 				modelagem, tecido, parteDeCima);
 
 		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar", HttpMethod.PUT,
 				new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(2l,response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(1l,response.getBody().modelagem().getSilhueta().getId());
 	}
-
+	
 	@Test
 	@DisplayName("Atualizar: deveria devolver codigo http 500 quando infos estao invalidas")
-	void testAtualizarRoupa2() throws Exception {
+	void testAtualizarRoupaInfosInvalidas() throws Exception {
 		DadosAtualizaRoupaDTO roupa = criaDadosAtualizaRoupaDTOComModelagemIdSilhuetaInvalido();
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.PUT,
@@ -125,7 +180,7 @@ class RoupaControllerTest {
 
 	@Test
 	@DisplayName("Detalhar: deveria devolver codigo http 200 quando infos estao validas")
-	void testPegarRoupaPorId() {
+	void testDetalharRoupaPorIdValido() {
 
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/1", Roupa.class);
 
@@ -134,31 +189,30 @@ class RoupaControllerTest {
 
 	}
 
+	
 	@Test
 	@DisplayName("Detalhar: deveria devolver codigo http 500 quando infos estao invalidas")
-	void testPegarRoupaPorId2() throws Exception {
+	void testDetalharRoupaPorIdInvalido() throws Exception {
 
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/300", Roupa.class);
-
 		assertTrue(response.getStatusCode().is4xxClientError());
 
 	}
-
+	
 	@Test
 	@DisplayName("Deletar: deveria devolver codigo http 204 quando infos estao validas")
-	void testDeletarRoupa() {
+	void testDeletarRoupaValida() {
 		
 			
 		restTemplate.delete("/confeccao/5");
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/5", Roupa.class);
-
 		assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
 
 	}
-
+	
 	@Test
 	@DisplayName("Deletar: deveria devolver codigo http 500 quando infos estao invalidas")
-	void testDeletarRoupa2() throws Exception {
+	void testDeletarRoupaInvalido() throws Exception {
 
 		restTemplate.delete("/confeccao/10");
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/100", Roupa.class);
@@ -168,17 +222,15 @@ class RoupaControllerTest {
 	}
 	
 	private DadosAtualizaRoupaDTO criaDadosAtualizaRoupaDTOComModelagemIdSilhuetaInvalido() {
-		DadosAtualizaModelagemDTO modelagem = new DadosAtualizaModelagemDTO(20l, 2l, false, false, true, false, 1l,
-				false, false, 2, true, 1l);
-		Long[] fibras = { 1l, 2l, 3l };
+		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(20l, 1l, true, true, true, true, 1l, true, true, 2, true, 1l);
+		Long[] fibras = { 1l, 3l };
 		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
-
-		DadosAtualizaParteDeCimaDTO parteDeCima = new DadosAtualizaParteDeCimaDTO(2l, 2l, 2l, false, 2l);
-
-		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO(2l, "camisa", 34, Genero.FEMININO, "rosa", true, true,
+		DadosCadastroParteDeCimaDTO parteDeCima = new DadosCadastroParteDeCimaDTO(1l, 1l, 1l, false, 1l);
+		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO(1l, "alterei o nome", 34, Genero.FEMININO, "rosa", true, true,
 				modelagem, tecido, parteDeCima);
 		return roupa;
 		
 	}
+	
 
 }

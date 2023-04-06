@@ -48,7 +48,6 @@ public class TratadorDeErros {
 
 		return ResponseEntity.internalServerError()
 				.body(new DadosErroValidacao(ex.getCause().toString(), ex.getMessage()));
-		// ResponseEntity.internalServerError().body(ex.toString());
 	}
 
 	@ExceptionHandler(ValidacaoException.class)
@@ -56,5 +55,4 @@ public class TratadorDeErros {
 		return ResponseEntity.badRequest().body(ex.getMessage());
 	}
 
-	
 }

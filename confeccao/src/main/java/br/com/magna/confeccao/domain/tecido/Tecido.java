@@ -1,7 +1,6 @@
 package br.com.magna.confeccao.domain.tecido;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
