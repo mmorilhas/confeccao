@@ -1,5 +1,5 @@
-INSERT INTO cavas
-(descricao)
+INSERT INTO TB_DOM_CAVA
+(VAR_DESCRICAO_CAVA)
 VALUES('justa'),
 ('baixa'),
 ('sem');

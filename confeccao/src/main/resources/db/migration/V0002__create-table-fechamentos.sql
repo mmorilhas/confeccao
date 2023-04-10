@@ -1,7 +1,7 @@
-CREATE TABLE fechamentos (
-	id bigserial not null,
-	aviamento varchar(100),
-	local varchar(50),
-	primary key (id)
+CREATE TABLE TB_DOM_FECHAMENTO (
+	PK_ID_FECHAMENTO bigserial not null,
+	VAR_AVIAMENTO_FECHAMENTO varchar(100),
+	VAR_LOCAL_FECHAMENTO varchar(50),
+	primary key (PK_ID_FECHAMENTO)
 );
 

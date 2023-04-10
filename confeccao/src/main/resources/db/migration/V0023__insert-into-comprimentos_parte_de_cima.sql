@@ -1,5 +1,5 @@
-INSERT INTO comprimentos_parte_de_cima
-(descricao)
+INSERT INTO TB_DOM_COMPRIMENTO
+(VAR_DESCRICAO_COMPRIMENTO)
 VALUES('cropped'),
 ('cintura'),
 ('quadril'),
@@ -9,8 +9,8 @@ VALUES('cropped'),
 
 --- para casacos
 
-INSERT INTO comprimentos_parte_de_cima
-(descricao)
+INSERT INTO TB_DOM_COMPRIMENTO
+(VAR_DESCRICAO_COMPRIMENTO)
 VALUES('meio da coxa'),
 ('joelho'),
 ('abaixo do joelho'),

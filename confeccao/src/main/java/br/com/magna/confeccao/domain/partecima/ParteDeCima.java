@@ -1,6 +1,7 @@
 package br.com.magna.confeccao.domain.partecima;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -9,21 +10,23 @@ import jakarta.persistence.ManyToOne;
 public class ParteDeCima{
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "manga_id")
+	@JoinColumn(name = "FK_ID_MANGA")
 	private Manga manga;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "decote_id")
+	@JoinColumn(name = "FK_ID_DECOTE")
 	private Decote decote;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "cava_id")
+	@JoinColumn(name = "FK_ID_CAVA")
 	private Cava cava;
 	
+	
+	@Column(name="BOOL_CAPUZ_ROUPA")
 	private Boolean capuz;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "comprimento_id")
+	@JoinColumn(name = "FK_ID_COMPRIMENTO")
 	private ComprimentoParteCima comprimento;
 
 	public void setManga(Manga manga) {

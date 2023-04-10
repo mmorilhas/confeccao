@@ -1,6 +1,6 @@
-CREATE TABLE comprimentos_parte_de_cima (
-	id bigserial not null,
-	descricao varchar (200),
+CREATE TABLE TB_DOM_COMPRIMENTO (
+	PK_ID_COMPRIMENTO bigserial not null,
+	VAR_DESCRICAO_COMPRIMENTO varchar (200),
 	
-	primary key(id)
+	primary key(PK_ID_COMPRIMENTO)
 );

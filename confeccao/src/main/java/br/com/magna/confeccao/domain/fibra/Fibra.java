@@ -10,29 +10,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
-@Table(name = "fibras")
+@Table(name = "TB_FIBRA")
 @Entity
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id") 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Fibra {
 	
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PK_ID_FIBRA")
 	private Long id;
 	
-	@Column(unique = true)
+	@Column(unique = true, name="VAR_NOME_FIBRA")
 	private String nomeFibra;
 	
+	@Column(name="VAR_TIPO_FIBRA")
 	private String tipoFibra;
 	
+	@Column(name="VAR_TEMPO_SECAGEM_FIBRA")
 	private String tempoSecagem;
+	
+	@Column(name="BOOL_RESPIRAVEL_FIBRA")
 	private Boolean respiravel;
+	
+	@Column(name="VAR_ABSORCAO_AGUA_FIBRA")
 	private String absorcaoAgua;
+	
+	@Column(name="VAR_ELASTICIDADE_FIBRA")
 	private String elasticidade;
+	
+	@Column(name="VAR_COMPORTAMENTO_TERMICO_FIBRA")
 	private String comportamentoTermico;
+	
+	@Column(name="VAR_RESISTENCIA_FIBRA")
 	private String resistencia;
 	
 	public Long getId() {

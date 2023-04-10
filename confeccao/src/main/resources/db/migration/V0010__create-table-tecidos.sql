@@ -1,12 +1,12 @@
-CREATE TABLE tecidos (
-	 id bigserial not null,
-     absorcao_agua varchar(250),
-     comportamento_termico varchar(250),
-     construcao varchar(200),
-     elasticidade varchar(200),
-     resistencia varchar(200),
-     respiravel boolean,
-     tempo_secagem varchar(200),
-     tipo_de_tecido varchar(100),
-     primary key (id)
+CREATE TABLE TB_TECIDO (
+	 PK_ID_TECIDO bigserial not null,
+     VAR_ABSORCAO_AGUA_TECIDO varchar(250),
+     VAR_COMPORTAMENTO_TERMICO_TECIDO varchar(250),
+     VAR_CONSTRUCAO_TECIDO varchar(200),
+     VAR_ELASTICIDADE_TECIDO varchar(200),
+     VAR_RESISTENCIA_TECIDO varchar(200),
+     BOOL_RESPIRAVEL_TECIDO boolean,
+     VAR_TEMPO_SECAGEM_TECIDO varchar(200),
+     VAR_TIPO_TECIDO varchar(100),
+     primary key (PK_ID_TECIDO)
 );

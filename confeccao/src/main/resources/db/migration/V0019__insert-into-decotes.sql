@@ -1,5 +1,5 @@
-INSERT INTO decotes
-(descricao)
+INSERT INTO TB_DOM_DECOTE
+(VAR_DESCRICAO_DECOTE)
 VALUES('canoa'),
 ('gola alta'),
 ('tomara que caia'),

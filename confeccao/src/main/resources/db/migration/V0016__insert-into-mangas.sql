@@ -1,5 +1,5 @@
-INSERT INTO mangas
-(comprimento, tipo)
+INSERT INTO TB_DOM_MANGA
+(VAR_COMPRIMENTO_MANGA, VAR_TIPO_MANGA)
 VALUES
 ('regata', 'raglan'),
 ('regata', 'alcinha'),

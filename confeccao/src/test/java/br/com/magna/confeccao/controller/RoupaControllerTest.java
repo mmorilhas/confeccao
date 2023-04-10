@@ -62,8 +62,8 @@ class RoupaControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Cadastro: deveria devolver codigo http 200 quando infos estao validas")
-	void testCadastrarRoupaInfosValidas2() {
+	@DisplayName("Cadastro com Tamanho Null: deveria devolver codigo http 400 quando infos estao invalidas")
+	void testCadastrarRoupaInfosInvalidasTamanhoNull() {
 		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(1l, 1l, true, true, true, true, 1l, true, true, 2, true, 1l);
 		Long[] fibras = { 1l, 3l };
 		DadosCadastroTecidoDTO tecido = new DadosCadastroTecidoDTO(fibras, Construcao.MALHA);
@@ -80,8 +80,8 @@ class RoupaControllerTest {
 
 	
 	@Test
-	@DisplayName("Cadastro: deveria devolver codigo http 400 quando infos estao invalidas")
-	void testCadastrarRoupaInfosInvalidas() {
+	@DisplayName("Cadastro com Id Silhueta Null: deveria devolver codigo http 400 quando infos estao invalidas")
+	void testCadastrarRoupaInfosInvalidasSilhuetaId() {
 		DadosCadastroModelagemDTO modelagem = new DadosCadastroModelagemDTO(null, 1l, false, false, true, false, 1l,
 				false, false, 2, true, 1l);
 		Long[] fibras = { 1l, 2l, 3l };

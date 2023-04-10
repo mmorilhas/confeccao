@@ -1,8 +1,8 @@
-CREATE TABLE mangas (
-	id bigserial not null,
-   comprimento varchar(150),
-    tipo varchar(200),
-    primary key (id)
+CREATE TABLE TB_DOM_MANGA (
+	PK_ID_MANGA bigserial not null,
+   	VAR_COMPRIMENTO_MANGA varchar(150),
+    VAR_TIPO_MANGA varchar(200),
+    primary key (PK_ID_MANGA)
 );
 
 -- CREATE TABLE mangas (

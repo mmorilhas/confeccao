@@ -6,6 +6,7 @@ import br.com.magna.confeccao.domain.modelagem.Modelagem;
 import br.com.magna.confeccao.domain.partecima.ParteDeCima;
 import br.com.magna.confeccao.domain.tecido.Tecido;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,27 +22,34 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 
-@Table(name = "roupas")
+@Table(name = "TB_ROUPA")
 @Entity (name = "Roupa")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Roupa{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PK_ID_ROUPA")
 	private Long id;
 	
 	@NotBlank
+	@Column(name="VAR_NOME_ROUPA")
 	private String nome;
 	
 	@Range(min=10, max=70)
+	@Column(name="INT_TAMANHO_ROUPA")
 	private Integer tamanho;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name="VAR_GENERO_ROUPA")
 	private Genero genero;
 	
+	@Column(name="VAR_COR_ROUPA")
 	private String cor;
 	
+	@Column(name="BOOL_ESTAMPA_ROUPA")
 	private Boolean temEstampa;
 	
+	@Column(name="BOOL_BORDADO_ROUPA")
 	private Boolean temBordado;
 	
 	@Embedded
@@ -49,12 +57,13 @@ public class Roupa{
 	
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "tecido_id")
+	@JoinColumn(name = "FK_ID_TECIDO")
 	private Tecido tecido;
 	
 	@Embedded
 	private ParteDeCima parteDeCima;
 
+	@Column(name="BOOL_ATIVO")
 	private Boolean ativo;
 	
 	

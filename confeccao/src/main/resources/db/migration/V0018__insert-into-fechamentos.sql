@@ -1,5 +1,5 @@
-INSERT INTO fechamentos
-(aviamento, "local")
+INSERT INTO TB_DOM_FECHAMENTO
+(VAR_AVIAMENTO_FECHAMENTO, VAR_LOCAL_FECHAMENTO)
 VALUES('ziper', 'lateral'),
 ('ziper', 'frente'),
 ('ziper', 'costas'),

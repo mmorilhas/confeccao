@@ -1,38 +1,38 @@
-CREATE TABLE roupas (
-	id bigserial not null,
-    cor varchar(80),
-    genero varchar(50),
-    nome varchar(250) not null,
-    tamanho integer,
-    tem_bordado boolean,
-    tem_estampa boolean,
+CREATE TABLE TB_ROUPA (
+	PK_ID_ROUPA bigserial not null,
+    VAR_COR_ROUPA varchar(80),
+    VAR_GENERO_ROUPA varchar(50),
+    VAR_NOME_ROUPA varchar(250) not null,
+    INT_TAMANHO_ROUPA integer,
+    BOOL_BORDADO_ROUPA boolean,
+    BOOL_ESTAMPA_ROUPA boolean,
 	
-	silhueta_id bigint, 
-	fechamento_id bigint, 
-	cinto boolean,
-	passantes boolean,
-	pences boolean,
-	pala boolean, 
-	prega_id bigint,
-	babado boolean,
-	fenda boolean,
-	bolsos integer,
-	forro boolean,
-	barra_id bigint,
+	FK_ID_SILHUETA bigint, 
+	FK_ID_FECHAMENTO bigint, 
+	BOOL_CINTO_ROUPA boolean,
+	BOOL_PASSANTE_ROUPA boolean,
+	BOOL_PENCE_ROUPA boolean,
+	BOOL_PALA_ROUPA boolean, 
+	FK_ID_PREGA bigint,
+	BOOL_BABADO_ROUPA boolean,
+	BOOL_FENDA_ROUPA boolean,
+	INT_BOLSOS_ROUPA integer,
+	BOOL_FORRO_ROUPA boolean,
+	FK_ID_BARRA bigint,
     
-    decote_id bigint,
-    manga_id bigint,
-    capuz boolean,
-    cava_id bigint,
-	comprimento_id bigint,
+    FK_ID_DECOTE bigint,
+    FK_ID_MANGA bigint,
+    BOOL_CAPUZ_ROUPA boolean,
+    FK_ID_CAVA bigint,
+	FK_ID_COMPRIMENTO bigint,
 	
-	tecido_id bigint,
+	FK_ID_TECIDO bigint,
 	
-	ativo boolean,
+	BOOL_ATIVO boolean,
 	
 
 
-    primary key (id)
+    primary key (PK_ID_ROUPA)
 );
 
 

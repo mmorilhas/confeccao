@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.magna.confeccao.domain.fibra.Fibra;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,30 +18,46 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Table(name = "tecidos")
+@Table(name = "TB_TECIDO")
 @Entity(name = "Tecido")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tecido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="PK_ID_TECIDO")
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "tecidos_composicao", 
-	joinColumns = { @JoinColumn(name = "tecido_id") },
-	inverseJoinColumns = { @JoinColumn(name = "fibras_id") })
+	@JoinTable(name = "TB_TECIDO_FIBRA_COMPOSICAO", 
+	joinColumns = { @JoinColumn(name = "FK_ID_TECIDO") },
+	inverseJoinColumns = { @JoinColumn(name = "FK_ID_FIBRA") })
 	private Collection<Fibra> composicao;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="VAR_CONSTRUCAO_TECIDO")
 	private Construcao construcao;
-
+	
+	
+	@Column(name="VAR_TIPO_TECIDO")
 	private String tipoDeTecido;
+	
+	@Column(name="VAR_TEMPO_SECAGEM_TECIDO")
 	private String tempoSecagem;
+	
+	@Column(name="BOOL_RESPIRAVEL_TECIDO")
 	private Boolean respiravel;
+	
+	@Column(name="VAR_ABSORCAO_AGUA_TECIDO")
 	private String absorcaoAgua;
+	
+	@Column(name="VAR_ELASTICIDADE_TECIDO")
 	private String elasticidade;
+	
+	@Column(name="VAR_COMPORTAMENTO_TERMICO_TECIDO")
 	private String comportamentoTermico;
+	
+	@Column(name="VAR_RESISTENCIA_TECIDO")
 	private String resistencia;
 	
 	

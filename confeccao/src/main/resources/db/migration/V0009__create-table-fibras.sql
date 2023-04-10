@@ -1,15 +1,15 @@
-CREATE TABLE fibras (
-	id bigserial not null,
-    absorcao_agua varchar(200),
-    comportamento_termico varchar(200),
-    elasticidade varchar(100),
-    nome_fibra varchar(250),
-    resistencia varchar(100),
-    respiravel boolean,
-    tempo_secagem varchar(100),
-    tipo_fibra varchar(100),
+CREATE TABLE TB_FIBRA (
+	PK_ID_FIBRA bigserial not null,
+    VAR_ABSORCAO_AGUA_FIBRA varchar(200),
+    VAR_COMPORTAMENTO_TERMICO_FIBRA varchar(200),
+    VAR_ELASTICIDADE_FIBRA varchar(100),
+    VAR_NOME_FIBRA varchar(250),
+    VAR_RESISTENCIA_FIBRA varchar(100),
+    BOOL_RESPIRAVEL_FIBRA boolean,
+    VAR_TEMPO_SECAGEM_FIBRA varchar(100),
+   	VAR_TIPO_FIBRA varchar(100),
     
-    primary key (id),
+    primary key (PK_ID_FIBRA),
     
-    CONSTRAINT nomeUnicoFibra unique (nome_fibra)
+    CONSTRAINT  VAR_NOME_FIBRA unique (VAR_NOME_FIBRA)
 );
