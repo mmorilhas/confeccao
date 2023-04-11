@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.com.magna.confeccao.domain.ValidacaoException;
+import br.com.magna.confeccao.entities.ValidacaoException;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
@@ -22,6 +21,7 @@ public class TratadorDeErros {
 
 	}
 
+	/*
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<DadosErroValidacao> handleException(HttpMessageNotReadableException ex) {
 		String[] erroMensagem = ex.getMessage().split("from");
@@ -35,6 +35,7 @@ public class TratadorDeErros {
 		return ResponseEntity.badRequest()
 				.body(new DadosErroValidacao(erro, "Tipo de valor inserido é inválido para o campo"));
 	}
+	*/
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<List<DadosErroValidacao>> tratarErro400(MethodArgumentNotValidException ex) {

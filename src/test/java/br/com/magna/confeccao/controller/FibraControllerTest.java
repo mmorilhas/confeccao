@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.fibra.Fibra;
+import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class FibraControllerTest {
 
 	    @Test
 	    void testListarFibras() {
-	    	ResponseEntity<List<Fibra>> response = restTemplate.exchange("/fibras", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<FibraDomain>> response = restTemplate.exchange("/fibras", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

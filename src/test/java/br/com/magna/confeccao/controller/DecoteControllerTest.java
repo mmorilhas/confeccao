@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.partecima.Decote;
+import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class DecoteControllerTest {
 
 	    @Test
 	    void testListarDecote() {
-	    	ResponseEntity<List<Decote>> response = restTemplate.exchange("/decotes", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<DecoteDomain>> response = restTemplate.exchange("/decotes", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());
 	    }

@@ -2,8 +2,8 @@ package br.com.magna.confeccao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.magna.confeccao.domain.modelagem.Fechamento;
+import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 
-public interface FechamentoRepository extends JpaRepository<Fechamento, Long>{
+public interface FechamentoRepository extends JpaRepository<FechamentoDomain, Long>{
 
 }

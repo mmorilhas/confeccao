@@ -1,5 +1,0 @@
-INSERT INTO TB_DOM_SILHUETA
-(VAR_DESCRICAO_SILHUETA)
-VALUES('justa'),
-('reta'),
-('larga');

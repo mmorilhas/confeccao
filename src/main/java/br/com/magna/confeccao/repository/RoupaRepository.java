@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.magna.confeccao.domain.roupa.Roupa;
+import br.com.magna.confeccao.entities.roupa.Roupa;
 
 public interface RoupaRepository extends JpaRepository<Roupa, Long>{
 

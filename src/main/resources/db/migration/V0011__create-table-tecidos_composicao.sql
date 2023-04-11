@@ -1,5 +1,0 @@
-CREATE TABLE TB_TECIDO_FIBRA_COMPOSICAO (
-	FK_ID_TECIDO bigint not null,
-	FK_ID_FIBRA bigint not null
-
-);

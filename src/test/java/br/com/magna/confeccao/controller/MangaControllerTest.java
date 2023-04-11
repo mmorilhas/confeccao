@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.partecima.Manga;
+import br.com.magna.confeccao.entities.domain.partecima.MangaDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class MangaControllerTest {
 
 	    @Test
 	    void testListarManga() {
-	    	ResponseEntity<List<Manga>> response = restTemplate.exchange("/mangas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<MangaDomain>> response = restTemplate.exchange("/mangas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

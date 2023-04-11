@@ -7,16 +7,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.magna.confeccao.domain.modelagem.Modelagem;
-import br.com.magna.confeccao.domain.partecima.ParteDeCima;
-import br.com.magna.confeccao.domain.roupa.Roupa;
-import br.com.magna.confeccao.domain.roupa.validacoes.ValidadorRoupa;
-import br.com.magna.confeccao.domain.tecido.Tecido;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
-import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.dto.domain.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.entities.ValidacaoException;
+import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
+import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
+import br.com.magna.confeccao.entities.modelagem.Modelagem;
+import br.com.magna.confeccao.entities.partecima.ParteDeCima;
+import br.com.magna.confeccao.entities.roupa.Roupa;
+import br.com.magna.confeccao.entities.roupa.validacoes.ValidadorRoupa;
+import br.com.magna.confeccao.entities.tecido.Tecido;
 import br.com.magna.confeccao.repository.RoupaRepository;
+import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -28,6 +32,9 @@ public class RoupaService {
 	private ModelagemService modelagemService;
 	@Autowired
 	private ParteDeCimaService parteDeCimaService;
+	
+	@Autowired
+	private TipoRoupaDomainRepository tipoRoupaRepository;
 
 	@Autowired
 	private RoupaRepository roupaRepository;
@@ -45,6 +52,7 @@ public class RoupaService {
 
 		Roupa roupa = new Roupa();
 		roupa.setNome(dados.nome());
+		roupa.setTipoRoupa(verificaEPegaTipoRoupa(dados.tipoRoupa()));
 		roupa.setTamanho(dados.tamanho());
 		roupa.setGenero(dados.genero());
 		roupa.setCor(dados.cor());
@@ -67,6 +75,7 @@ public class RoupaService {
 		Roupa roupa = roupaRepository.getReferenceById(dados.id());
 
 		roupa.setNome(dados.nome());
+		roupa.setTipoRoupa(verificaEPegaTipoRoupa(dados.tipoRoupa()));
 		roupa.setTamanho(dados.tamanho());
 		roupa.setGenero(dados.genero());
 		roupa.setCor(dados.cor());
@@ -102,5 +111,14 @@ public class RoupaService {
 	public void tornarInativo(Long id) {
 		Roupa roupa = roupaRepository.getReferenceById(id);
 		roupa.excluir();
+	}
+	
+	private TipoRoupaDomain verificaEPegaTipoRoupa(String tipoRoupa) {
+		if (!tipoRoupaRepository.existsById(tipoRoupa)) {
+			throw new ValidacaoException("Id de TipoRoupa informado não existe");
+		}
+		
+
+		return tipoRoupaRepository.getReferenceById(tipoRoupa);
 	}
 }

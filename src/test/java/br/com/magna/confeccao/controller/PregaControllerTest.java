@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.modelagem.Prega;
+import br.com.magna.confeccao.entities.domain.modelagem.PregaDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class PregaControllerTest {
 
 	    @Test
 	    void testListarPrega() {
-	    	ResponseEntity<List<Prega>> response = restTemplate.exchange("/pregas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<PregaDomain>> response = restTemplate.exchange("/pregas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

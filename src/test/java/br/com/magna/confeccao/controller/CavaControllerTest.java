@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.partecima.Cava;
+import br.com.magna.confeccao.entities.domain.partecima.CavaDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class CavaControllerTest {
 
 	    @Test
 	    void testListarCava() {
-	    	ResponseEntity<List<Cava>> response = restTemplate.exchange("/cavas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<CavaDomain>> response = restTemplate.exchange("/cavas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

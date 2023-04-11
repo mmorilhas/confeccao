@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.partecima.ComprimentoParteCima;
+import br.com.magna.confeccao.entities.domain.partecima.ComprimentoParteCimaDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class ComprimentosControllerTest {
 
 	    @Test
 	    void testListarComprimentos() {
-	    	ResponseEntity<List<ComprimentoParteCima>> response = restTemplate.exchange("/comprimentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<ComprimentoParteCimaDomain>> response = restTemplate.exchange("/comprimentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

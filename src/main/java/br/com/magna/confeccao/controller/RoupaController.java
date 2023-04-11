@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magna.confeccao.domain.roupa.Roupa;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
-import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.dto.domain.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.entities.roupa.Roupa;
 import br.com.magna.confeccao.service.RoupaService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

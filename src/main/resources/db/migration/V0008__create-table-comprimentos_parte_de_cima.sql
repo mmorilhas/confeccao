@@ -1,6 +1,0 @@
-CREATE TABLE TB_DOM_COMPRIMENTO (
-	PK_ID_COMPRIMENTO bigserial not null,
-	VAR_DESCRICAO_COMPRIMENTO varchar (200),
-	
-	primary key(PK_ID_COMPRIMENTO)
-);

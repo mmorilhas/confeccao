@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.modelagem.Fechamento;
+import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class FechamentoControllerTest {
 
 	    @Test
 	    void testListarFechamento() {
-	    	ResponseEntity<List<Fechamento>> response = restTemplate.exchange("/fechamentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<FechamentoDomain>> response = restTemplate.exchange("/fechamentos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

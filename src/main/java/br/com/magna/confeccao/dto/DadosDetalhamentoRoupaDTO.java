@@ -1,16 +1,18 @@
 package br.com.magna.confeccao.dto;
 
-import br.com.magna.confeccao.domain.modelagem.Modelagem;
-import br.com.magna.confeccao.domain.partecima.ParteDeCima;
-import br.com.magna.confeccao.domain.roupa.Genero;
-import br.com.magna.confeccao.domain.roupa.Roupa;
-import br.com.magna.confeccao.domain.tecido.Tecido;
+import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
+import br.com.magna.confeccao.entities.modelagem.Modelagem;
+import br.com.magna.confeccao.entities.partecima.ParteDeCima;
+import br.com.magna.confeccao.entities.roupa.Roupa;
+import br.com.magna.confeccao.entities.roupa.enums.Genero;
+import br.com.magna.confeccao.entities.tecido.Tecido;
 
 public record DadosDetalhamentoRoupaDTO(
 	
 		
 		Long id,
 		String nome,
+		TipoRoupaDomain tipoRoupa,
 		Integer tamanho,
 		Genero genero,
 		String cor,
@@ -26,6 +28,7 @@ public record DadosDetalhamentoRoupaDTO(
 	public DadosDetalhamentoRoupaDTO(Roupa roupa) {
 		this(roupa.getId(),
 				roupa.getNome(),
+				roupa.getTipoRoupa(),
 				roupa.getTamanho(),
 				roupa.getGenero(),
 				roupa.getCor(),

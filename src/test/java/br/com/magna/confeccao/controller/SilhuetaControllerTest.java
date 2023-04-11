@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.magna.confeccao.domain.modelagem.Silhueta;
+import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -27,7 +27,7 @@ class SilhuetaControllerTest {
 
 	    @Test
 	    void testListarSilhueta() {
-	    	ResponseEntity<List<Silhueta>> response = restTemplate.exchange("/silhuetas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+	    	ResponseEntity<List<SilhuetaDomain>> response = restTemplate.exchange("/silhuetas", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
 
 	    
 	    	assertTrue(response.getStatusCode().is2xxSuccessful());

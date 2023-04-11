@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.magna.confeccao.domain.ValidacaoException;
-import br.com.magna.confeccao.domain.partecima.Cava;
-import br.com.magna.confeccao.domain.partecima.ComprimentoParteCima;
-import br.com.magna.confeccao.domain.partecima.Decote;
-import br.com.magna.confeccao.domain.partecima.Manga;
-import br.com.magna.confeccao.domain.partecima.ParteDeCima;
-import br.com.magna.confeccao.domain.partecima.validacoes.ValidadorParteCima;
-import br.com.magna.confeccao.domain.roupa.Roupa;
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
+import br.com.magna.confeccao.entities.ValidacaoException;
+import br.com.magna.confeccao.entities.domain.partecima.CavaDomain;
+import br.com.magna.confeccao.entities.domain.partecima.ComprimentoParteCimaDomain;
+import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
+import br.com.magna.confeccao.entities.domain.partecima.MangaDomain;
+import br.com.magna.confeccao.entities.partecima.ParteDeCima;
+import br.com.magna.confeccao.entities.partecima.validacoes.ValidadorParteCima;
+import br.com.magna.confeccao.entities.roupa.Roupa;
 import br.com.magna.confeccao.repository.CavaRepository;
 import br.com.magna.confeccao.repository.ComprimentoRepository;
 import br.com.magna.confeccao.repository.DecoteRepository;
@@ -62,28 +62,28 @@ public class ParteDeCimaService {
 		return parteDeCima;
 	}
 
-	private Manga verificaEPegaManga(Long idManga) {
+	private MangaDomain verificaEPegaManga(Long idManga) {
 		if (!mangaRepository.existsById(idManga)) {
 			throw new ValidacaoException("Id de Manga informado não existe");
 		}
 		return mangaRepository.getReferenceById(idManga);
 	}
 
-	private Decote verificaEPegaDecote(Long idDecote) {
+	private DecoteDomain verificaEPegaDecote(Long idDecote) {
 		if (!decoteRepository.existsById(idDecote)) {
 			throw new ValidacaoException("Id de Decote informado não existe");
 		}
 		return decoteRepository.getReferenceById(idDecote);
 	}
 
-	private Cava verificaEPegaCava(Long idCava) {
+	private CavaDomain verificaEPegaCava(Long idCava) {
 		if (!cavaRepository.existsById(idCava)) {
 			throw new ValidacaoException("Id de Cava informado não existe");
 		}
 		return cavaRepository.getReferenceById(idCava);
 	}
 
-	private ComprimentoParteCima verificaEPegaComprimento(Long idComprimento) {
+	private ComprimentoParteCimaDomain verificaEPegaComprimento(Long idComprimento) {
 		if (!comprimentoRepository.existsById(idComprimento)) {
 			throw new ValidacaoException("Id de Comprimento informado não existe");
 		}
