@@ -1,4 +1,4 @@
-package br.com.magna.confeccao.dto.domain;
+package br.com.magna.confeccao.dto;
 
 import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;

@@ -34,11 +34,11 @@ public class TecidoService {
 
 		validadores.forEach(v -> v.validar(dados));
 		
-		Collection<FibraDomain> composicao = criarComposicao(dados.idDasFibras());
+		Collection<FibraDomain> composicao = criarComposicao(dados.getIdDasFibras());
 
 		Tecido tecido = new Tecido();
 		tecido.setComposicao(composicao);
-		tecido.setConstrucao(dados.construcao());
+		tecido.setConstrucao(dados.getConstrucao());
 		tecido.setTipoDeTecido(calcularTipoTecido(composicao));
 		tecido.setTempoSecagem(calcularTempoSecagem(composicao));
 		tecido.setRespiravel(calcularEhRespiravel(composicao));
@@ -57,7 +57,7 @@ public class TecidoService {
 		
 		Tecido tecido = tecidoRepository.getReferenceById(idRoupa);
 
-		Collection<FibraDomain> composicao = criarComposicao(dados.idDasFibras());
+		Collection<FibraDomain> composicao = criarComposicao(dados.getIdDasFibras());
 		tecido.setComposicao(composicao);
 		tecido.setTipoDeTecido(calcularTipoTecido(composicao));
 		tecido.setTempoSecagem(calcularTempoSecagem(composicao));
@@ -67,7 +67,7 @@ public class TecidoService {
 		tecido.setComportamentoTermico(calcularComportamentoTermico(composicao));
 		tecido.setResistencia(calcularResistencia(composicao));
 
-		tecido.setConstrucao(dados.construcao());
+		tecido.setConstrucao(dados.getConstrucao());
 
 		tecidoRepository.save(tecido);
 

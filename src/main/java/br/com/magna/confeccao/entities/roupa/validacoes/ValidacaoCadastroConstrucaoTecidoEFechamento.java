@@ -12,7 +12,7 @@ import br.com.magna.confeccao.repository.FechamentoRepository;
 import br.com.magna.confeccao.repository.SilhuetaRepository;
 
 @Component
-public class ValidacaoConstrucaoTecidoEFechamento implements ValidadorRoupa {
+public class ValidacaoCadastroConstrucaoTecidoEFechamento implements ValidadorRoupaCadastro{
 
 	@Autowired
 	private FechamentoRepository fechamentoRepository;
@@ -22,17 +22,15 @@ public class ValidacaoConstrucaoTecidoEFechamento implements ValidadorRoupa {
 
 	@Override
 	public void validar(DadosCadastroRoupaDTO dados) {
-		FechamentoDomain fechamento = fechamentoRepository.getReferenceById(dados.modelagem().idFechamento());
-		SilhuetaDomain silhueta = silhuetaRepository.getReferenceById(dados.modelagem().idSilhueta());
+		FechamentoDomain fechamento = fechamentoRepository.getReferenceById(dados.getModelagem().getIdFechamento());
+		SilhuetaDomain silhueta = silhuetaRepository.getReferenceById(dados.getModelagem().getIdSilhueta());
 
-		if ((fechamento.getLocal().equalsIgnoreCase("sem") && !dados.tecido().construcao().equals(ConstrucaoEnum.MALHA))
-				||  (fechamento.getLocal().equalsIgnoreCase("sem") && !silhueta.getDescricao().equalsIgnoreCase("larga"))) {
-			throw new ValidacaoException(
-					"Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha");
 
+		if (fechamento.getLocal().equalsIgnoreCase("sem") && !dados.getTecido().getConstrucao().equals(ConstrucaoEnum.MALHA) && (!silhueta.getDescricao().equalsIgnoreCase("larga"))) {
+				throw new ValidacaoException(
+						"Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha");
 			
 		}
-			
 		
 	}
 

@@ -16,8 +16,8 @@ public class ValidacaoFibrasExistem implements ValidadorTecido{
 	@Override
 	public void validar(DadosCadastroTecidoDTO dados) {
 		
-		for (Long dado : dados.idDasFibras()) {
-			if (! fibraRepository.existsById(dado)) {
+		for (Long id : dados.getIdDasFibras()) {
+			if (! fibraRepository.existsById(id)) {
 				throw new ValidacaoException("Id de fibra inexistente");
 
 			}

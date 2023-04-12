@@ -16,8 +16,8 @@ public class ValidacaoFibraCouroEhUnica implements ValidadorTecido {
 	@Override
 	public void validar(DadosCadastroTecidoDTO dados) {
 
-		if(dados.idDasFibras().length > 1) {
-			for (Long dado : dados.idDasFibras()) {
+		if(dados.getIdDasFibras().length > 1) {
+			for (Long dado : dados.getIdDasFibras()) {
 				FibraDomain fibra = fibraRepository.getReferenceById(dado);
 				if (fibra.getNomeFibra().equalsIgnoreCase("Couro")) {
 					throw new ValidacaoException("Couro não é uma fibra que possa ser misturada");

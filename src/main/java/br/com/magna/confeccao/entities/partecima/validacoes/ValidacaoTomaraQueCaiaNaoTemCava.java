@@ -20,8 +20,8 @@ public class ValidacaoTomaraQueCaiaNaoTemCava implements ValidadorParteCima{
 
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {
-		DecoteDomain decote = decoteRepository.getReferenceById(dados.idDecote());
-		CavaDomain cava = cavaRepository.getReferenceById(dados.idCava());
+		DecoteDomain decote = decoteRepository.getReferenceById(dados.getIdDecote());
+		CavaDomain cava = cavaRepository.getReferenceById(dados.getIdCava());
 		
 		if(decote.getDescricao().equalsIgnoreCase("tomara que caia") && !cava.getDescricao().equalsIgnoreCase("sem")) {
 			throw new ValidacaoException("Peças tomara-que-caia não possuem cava");

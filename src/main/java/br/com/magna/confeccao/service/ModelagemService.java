@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 import br.com.magna.confeccao.entities.domain.modelagem.PregaDomain;
 import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
+import br.com.magna.confeccao.entities.modelagem.validacoes.ValidadorModelagem;
+import br.com.magna.confeccao.entities.partecima.validacoes.ValidadorParteCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
 import br.com.magna.confeccao.repository.BarraRepository;
 import br.com.magna.confeccao.repository.FechamentoRepository;
@@ -31,74 +35,53 @@ public class ModelagemService {
 	private PregaRepository pregaRepository;
 	@Autowired
 	private RoupaRepository roupaRepository;
+	
+	@Autowired
+	private List<ValidadorModelagem> validadores;
 
 	public Modelagem criarModelagem(@Valid DadosCadastroModelagemDTO dados) {
+		
+		validadores.forEach(v -> v.validar(dados));
+		
 		Modelagem modelagem = new Modelagem();
-		modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
-		modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
-		modelagem.setCinto(dados.cinto());
-		modelagem.setPassantes(dados.passantes());
-		modelagem.setPences(dados.pences());
-		modelagem.setPala(dados.pala());
-		modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
-		modelagem.setBabado(dados.babado());
-		modelagem.setFenda(dados.fenda());
-		modelagem.setBolsos(dados.bolsos());
-		modelagem.setForro(dados.forro());
-		modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
+		modelagem.setSilhueta(silhuetaRepository.getReferenceById(dados.getIdSilhueta()));
+		modelagem.setFechamento(fechamentoRepository.getReferenceById(dados.getIdFechamento()));
+		modelagem.setCinto(dados.getCinto());
+		modelagem.setPassantes(dados.getPassantes());
+		modelagem.setPences(dados.getPences());
+		modelagem.setPala(dados.getPala());
+		modelagem.setPrega(pregaRepository.getReferenceById(dados.getIdPrega()));
+		modelagem.setBabado(dados.getBabado());
+		modelagem.setFenda(dados.getFenda());
+		modelagem.setBolsos(dados.getBolsos());
+		modelagem.setForro(dados.getForro());
+		modelagem.setBarra(barraRepository.getReferenceById(dados.getIdBarra()));
 
 		return modelagem;
 
 	}
 
 	public Modelagem atualizaModelagem(Long idRoupa, @Valid DadosCadastroModelagemDTO dados) {
+		
+		validadores.forEach(v -> v.validar(dados));
+		
 		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
 		Modelagem modelagem = roupa.getModelagem();
 
-		modelagem.setSilhueta(verificaEPegaSilhueta(dados.idSilhueta()));
-		modelagem.setFechamento(verificaEPegaFechamento(dados.idFechamento()));
-		modelagem.setPrega(verificaEPegaPrega(dados.idPrega()));
-		modelagem.setBarra(verificaEPegaBarra(dados.idBarra()));
-		modelagem.setCinto(dados.cinto());
-		modelagem.setPassantes(dados.passantes());
-		modelagem.setPences(dados.pences());
-		modelagem.setPala(dados.pala());
-		modelagem.setBabado(dados.babado());
-		modelagem.setFenda(dados.fenda());
-		modelagem.setBolsos(dados.bolsos());
-		modelagem.setForro(dados.forro());
+		modelagem.setSilhueta(silhuetaRepository.getReferenceById(dados.getIdSilhueta()));
+		modelagem.setFechamento(fechamentoRepository.getReferenceById(dados.getIdFechamento()));
+		modelagem.setPrega(pregaRepository.getReferenceById(dados.getIdPrega()));
+		modelagem.setBarra(barraRepository.getReferenceById(dados.getIdBarra()));
+		modelagem.setCinto(dados.getCinto());
+		modelagem.setPassantes(dados.getPassantes());
+		modelagem.setPences(dados.getPences());
+		modelagem.setPala(dados.getPala());
+		modelagem.setBabado(dados.getBabado());
+		modelagem.setFenda(dados.getFenda());
+		modelagem.setBolsos(dados.getBolsos());
+		modelagem.setForro(dados.getForro());
 
 		return modelagem;
 	}
 
-	private SilhuetaDomain verificaEPegaSilhueta(Long idSilhueta) {
-		if (!silhuetaRepository.existsById(idSilhueta)) {
-			throw new ValidacaoException("Id de Silhueta informado não existe");
-		}
-
-		return silhuetaRepository.getReferenceById(idSilhueta);
-	}
-
-	private FechamentoDomain verificaEPegaFechamento(Long idFechamento) {
-		if (!fechamentoRepository.existsById(idFechamento)) {
-			throw new ValidacaoException("Id de Fechamento informado não existe");
-		}
-
-		return fechamentoRepository.getReferenceById(idFechamento);
-	}
-
-	private BarraDomain verificaEPegaBarra(Long idBarra) {
-		if (!barraRepository.existsById(idBarra)) {
-			throw new ValidacaoException("Id de Barra informado não existe");
-		}
-		return barraRepository.getReferenceById(idBarra);
-	}
-
-	private PregaDomain verificaEPegaPrega(Long idPrega) {
-		if (!pregaRepository.existsById(idPrega)) {
-			throw new ValidacaoException("Id de tipo Prega informado não existe");
-		}
-
-		return pregaRepository.getReferenceById(idPrega);
-	}
 }

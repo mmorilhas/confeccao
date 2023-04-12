@@ -5,25 +5,26 @@ import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
+import br.com.magna.confeccao.entities.domain.partecima.CavaDomain;
 import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
+import br.com.magna.confeccao.repository.CavaRepository;
+import br.com.magna.confeccao.repository.ComprimentoRepository;
 import br.com.magna.confeccao.repository.DecoteRepository;
+import br.com.magna.confeccao.repository.MangaRepository;
 
 @Component
-public class ValidacaoCapuzNaoTemColarinhoNemLapela implements ValidadorParteCima{
+public class ValidacaoMangaExiste implements ValidadorParteCima{
 	
 	@Autowired
-	private DecoteRepository decoteRepository;
+	private MangaRepository mangaRepository;
 
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {
-		DecoteDomain decote = decoteRepository.getReferenceById(dados.getIdDecote());
-		
-		if((decote.getDescricao().contains("colarinho") || decote.getDescricao().contains("lapela")) &&  Boolean.TRUE.equals(dados.getCapuz()) ) {
-			throw new ValidacaoException("Peças com Colarinho ou Lapela não possuem capuz");
+		if (!mangaRepository.existsById(dados.getIdManga())) {
+			throw new ValidacaoException("Id de Manga informado não existe");
 		}
 		
 	}
-	
 
 
 	

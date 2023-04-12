@@ -10,14 +10,11 @@ import org.springframework.stereotype.Service;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
-import br.com.magna.confeccao.dto.domain.DadosListagemRoupaDTO;
-import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
-import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
+import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
-import br.com.magna.confeccao.entities.roupa.validacoes.ValidadorRoupa;
+import br.com.magna.confeccao.entities.roupa.validacoes.ValidadorRoupaCadastro;
 import br.com.magna.confeccao.entities.tecido.Tecido;
 import br.com.magna.confeccao.repository.RoupaRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
@@ -40,24 +37,25 @@ public class RoupaService {
 	private RoupaRepository roupaRepository;
 	
 	@Autowired
-	private List<ValidadorRoupa> validadores;
+	private List<ValidadorRoupaCadastro> validadoresCadastro;
+	
 
 	public void criarRoupaECadastrar(@Valid DadosCadastroRoupaDTO dados) {
 
-		validadores.forEach(v -> v.validar(dados));
+		validadoresCadastro.forEach(v -> v.validar(dados));
 		
-		Modelagem modelagem = modelagemService.criarModelagem(dados.modelagem());
-		Tecido tecido = tecidoService.criarTecido(dados.tecido());
-		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.parteDeCima());
+		Modelagem modelagem = modelagemService.criarModelagem(dados.getModelagem());
+		Tecido tecido = tecidoService.criarTecido(dados.getTecido());
+		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.getParteDeCima());
 
 		Roupa roupa = new Roupa();
-		roupa.setNome(dados.nome());
-		roupa.setTipoRoupa(verificaEPegaTipoRoupa(dados.tipoRoupa()));
-		roupa.setTamanho(dados.tamanho());
-		roupa.setGenero(dados.genero());
-		roupa.setCor(dados.cor());
-		roupa.setTemEstampa(dados.temEstampa());
-		roupa.setTemBordado(dados.temBordado());
+		roupa.setNome(dados.getNome());
+		roupa.setTipoRoupa(tipoRoupaRepository.getReferenceById(dados.getTipoRoupa()));
+		roupa.setTamanho(dados.getTamanho());
+		roupa.setGenero(dados.getGenero());
+		roupa.setCor(dados.getCor());
+		roupa.setTemEstampa(dados.getTemEstampa());
+		roupa.setTemBordado(dados.getTemBordado());
 		roupa.setModelagem(modelagem);
 		roupa.setTecido(tecido);
 		roupa.setParteDeCima(parteDeCima);
@@ -72,28 +70,29 @@ public class RoupaService {
 	}
 
 	public DadosDetalhamentoRoupaDTO atualizar(@Valid DadosAtualizaRoupaDTO dados) {
-		Roupa roupa = roupaRepository.getReferenceById(dados.id());
+		
+		Roupa roupa = roupaRepository.getReferenceById(dados.getId());
 
-		roupa.setNome(dados.nome());
-		roupa.setTipoRoupa(verificaEPegaTipoRoupa(dados.tipoRoupa()));
-		roupa.setTamanho(dados.tamanho());
-		roupa.setGenero(dados.genero());
-		roupa.setCor(dados.cor());
-		roupa.setTemEstampa(dados.temEstampa());
-		roupa.setTemBordado(dados.temBordado());
+		roupa.setNome(dados.getNome());
+		roupa.setTipoRoupa(tipoRoupaRepository.getReferenceById(dados.getTipoRoupa()));
+		roupa.setTamanho(dados.getTamanho());
+		roupa.setGenero(dados.getGenero());
+		roupa.setCor(dados.getCor());
+		roupa.setTemEstampa(dados.getTemEstampa());
+		roupa.setTemBordado(dados.getTemBordado());
 
-		if (dados.modelagem() != null) {
-			Modelagem modelagem = modelagemService.atualizaModelagem(dados.id(), dados.modelagem());
+		if (dados.getModelagem() != null) {
+			Modelagem modelagem = modelagemService.atualizaModelagem(dados.getId(), dados.getModelagem());
 			roupa.setModelagem(modelagem);
 		}
 
-		if (dados.tecido() != null) {
-			Tecido tecido = tecidoService.atualizaTecido(dados.id(), dados.tecido());
+		if (dados.getTecido() != null) {
+			Tecido tecido = tecidoService.atualizaTecido(dados.getId(), dados.getTecido());
 			roupa.setTecido(tecido);
 		}
 
-		if (dados.parteDeCima() != null) {
-			ParteDeCima parteDeCima = parteDeCimaService.atualizaParteDeCima(dados.id(), dados.parteDeCima());
+		if (dados.getParteDeCima() != null) {
+			ParteDeCima parteDeCima = parteDeCimaService.atualizaParteDeCima(dados.getId(), dados.getParteDeCima());
 			roupa.setParteDeCima(parteDeCima);
 		}
 
@@ -113,12 +112,4 @@ public class RoupaService {
 		roupa.excluir();
 	}
 	
-	private TipoRoupaDomain verificaEPegaTipoRoupa(String tipoRoupa) {
-		if (!tipoRoupaRepository.existsById(tipoRoupa)) {
-			throw new ValidacaoException("Id de TipoRoupa informado não existe");
-		}
-		
-
-		return tipoRoupaRepository.getReferenceById(tipoRoupa);
-	}
 }
