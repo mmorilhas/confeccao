@@ -30,9 +30,7 @@ import br.com.magna.confeccao.entities.roupa.enums.Genero;
 import br.com.magna.confeccao.entities.tecido.ConstrucaoEnum;
 
 @RunWith(SpringRunner.class)
-
 @ActiveProfiles("test")
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RoupaControllerTest {
 

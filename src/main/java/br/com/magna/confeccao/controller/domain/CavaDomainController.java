@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemCavaDTO;
-import br.com.magna.confeccao.repository.CavaRepository;
+import br.com.magna.confeccao.repository.CavaDomainRepository;
 
 @RestController
 @RequestMapping("cavas")
 public class CavaDomainController {
 
 	@Autowired
-	CavaRepository repository;
+	CavaDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemCavaDTO>> listar() {

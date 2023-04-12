@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
 
-public interface DecoteRepository extends JpaRepository<DecoteDomain, Long> {
+public interface DecoteDomainRepository extends JpaRepository<DecoteDomain, Long> {
 
 		
 	

@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.repository.PregaRepository;
+import br.com.magna.confeccao.repository.PregaDomainRepository;
 
 @Component
 public class ValidacaoPregaExiste implements ValidadorModelagem{
 	
 	@Autowired
-	private PregaRepository pregaRepository;
+	private PregaDomainRepository pregaRepository;
 
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {

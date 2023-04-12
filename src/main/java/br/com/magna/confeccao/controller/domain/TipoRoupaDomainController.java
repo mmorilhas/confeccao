@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemBarraDTO;
 import br.com.magna.confeccao.dto.domain.DadosListagemTipoRoupaDTO;
-import br.com.magna.confeccao.repository.BarraRepository;
+import br.com.magna.confeccao.repository.BarraDomainRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 
 @RestController

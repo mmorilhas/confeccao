@@ -11,14 +11,14 @@ import br.com.magna.confeccao.dto.DadosCadastroTecidoDTO;
 import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
 import br.com.magna.confeccao.entities.tecido.Tecido;
 import br.com.magna.confeccao.entities.tecido.validacoes.ValidadorTecido;
-import br.com.magna.confeccao.repository.FibraRepository;
+import br.com.magna.confeccao.repository.FibraDomainRepository;
 import br.com.magna.confeccao.repository.TecidoRepository;
 import jakarta.validation.Valid;
 
 @Service
 public class TecidoService {
 	@Autowired
-	private FibraRepository fibraRepository;
+	private FibraDomainRepository fibraRepository;
 
 	@Autowired
 	TecidoRepository tecidoRepository;

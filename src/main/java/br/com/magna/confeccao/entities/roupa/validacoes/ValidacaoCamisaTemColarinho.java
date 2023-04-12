@@ -7,14 +7,14 @@ import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
 import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
-import br.com.magna.confeccao.repository.DecoteRepository;
+import br.com.magna.confeccao.repository.DecoteDomainRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 
 @Component
 public class ValidacaoCamisaTemColarinho implements ValidadorRoupaCadastro{
 	
 	@Autowired
-	private DecoteRepository decoteRepository;
+	private DecoteDomainRepository decoteRepository;
 	
 	@Autowired
 	private TipoRoupaDomainRepository tipoRoupaDomainRepository;

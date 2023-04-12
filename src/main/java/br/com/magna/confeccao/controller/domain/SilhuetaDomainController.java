@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemSilhuetaDTO;
-import br.com.magna.confeccao.repository.SilhuetaRepository;
+import br.com.magna.confeccao.repository.SilhuetaDomainRepository;
 
 @RestController
 @RequestMapping("silhuetas")
 public class SilhuetaDomainController {
 
 	@Autowired
-	SilhuetaRepository repository;
+	SilhuetaDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemSilhuetaDTO>> listar() {

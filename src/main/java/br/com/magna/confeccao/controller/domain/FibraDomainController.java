@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemFibraDTO;
-import br.com.magna.confeccao.repository.FibraRepository;
+import br.com.magna.confeccao.repository.FibraDomainRepository;
 
 @RestController
 @RequestMapping("fibras")
 public class FibraDomainController {
 
 	@Autowired
-	private FibraRepository repository;
+	private FibraDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemFibraDTO>> listar() {

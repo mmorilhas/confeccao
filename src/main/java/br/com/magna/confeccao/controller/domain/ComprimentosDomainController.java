@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemComprimentoDTO;
-import br.com.magna.confeccao.repository.ComprimentoRepository;
+import br.com.magna.confeccao.repository.ComprimentoDomainRepository;
 import jakarta.persistence.Cacheable;
 
 @RestController
@@ -18,7 +18,7 @@ import jakarta.persistence.Cacheable;
 public class ComprimentosDomainController {
 
 	@Autowired
-	ComprimentoRepository repository;
+	ComprimentoDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemComprimentoDTO>> listar() {

@@ -7,14 +7,14 @@ import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.partecima.MangaDomain;
 import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
-import br.com.magna.confeccao.repository.MangaRepository;
+import br.com.magna.confeccao.repository.MangaDomainRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 
 @Component
 public class ValidacaoPonchoNaoTemManga implements ValidadorRoupaCadastro{
 	
 	@Autowired
-	private MangaRepository mangaRepository;
+	private MangaDomainRepository mangaRepository;
 	
 	@Autowired
 	private TipoRoupaDomainRepository tipoRoupaDomainRepository;

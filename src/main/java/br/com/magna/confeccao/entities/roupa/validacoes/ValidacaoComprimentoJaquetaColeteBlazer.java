@@ -7,14 +7,14 @@ import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.partecima.ComprimentoParteCimaDomain;
 import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
-import br.com.magna.confeccao.repository.ComprimentoRepository;
+import br.com.magna.confeccao.repository.ComprimentoDomainRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 
 @Component
 public class ValidacaoComprimentoJaquetaColeteBlazer implements ValidadorRoupaCadastro{
 	
 	@Autowired
-	private ComprimentoRepository comprimentoRepository;
+	private ComprimentoDomainRepository comprimentoRepository;
 	
 	@Autowired
 	private TipoRoupaDomainRepository tipoRoupaDomainRepository;

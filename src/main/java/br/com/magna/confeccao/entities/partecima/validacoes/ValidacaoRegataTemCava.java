@@ -7,16 +7,16 @@ import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.partecima.CavaDomain;
 import br.com.magna.confeccao.entities.domain.partecima.MangaDomain;
-import br.com.magna.confeccao.repository.CavaRepository;
-import br.com.magna.confeccao.repository.MangaRepository;
+import br.com.magna.confeccao.repository.CavaDomainRepository;
+import br.com.magna.confeccao.repository.MangaDomainRepository;
 
 @Component
 public class ValidacaoRegataTemCava implements ValidadorParteCima{
 	
 	@Autowired
-	private MangaRepository mangaRepository;
+	private MangaDomainRepository mangaRepository;
 	@Autowired
-	private CavaRepository cavaRepository;
+	private CavaDomainRepository cavaRepository;
 
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {

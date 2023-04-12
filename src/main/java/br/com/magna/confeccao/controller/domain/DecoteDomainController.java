@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemDecoteDTO;
-import br.com.magna.confeccao.repository.DecoteRepository;
+import br.com.magna.confeccao.repository.DecoteDomainRepository;
 
 @RestController
 @RequestMapping("decotes")
 public class DecoteDomainController {
 
 	@Autowired
-	DecoteRepository repository;
+	DecoteDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemDecoteDTO>> listar() {

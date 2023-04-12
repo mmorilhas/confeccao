@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemPregaDTO;
-import br.com.magna.confeccao.repository.PregaRepository;
+import br.com.magna.confeccao.repository.PregaDomainRepository;
 
 @RestController
 @RequestMapping("pregas")
 public class PregaDomainController {
 
 	@Autowired
-	private PregaRepository repository;
+	private PregaDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemPregaDTO>> listar() {

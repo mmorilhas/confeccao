@@ -14,10 +14,10 @@ import br.com.magna.confeccao.entities.domain.partecima.MangaDomain;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.partecima.validacoes.ValidadorParteCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
-import br.com.magna.confeccao.repository.CavaRepository;
-import br.com.magna.confeccao.repository.ComprimentoRepository;
-import br.com.magna.confeccao.repository.DecoteRepository;
-import br.com.magna.confeccao.repository.MangaRepository;
+import br.com.magna.confeccao.repository.CavaDomainRepository;
+import br.com.magna.confeccao.repository.ComprimentoDomainRepository;
+import br.com.magna.confeccao.repository.DecoteDomainRepository;
+import br.com.magna.confeccao.repository.MangaDomainRepository;
 import br.com.magna.confeccao.repository.RoupaRepository;
 import jakarta.validation.Valid;
 
@@ -25,13 +25,13 @@ import jakarta.validation.Valid;
 public class ParteDeCimaService {
 
 	@Autowired
-	private MangaRepository mangaRepository;
+	private MangaDomainRepository mangaRepository;
 	@Autowired
-	private DecoteRepository decoteRepository;
+	private DecoteDomainRepository decoteRepository;
 	@Autowired
-	private CavaRepository cavaRepository;
+	private CavaDomainRepository cavaRepository;
 	@Autowired
-	private ComprimentoRepository comprimentoRepository;
+	private ComprimentoDomainRepository comprimentoRepository;
 	@Autowired
 	private RoupaRepository roupaRepository;
 	@Autowired

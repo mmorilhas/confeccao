@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.repository.DecoteRepository;
+import br.com.magna.confeccao.repository.DecoteDomainRepository;
 
 @Component
 public class ValidacaoDecoteExiste implements ValidadorParteCima{
 	
 	@Autowired
-	private DecoteRepository decoteRepository;
+	private DecoteDomainRepository decoteRepository;
 
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {

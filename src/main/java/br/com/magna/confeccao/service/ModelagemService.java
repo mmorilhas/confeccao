@@ -15,24 +15,24 @@ import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.modelagem.validacoes.ValidadorModelagem;
 import br.com.magna.confeccao.entities.partecima.validacoes.ValidadorParteCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
-import br.com.magna.confeccao.repository.BarraRepository;
-import br.com.magna.confeccao.repository.FechamentoRepository;
-import br.com.magna.confeccao.repository.PregaRepository;
+import br.com.magna.confeccao.repository.BarraDomainRepository;
+import br.com.magna.confeccao.repository.FechamentoDomainRepository;
+import br.com.magna.confeccao.repository.PregaDomainRepository;
 import br.com.magna.confeccao.repository.RoupaRepository;
-import br.com.magna.confeccao.repository.SilhuetaRepository;
+import br.com.magna.confeccao.repository.SilhuetaDomainRepository;
 import jakarta.validation.Valid;
 
 @Service
 public class ModelagemService {
 
 	@Autowired
-	private FechamentoRepository fechamentoRepository;
+	private FechamentoDomainRepository fechamentoRepository;
 	@Autowired
-	private BarraRepository barraRepository;
+	private BarraDomainRepository barraRepository;
 	@Autowired
-	private SilhuetaRepository silhuetaRepository;
+	private SilhuetaDomainRepository silhuetaRepository;
 	@Autowired
-	private PregaRepository pregaRepository;
+	private PregaDomainRepository pregaRepository;
 	@Autowired
 	private RoupaRepository roupaRepository;
 	

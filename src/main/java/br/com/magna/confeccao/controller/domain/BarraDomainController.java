@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemBarraDTO;
-import br.com.magna.confeccao.repository.BarraRepository;
+import br.com.magna.confeccao.repository.BarraDomainRepository;
 
 @RestController
 @RequestMapping("barras")
 public class BarraDomainController {
 
 	@Autowired
-	BarraRepository repository;
+	BarraDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemBarraDTO>> listar() {

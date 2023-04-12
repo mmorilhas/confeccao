@@ -8,17 +8,17 @@ import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
 import br.com.magna.confeccao.entities.tecido.ConstrucaoEnum;
-import br.com.magna.confeccao.repository.FechamentoRepository;
-import br.com.magna.confeccao.repository.SilhuetaRepository;
+import br.com.magna.confeccao.repository.FechamentoDomainRepository;
+import br.com.magna.confeccao.repository.SilhuetaDomainRepository;
 
 @Component
 public class ValidacaoCadastroConstrucaoTecidoEFechamento implements ValidadorRoupaCadastro{
 
 	@Autowired
-	private FechamentoRepository fechamentoRepository;
+	private FechamentoDomainRepository fechamentoRepository;
 
 	@Autowired
-	private SilhuetaRepository silhuetaRepository;
+	private SilhuetaDomainRepository silhuetaRepository;
 
 	@Override
 	public void validar(DadosCadastroRoupaDTO dados) {

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemMangaDTO;
-import br.com.magna.confeccao.repository.MangaRepository;
+import br.com.magna.confeccao.repository.MangaDomainRepository;
 
 @RestController
 @RequestMapping("mangas")
 public class MangaDomainController {
 
 	@Autowired
-	MangaRepository repository;
+	MangaDomainRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<DadosListagemMangaDTO>> listar() {

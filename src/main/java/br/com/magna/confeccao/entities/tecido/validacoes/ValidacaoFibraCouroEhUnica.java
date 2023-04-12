@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import br.com.magna.confeccao.dto.DadosCadastroTecidoDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
-import br.com.magna.confeccao.repository.FibraRepository;
+import br.com.magna.confeccao.repository.FibraDomainRepository;
 
 @Component
 public class ValidacaoFibraCouroEhUnica implements ValidadorTecido {
 	@Autowired
-	private FibraRepository fibraRepository;
+	private FibraDomainRepository fibraRepository;
 
 	@Override
 	public void validar(DadosCadastroTecidoDTO dados) {
