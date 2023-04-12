@@ -8,8 +8,8 @@ import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.repository.FechamentoRepository;
 
 @Component
-public class ValidacaoFechamentoExiste implements ValidadorModelagem{
-	
+public class ValidacaoFechamentoExiste implements ValidadorModelagem {
+
 	@Autowired
 	private FechamentoRepository fechamentoRepository;
 
@@ -18,9 +18,7 @@ public class ValidacaoFechamentoExiste implements ValidadorModelagem{
 		if (!fechamentoRepository.existsById(dados.getIdFechamento())) {
 			throw new ValidacaoException("Id de Fechamento informado não existe");
 		}
-		
+
 	}
 
-
-	
 }

@@ -24,13 +24,14 @@ public class ValidacaoCadastroConstrucaoTecidoEFechamento implements ValidadorRo
 	public void validar(DadosCadastroRoupaDTO dados) {
 		FechamentoDomain fechamento = fechamentoRepository.getReferenceById(dados.getModelagem().getIdFechamento());
 		SilhuetaDomain silhueta = silhuetaRepository.getReferenceById(dados.getModelagem().getIdSilhueta());
-
-
-		if (fechamento.getLocal().equalsIgnoreCase("sem") && !dados.getTecido().getConstrucao().equals(ConstrucaoEnum.MALHA) && (!silhueta.getDescricao().equalsIgnoreCase("larga"))) {
-				throw new ValidacaoException(
-						"Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha");
+		if ((fechamento.getLocal().equalsIgnoreCase("sem") && !(dados.getTecido().getConstrucao().equals(ConstrucaoEnum.MALHA)
+				|| silhueta.getDescricao().equalsIgnoreCase("larga"))) ) {
+				  throw new ValidacaoException(
+							"Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha");
 			
-		}
+				  
+		  }
+		 
 		
 	}
 

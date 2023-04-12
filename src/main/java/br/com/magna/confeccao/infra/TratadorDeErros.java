@@ -15,11 +15,11 @@ import jakarta.persistence.EntityNotFoundException;
 @RestControllerAdvice
 public class TratadorDeErros {
 
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<Void> tratarErro404() {
-		return ResponseEntity.notFound().build();
-	}
-
+	
+	  @ExceptionHandler(EntityNotFoundException.class) public ResponseEntity<Void>
+	  tratarErro404() { return ResponseEntity.notFound().build(); }
+	  
+	 
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<List<DadosErroValidacao>> tratarErro400(MethodArgumentNotValidException ex) {
@@ -28,9 +28,10 @@ public class TratadorDeErros {
 	}
 
 
-	@ExceptionHandler(ValidacaoException.class)
-	public ResponseEntity<String> tratarErroRegraDeNegocio(ValidacaoException ex) {
-		return ResponseEntity.badRequest().body(ex.getMessage());
-	}
+	
+	  @ExceptionHandler(ValidacaoException.class) public ResponseEntity<String>
+	  tratarErroRegraDeNegocio(ValidacaoException ex) { return
+	  ResponseEntity.badRequest().body(ex.getMessage()); }
+	 
 
 }
