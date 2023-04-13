@@ -1,6 +1,5 @@
 package br.com.magna.confeccao.entities;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;

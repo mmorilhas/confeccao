@@ -542,7 +542,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(3, response.getBody().tecido().getComposicao().size());
 	}
 
 	
@@ -557,7 +557,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(2, response.getBody().tecido().getComposicao().size());
 	}
 	
 	
@@ -572,7 +572,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(1, response.getBody().tecido().getComposicao().size());
 	}
 	
 	@Test
@@ -586,7 +586,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(1, response.getBody().tecido().getComposicao().size());
 	}
 	
 	
@@ -601,7 +601,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(1, response.getBody().tecido().getComposicao().size());
 	}
 	
 	@Test
@@ -615,7 +615,7 @@ class RoupaControllerTest {
 				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
 
 		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1l, response.getBody().modelagem().getSilhueta().getId());
+		assertEquals(2, response.getBody().tecido().getComposicao().size());
 	}
 	
 	@Test
