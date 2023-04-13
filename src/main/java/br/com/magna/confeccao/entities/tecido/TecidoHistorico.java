@@ -19,10 +19,10 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-@Table(name = "TB_TECIDO")
-@Entity(name = "Tecido")
+@Table(name = "TB_HIST_TECIDO")
+@Entity(name = "TecidoHistorico")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Tecido extends AbstractEntity<Tecido, Long>{
+public class TecidoHistorico extends AbstractEntity<TecidoHistorico, Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Tecido extends AbstractEntity<Tecido, Long>{
 	private Long id;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "TB_TECIDO_FIBRA_COMPOSICAO", joinColumns = {
+	@JoinTable(name = "TB_HIST_TECIDO_FIBRA_COMPOSICAO", joinColumns = {
 			@JoinColumn(name = "FK_ID_TECIDO") }, inverseJoinColumns = { @JoinColumn(name = "FK_ID_FIBRA") })
 	private Collection<FibraDomain> composicao;
 

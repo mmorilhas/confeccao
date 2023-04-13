@@ -46,6 +46,8 @@ public class TecidoService {
 		tecido.setElasticidade(calcularElasticidade(composicao));
 		tecido.setComportamentoTermico(calcularComportamentoTermico(composicao));
 		tecido.setResistencia(calcularResistencia(composicao));
+		tecido.setUser_first_insert("admin");
+		tecido.setUser_last_modified("admin");	
 
 		return tecido;
 

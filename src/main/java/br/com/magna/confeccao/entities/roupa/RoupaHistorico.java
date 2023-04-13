@@ -8,6 +8,7 @@ import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.roupa.enums.Genero;
 import br.com.magna.confeccao.entities.tecido.Tecido;
+import br.com.magna.confeccao.entities.tecido.TecidoHistorico;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -26,10 +27,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 
-@Table(name = "TB_ROUPA")
-@Entity (name = "Roupa")
+@Table(name = "TB_HIST_ROUPA")
+@Entity (name = "RoupaHistorico")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Roupa extends AbstractEntity<Roupa, Long>{
+public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="PK_ID_ROUPA")
@@ -66,7 +67,7 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "FK_ID_TECIDO")
-	private Tecido tecido;
+	private TecidoHistorico tecido;
 	
 	@Embedded
 	private ParteDeCima parteDeCima;
@@ -121,7 +122,7 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 		this.modelagem = modelagem;
 	}
 
-	public void setTecido(Tecido tecido) {
+	public void setTecido(TecidoHistorico tecido) {
 		this.tecido = tecido;
 	}
 
@@ -129,8 +130,8 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 		this.parteDeCima = parteDeCima;
 	}
 
-	public void setAtivo() {
-		this.ativo = true;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public String getNome() {
@@ -161,7 +162,7 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 		return modelagem;
 	}
 
-	public Tecido getTecido() {
+	public TecidoHistorico getTecido() {
 		return tecido;
 	}
 

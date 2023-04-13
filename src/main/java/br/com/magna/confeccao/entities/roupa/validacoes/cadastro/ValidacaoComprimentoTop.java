@@ -1,8 +1,9 @@
-package br.com.magna.confeccao.entities.roupa.validacoes;
+package br.com.magna.confeccao.entities.roupa.validacoes.cadastro;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.domain.partecima.ComprimentoParteCimaDomain;
@@ -11,7 +12,7 @@ import br.com.magna.confeccao.repository.ComprimentoDomainRepository;
 import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
 
 @Component
-public class ValidacaoComprimentoJaquetaColeteBlazer implements ValidadorRoupaCadastro{
+public class ValidacaoComprimentoTop implements ValidadorRoupaCadastro, ValidadorRoupaAtualizar{
 	
 	@Autowired
 	private ComprimentoDomainRepository comprimentoRepository;
@@ -20,25 +21,36 @@ public class ValidacaoComprimentoJaquetaColeteBlazer implements ValidadorRoupaCa
 	private TipoRoupaDomainRepository tipoRoupaDomainRepository;
 
 	@Override
-	public void validar(DadosCadastroRoupaDTO dados) {
+	public void validarCadastro(DadosCadastroRoupaDTO dados) {
 		ComprimentoParteCimaDomain comprimento = comprimentoRepository.getReferenceById(dados.getParteDeCima().getIdComprimento());
 		TipoRoupaDomain tipo = tipoRoupaDomainRepository.getReferenceById(dados.getTipoRoupa());
 		
 		
-		if((tipo.getTipoRoupa().equals("colete") 
-				|| tipo.getTipoRoupa().equals("blazer")
-				|| tipo.getTipoRoupa().equals("jaqueta")
-				)
+		if(tipo.getTipoRoupa().equals("top") 
 				&& !(comprimento.getDescricao().contains("cropped")
-						||comprimento.getDescricao().contains("cintura")
+						|| comprimento.getDescricao().contains("cintura")
 						|| comprimento.getDescricao().contains("torax")
-						|| comprimento.getDescricao().contains("abaixo do quadril")
-						|| comprimento.getDescricao().contains("quadril")
 						)
 			) {
-			throw new ValidacaoException("Colete, Blazer e Jaqueta possuem comprimento acima do meio da coxa");
+			throw new ValidacaoException("Top possui comprimento na cintura ou acima");
 		}
 		
+	}
+
+	@Override
+	public void validarAtualiza(DadosAtualizaRoupaDTO dados) {
+		ComprimentoParteCimaDomain comprimento = comprimentoRepository.getReferenceById(dados.getParteDeCima().getIdComprimento());
+		TipoRoupaDomain tipo = tipoRoupaDomainRepository.getReferenceById(dados.getTipoRoupa());
+		
+		
+		if(tipo.getTipoRoupa().equals("top") 
+				&& !(comprimento.getDescricao().contains("cropped")
+						|| comprimento.getDescricao().contains("cintura")
+						|| comprimento.getDescricao().contains("torax")
+						)
+			) {
+			throw new ValidacaoException("Top possui comprimento na cintura ou acima");
+		}
 		
 	}
 	
