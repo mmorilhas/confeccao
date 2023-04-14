@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -11,10 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.magna.confeccao.entities.domain.partecima.ComprimentoDomain;
 import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
 
 @RunWith(SpringRunner.class)
@@ -27,9 +31,10 @@ class DecoteControllerTest {
 
 	    @Test
 	    void testListarDecote() {
-	    	ResponseEntity<List<DecoteDomain>> response = restTemplate.exchange("/decotes", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-	    
-	    	assertTrue(response.getStatusCode().is2xxSuccessful());
+	    	ResponseEntity<DecoteDomain> response = restTemplate.getForEntity("/decotes", DecoteDomain.class);
+
+	    	assertEquals(HttpStatus.OK, response.getStatusCode());
+			assertNotNull(response.getBody());
 	    }
 
 

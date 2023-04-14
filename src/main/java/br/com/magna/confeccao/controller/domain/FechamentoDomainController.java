@@ -1,9 +1,9 @@
 package br.com.magna.confeccao.controller.domain;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +20,8 @@ public class FechamentoDomainController {
 	FechamentoDomainRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<DadosListagemFechamentoDTO>> listar() {
-		List<DadosListagemFechamentoDTO> fechamentos = repository.findAll().stream().map(DadosListagemFechamentoDTO::new).toList();
-
-		return ResponseEntity.status(HttpStatus.OK).body(fechamentos);
+	public ResponseEntity<Page<DadosListagemFechamentoDTO>> listar(@PageableDefault(size = 10, sort = { "id" }) Pageable paginacao) {
+		return ResponseEntity.ok(repository.findAll(paginacao).map(DadosListagemFechamentoDTO::new)) ;
 	}
 
 }

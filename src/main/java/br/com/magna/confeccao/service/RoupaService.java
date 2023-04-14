@@ -106,12 +106,6 @@ public class RoupaService {
 		
 		RoupaHistorico roupaHistorico = criaRoupaHistorico(roupa);
 		roupaHistRepository.save(roupaHistorico);
-		
-		
-		
-		
-		
-		
 
 	}
 

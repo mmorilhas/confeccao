@@ -27,10 +27,6 @@ public class TipoRoupaDomain {
 		return tipoRoupa;
 	}
 
-	public void setTipoRoupa(String tipoRoupa) {
-		this.tipoRoupa = tipoRoupa;
-	}
-
 	public Long getId() {
 		return id;
 	}

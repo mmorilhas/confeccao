@@ -27,7 +27,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "TB_ROUPA")
 @Entity (name = "Roupa")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Roupa extends AbstractEntity<Roupa, Long>{
+public class Roupa extends AbstractEntity<Long>{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="PK_ID_ROUPA")
