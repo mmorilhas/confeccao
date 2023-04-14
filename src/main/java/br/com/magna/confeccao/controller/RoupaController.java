@@ -42,7 +42,7 @@ public class RoupaController {
 
 	@GetMapping(value = "/listagem")
 	public ResponseEntity<Page<DadosListagemRoupaDTO>> listar(
-			@PageableDefault(size = 3, sort = { "id", "nome", "tamanho" }) Pageable paginacao) {
+			@PageableDefault(size = 10, sort = { "id", "nome", "tamanho" }) Pageable paginacao) {
 
 		return ResponseEntity.ok(roupaService.listar(paginacao));
 	}

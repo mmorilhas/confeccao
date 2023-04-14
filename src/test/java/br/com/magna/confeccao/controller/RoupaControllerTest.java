@@ -446,20 +446,6 @@ class RoupaControllerTest {
 	}
 
 	
-
-
-	
-	@Test
-	@DisplayName("Listagem: deveria devolver codigo http 200 quando infos estao validas")
-	void testListarRoupa() {
-
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem", Roupa.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-
-	}
-
-	
 	
 	@Test
 	@DisplayName("Atualizar: deveria devolver codigo http 200 quando infos estao validas")
@@ -626,6 +612,22 @@ class RoupaControllerTest {
 				Arguments.of(fibras4, fibras4.length)
 				);
 	}
+	
+	
+	
+
+
+	
+	@Test
+	@DisplayName("Listagem: deveria devolver codigo http 200 quando infos estao validas")
+	void testListarRoupa() {
+
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem", Roupa.class);
+
+		assertTrue(response.getStatusCode().is2xxSuccessful());
+
+	}
+	
 	
 	@Test
 	@DisplayName("Detalhar: deveria devolver codigo http 200 quando infos estao validas")
