@@ -2,14 +2,12 @@ package br.com.magna.confeccao.service;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.dto.DadosCadastroTecidoDTO;
 import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
-import br.com.magna.confeccao.entities.roupa.validacoes.tecido.ValidadorTecido;
 import br.com.magna.confeccao.entities.tecido.Tecido;
 import br.com.magna.confeccao.repository.TecidoRepository;
 import br.com.magna.confeccao.repository.domain.FibraDomainRepository;

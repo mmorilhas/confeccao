@@ -5,9 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -135,7 +139,7 @@ class RoupaControllerTest {
 
 	@Test
 	@DisplayName("Cadastro com Id Silhueta Null: deveria devolver codigo http 400 quando infos estao invalidas")
-	void testCadastrarRoupaInfosInvalidasSilhuetaId() {
+	void testCadastrarRoupaInfosInvalidasSilhuetaNull() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setSilhueta(null);
 
@@ -160,54 +164,56 @@ class RoupaControllerTest {
 				response.getBody());
 
 	}
-
 	
 
-	@Test
-	@DisplayName("Cadastro com Exceção de Fibras com length igua a zero: deveria devolver mensagem de ValidacaoFibrasMaiorQueZero ")
-	void testCadastrarRoupaValidacaoFibrasMaiorQueZero() {
+	@ParameterizedTest(name= "{index} {0}: [fibras]={1}, [msgExcecao]={2}")
+	@MethodSource("proveFibrasParaValidacaoComposicaoTecidoCadastro")
+	@DisplayName("Cadastro: Validando Exceções de Fibras")
+	void testCadastroRoupaValidacaoFibras(String nomeTeste, Long[] fibras, String msgExcecao) {
+		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
+		roupa.getTecido().setIdDasFibras(fibras);
+
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+				String.class);
+
+		assertEquals(msgExcecao, response.getBody());
+		assertTrue(response.getStatusCode().is4xxClientError());
+	}
+	
+	private static Stream<Arguments> proveFibrasParaValidacaoComposicaoTecidoCadastro(){
 		Long[] fibras = {};
+		Long[] fibras1 = {30l};
+		Long[] fibras2 = { 1l, 2l, 3l };
+		return Stream.of(
+				Arguments.of("Exceção de Fibras com length igua a zero" , fibras, "Necessário inserir pelo menos uma fibra na composição"),
+				Arguments.of("Exceção de Fibras Inexistente" , fibras1, "Id de fibra inexistente"),
+				Arguments.of("Exceção de Fibra Couro" , fibras2, "Couro não é uma fibra que possa ser misturada")
+				);
+	}
 
+	
+	@ParameterizedTest(name= "{index} {0}: [decote]={1}, [msgExcecao]={2}")
+	@MethodSource("proveAtributosParaValidarExcecoesRoupasSemCapuz")
+	@DisplayName("Cadastro: Excecao Tipo De Roupa: deveria devolver mensagem de ValidacaoException")
+	void testCadastrarRoupaValidacaoExcecoesRoupasSemCapuz(String nomeTeste, String decote, String msgExcecao) {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getTecido().setIdDasFibras(fibras);
+		roupa.getParteDeCima().setCapuz(true);
+		roupa.getParteDeCima().setDecote(decote);
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Necessário inserir pelo menos uma fibra na composição", response.getBody());
+		assertEquals(msgExcecao, response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
-
-	@Test
-	@DisplayName("Cadastro com Exceção de Fibra Inexistente: deveria devolver mensagem de ValidacaoFibrasExistem ")
-	void testCadastrarRoupaValidacaoFibrasNaoExistem() {
-		Long[] fibras = { 30l };
-
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Id de fibra inexistente", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
+	
+	private static Stream<Arguments> proveAtributosParaValidarExcecoesRoupasSemCapuz(){
+		return Stream.of(
+				Arguments.of("Exceção de Tomara que Caia com Capuz", "colarinho americano", "Peças Tomara que Caia ou com Colarinho/Lapela não possuem capuz"),
+				Arguments.of("Exceção de Decote Colarinho com Capuz","tomara que caia" ,"Peças Tomara que Caia ou com Colarinho/Lapela não possuem capuz" )
+				);
 	}
-
-	@Test
-	@DisplayName("Cadastro com Exceção de Fibra Couro: deveria devolver mensagem de ValidacaoFibraCouroEhUnica ")
-	void testCadastrarRoupaValidacaoFibraCouroEhSozinha() {
-		Long[] fibras = { 1l, 2l, 3l };
-
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Couro não é uma fibra que possa ser misturada", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
-
+	
 	@Test
 	@DisplayName("Cadastro com Exceção de Decote Tomara que caia Com Cava: deveria devolver mensagem de ValidacaoTomaraQueCaiaNaoTemCava ")
 	void testCadastrarRoupaValidacaoTomaraQueCaiaComCava() {
@@ -220,34 +226,32 @@ class RoupaControllerTest {
 		assertEquals("Peças tomara-que-caia não possuem cava", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
-
-	@Test
-	@DisplayName("Cadastro com Exceção de Decote Colarinho com Capuz: deveria devolver mensagem de ValidacaoCapuzNaoTemColarinhoNemLapela ")
-	void testCadastrarRoupaValidacaoCapuzSemColarinho() {
+	
+	
+	@ParameterizedTest(name= "{index} {0}: [tipoRoupa]={1}, [msgExcecao]={2}")
+	@MethodSource("proveAtributosParaValidarExcecoesTipoRoupaCadastro")
+	@DisplayName("Cadastro: Excecao Tipo De Roupa: deveria devolver mensagem de ValidacaoException")
+	void testCadastrarRoupaValidacaoExcecoesTipoRoupa(String nomeTeste, String tipoRoupa, String msgExcecao) {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getParteDeCima().setCapuz(true);
-		roupa.getParteDeCima().setDecote("colarinho americano");
+		roupa.setTipoRoupa(tipoRoupa);
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Peças com Colarinho ou Lapela não possuem capuz", response.getBody());
+		assertEquals(msgExcecao, response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
-
-	@Test
-	@DisplayName("Cadastro com Exceção de Tipo De Roupa Inexistente: deveria devolver mensagem de ValidacaoTipoRoupaExiste ")
-	void testCadastrarRoupaValidacaoTipoDeRoupaInexistente() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("colar");
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("TipoRoupa informado não existe", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
+	
+	private static Stream<Arguments> proveAtributosParaValidarExcecoesTipoRoupaCadastro(){
+		return Stream.of(
+				Arguments.of("Exceção de Tipo De Roupa Inexistente", "colar", "TipoRoupa informado não existe"),
+				Arguments.of("Exceção de Camisa sem Colarinho","camisa" ,"Camisas possuem decote colarinho" ),
+				Arguments.of("Exceção de Poncho Com Manga","poncho" ,"Ponchos não possuem mangas" )
+				);
 	}
 
+	
+	
 	@Test
 	@DisplayName("Cadastro com Exceção de Manga Inexistente: deveria devolver mensagem de ValidacaoMangaExiste ")
 	void testCadastrarRoupaValidacaoMangaInexistente() {
@@ -270,7 +274,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		// assertEquals("Id de Decote informado não existe", response.getBody());
+		assertEquals("Id de Decote informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -278,7 +282,7 @@ class RoupaControllerTest {
 	@DisplayName("Cadastro com Exceção de Cava Inexistente: deveria devolver mensagem de ValidacaoCavaExiste ")
 	void testCadastrarRoupaValidacaoCavaInexistente() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getParteDeCima().setCava("eitaaa");
+		roupa.getParteDeCima().setCava("teste");
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
@@ -304,7 +308,7 @@ class RoupaControllerTest {
 	@DisplayName("Cadastro com Exceção de Silhueta Inexistente: deveria devolver mensagem de ValidacaoSilhuetaExiste ")
 	void testCadastrarRoupaValidacaoSilhuetaInexistente() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getModelagem().setSilhueta("aooba");
+		roupa.getModelagem().setSilhueta("teste");
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
@@ -322,7 +326,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		//assertEquals("Id de Fechamento informado não existe", response.getBody());
+		assertEquals("Id de Fechamento informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -330,7 +334,7 @@ class RoupaControllerTest {
 	@DisplayName("Cadastro com Exceção de Barra Inexistente: deveria devolver mensagem de ValidacaoBarraExiste ")
 	void testCadastrarRoupaValidacaoBarraInexistente() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getModelagem().setBarra("aaroba");
+		roupa.getModelagem().setBarra("teste");
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
@@ -343,7 +347,7 @@ class RoupaControllerTest {
 	@DisplayName("Cadastro com Exceção de Prega Inexistente: deveria devolver mensagem de ValidacaoPregaExiste ")
 	void testCadastrarRoupaValidacaoPregaInexistente() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getModelagem().setPrega("aooba");
+		roupa.getModelagem().setPrega("Teste");
 
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
@@ -371,7 +375,6 @@ class RoupaControllerTest {
 	@DisplayName("Cadastro com Exceção de Comprimento Jaqueta Colete Blazer: deveria devolver mensagem de ValidacaoComprimentoJaquetaColeteBlazer ")
 	void testCadastrarRoupaValidacaoComprimentoJaqueta() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.getModelagem().setFechamento("ziper lateral");
 		roupa.setTipoRoupa("jaqueta");
 		roupa.getParteDeCima().setComprimento("joelho");
 
@@ -427,19 +430,7 @@ class RoupaControllerTest {
 	}
 	
 	
-	@Test
-	@DisplayName("Cadastro com Exceção de Camisa sem Colarinho: deveria devolver mensagem de ValidacaoCamisaTemColarinho ")
-	void testCadastrarRoupaValidacaoCamisaSemColarinho() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("camisa");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Camisas possuem decote colarinho", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
-	
 	
 	@Test
 	@DisplayName("Cadastro com Exceção de Regata Sem Cava: deveria devolver mensagem de ValidacaoCavaExiste ")
@@ -455,20 +446,7 @@ class RoupaControllerTest {
 	}
 
 	
-	@Test
-	@DisplayName("Cadastro com Exceção de Poncho Com Manga: deveria devolver mensagem de ValidacaoPonchoNaoTemManga ")
-	void testCadastrarRoupaValidacaoPonchoComManga() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("poncho");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Ponchos não possuem mangas", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-		
-
-	}
 
 	
 	@Test
@@ -519,20 +497,30 @@ class RoupaControllerTest {
 	}
 	
 	
-	@Test
-	@DisplayName("Atualizar: Excecao Ponchos Nao Tem Manga")
-	void testAtualizarRoupaExcecaoPonchosNaoTemManga() {
+	@ParameterizedTest(name= "{index} {0}: [tipoRoupa]={1}, [msgExcecao]={2}")
+	@MethodSource("proveAtributosParaValidarExcecoesTipoRoupaAtualizar")
+	@DisplayName("Atualizar: Excecao Tipo De Roupa: deveria devolver mensagem de ValidacaoException")
+	void testAtualizarRoupaValidacaoExcecoes(String nomeTeste, String tipoRoupa, String msgExcecao) {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
 		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		roupa.setTipoRoupa("poncho");
+		roupa.setTipoRoupa(tipoRoupa);
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/atualizar",
 				HttpMethod.PUT, new HttpEntity<>(roupa), String.class);
 		
-		assertEquals("Ponchos não possuem mangas", response.getBody());
+		assertEquals(msgExcecao, response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
+	
+	private static Stream<Arguments> proveAtributosParaValidarExcecoesTipoRoupaAtualizar(){
+		return Stream.of(
+				Arguments.of("Excecao Tipo De Roupa Inexistente", "colar", "TipoRoupa informado não existe"),
+				Arguments.of("Excecao Ponchos Nao Tem Manga","poncho" ,"Ponchos não possuem mangas" ),
+				Arguments.of("Exceção de Camisa sem Colarinho","camisa" ,"Camisas possuem decote colarinho" )
+				);
+	}
+	
 	
 	@Test
 	@DisplayName("Atualizar: Excecao Comprimento Camisa e Camiseta")
@@ -586,20 +574,8 @@ class RoupaControllerTest {
 	}
 	
 	
-	@Test
-	@DisplayName("Atualizar: Excecao Tipo De Roupa Inexistente")
-	void testAtualizarRoupaExcecaoTipoRoupaInexistente() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		roupa.setTipoRoupa("colar");
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), String.class);
-		
-		assertEquals("TipoRoupa informado não existe", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
+	
+
 	
 	@Test
 	@DisplayName("Atualizar: Excecao Sem Fechamento Com Construcao Tecido ")
@@ -617,109 +593,38 @@ class RoupaControllerTest {
 		assertEquals("Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
+		
 	
-	@Test
-	@DisplayName("Atualizar: Excecao Camisa Sem Colarinha ")
-	void testAtualizarRoupaExcecaoCamisaSemColarinho() {
+	@ParameterizedTest
+	@MethodSource("proveFibrasParaComposicaoTecidoParaValidacao")
+	@DisplayName("Atualizar: Validando Atributos Tecido Passando Composicao de Fibras Diferentes")
+	void testAtualizarRoupaInfosValidasParaValidacaoTecido(Long[] fibras, Integer length) {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
 		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		roupa.setTipoRoupa("camisa");
+		roupa.getTecido().setIdDasFibras(fibras);
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), String.class);
-		
-		assertEquals("Camisas possuem decote colarinho", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
+		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
+				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
+
+		assertTrue(response.getStatusCode().is2xxSuccessful());
+		assertEquals(length, response.getBody().tecido().getComposicao().size());
 	}
 	
-	
-	@Test
-	@DisplayName("Atualizar: Validando Tecido")
-	void testAtualizarRoupaInfosValidasTecido0() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
+	private static Stream<Arguments> proveFibrasParaComposicaoTecidoParaValidacao(){
 		Long[] fibras = {3l,6l};
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(2, response.getBody().tecido().getComposicao().size());
-	}
-	
-	
-	@Test
-	@DisplayName("Atualizar: Validando Tecido")
-	void testAtualizarRoupaInfosValidasTecido1() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		Long[] fibras = {6l};
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1, response.getBody().tecido().getComposicao().size());
-	}
-	
-	@Test
-	@DisplayName("Atualizar: Validando Tecido")
-	void testAtualizarRoupaInfosValidasTecido2() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		Long[] fibras = {8l};
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1, response.getBody().tecido().getComposicao().size());
-	}
-	
-	
-	@Test
-	@DisplayName("Atualizar: Validando Tecido")
-	void testAtualizarRoupaInfosValidasTecido3() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		Long[] fibras = {9l};
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(1, response.getBody().tecido().getComposicao().size());
-	}
-	
-	@Test
-	@DisplayName("Atualizar: Validando Tecido")
-	void testAtualizarRoupaInfosValidasTecido4() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		Long[] fibras = {1l,9l};
-		roupa.getTecido().setIdDasFibras(fibras);
-
-		ResponseEntity<DadosDetalhamentoRoupaDTO> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), DadosDetalhamentoRoupaDTO.class);
-
-		assertTrue(response.getStatusCode().is2xxSuccessful());
-		assertEquals(2, response.getBody().tecido().getComposicao().size());
+		Long[] fibras1 = {6l};
+		Long[] fibras2 = {8l};
+		Long[] fibras3 = {9l};
+		Long[] fibras4 = {1l,9l};
+		return Stream.of(
+				Arguments.of(fibras, fibras.length),
+				Arguments.of(fibras1, fibras1.length),
+				Arguments.of(fibras2, fibras2.length),
+				Arguments.of(fibras3, fibras3.length),
+				Arguments.of(fibras4, fibras4.length)
+				);
 	}
 	
 	@Test

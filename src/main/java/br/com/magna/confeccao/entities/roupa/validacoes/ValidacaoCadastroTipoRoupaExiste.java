@@ -16,14 +16,14 @@ public class ValidacaoCadastroTipoRoupaExiste implements ValidadorRoupaCadastro,
 
 	@Override
 	public void validarCadastro(DadosCadastroRoupaDTO dados) {
-		if (!tipoRoupaRepository.existsByTipoRoupa(dados.getTipoRoupa())) {
+		if (Boolean.FALSE.equals(tipoRoupaRepository.existsByTipoRoupa(dados.getTipoRoupa()))) {
 			throw new ValidacaoException("TipoRoupa informado não existe");
 		}
 	}
 
 	@Override
 	public void validarAtualiza(DadosAtualizaRoupaDTO dados) {
-		if (!tipoRoupaRepository.existsByTipoRoupa(dados.getTipoRoupa())) {
+		if (Boolean.FALSE.equals(tipoRoupaRepository.existsByTipoRoupa(dados.getTipoRoupa()))) {
 			throw new ValidacaoException("TipoRoupa informado não existe");
 		}
 		

@@ -65,6 +65,8 @@ public class RoupaService {
 	@Autowired
 	private List<ValidadorRoupaAtualizar> validadoresRoupaAtualizar;
 	
+	
+	private String user = "admin";
 
 	public void criarRoupaECadastrar(@Valid DadosCadastroRoupaDTO dados) {
 		
@@ -77,14 +79,6 @@ public class RoupaService {
 		Tecido tecido = tecidoService.criarTecido(dados.getTecido());
 		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.getParteDeCima());
 
-		
-		/*
-		 * ZonedDateTime zonedDateTime = ZonedDateTime.now(); ZoneId z =
-		 * zonedDateTime.getZone(); z.toString(); DateTimeFormatter formatter2 =
-		 * DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"); String
-		 * formattedString = zonedDateTime.format(formatter2);
-		 */
-		  
 		  
 		Roupa roupa = new Roupa();
 		roupa.setNome(dados.getNome());
@@ -100,8 +94,8 @@ public class RoupaService {
 		roupa.setAtivo();
 		
 		
-		roupa.setUserFirstInsert("admin");
-		roupa.setUserLastModified("admin");
+		roupa.setUserFirstInsert(user);
+		roupa.setUserLastModified(user);
 		
 		tecido.setTimeStampFirstInsert(ZonedDateTime.now());
 		roupa.setTimeStampFirstInsert(ZonedDateTime.now());
@@ -146,8 +140,8 @@ public class RoupaService {
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
 		roupa.setTemBordado(dados.getTemBordado());
-		roupa.setUserFirstInsert("admin");
-		roupa.setUserLastModified("admin");
+		roupa.setUserFirstInsert(user);
+		roupa.setUserLastModified(user);
 		
 
 		if (dados.getModelagem() != null) {
@@ -158,7 +152,7 @@ public class RoupaService {
 		if (dados.getTecido() != null) {
 			Tecido tecido = tecidoService.atualizaTecido(dados.getId(), dados.getTecido());
 			roupa.setTecido(tecido);
-			tecido.setUserLastModified("admin");	
+			tecido.setUserLastModified(user);	
 			tecido.setTimeStampLastModified(ZonedDateTime.now());
 		}
 

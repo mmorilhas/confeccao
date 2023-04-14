@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemComprimentoDTO;
 import br.com.magna.confeccao.repository.domain.ComprimentoDomainRepository;
-import jakarta.persistence.Cacheable;
 
 @RestController
 @RequestMapping("comprimentos")

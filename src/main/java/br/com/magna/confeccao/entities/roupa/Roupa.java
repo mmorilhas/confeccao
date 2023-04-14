@@ -3,7 +3,6 @@ package br.com.magna.confeccao.entities.roupa;
 import org.hibernate.validator.constraints.Range;
 
 import br.com.magna.confeccao.entities.AbstractEntity;
-import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.roupa.enums.Genero;
@@ -20,7 +19,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;

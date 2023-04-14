@@ -8,7 +8,7 @@ import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.repository.domain.DecoteDomainRepository;
 
 @Component
-public class ValidacaoCapuzNaoTemColarinhoNemLapela implements ValidadorRoupaCadastro {
+public class ValidacaoCapuzNaoTemColarinhoLapelaTomaraQueCaia implements ValidadorRoupaCadastro {
 
 	@Autowired
 	private DecoteDomainRepository decoteRepository;
@@ -17,8 +17,8 @@ public class ValidacaoCapuzNaoTemColarinhoNemLapela implements ValidadorRoupaCad
 	public void validarCadastro(DadosCadastroRoupaDTO dados) {
 		String decote = decoteRepository.findyByDecote(dados.getParteDeCima().getDecote());
 
-		if ((decote.contains("colarinho") || decote.contains("lapela")) && Boolean.TRUE.equals(dados.getParteDeCima().getCapuz())) {
-			throw new ValidacaoException("Peças com Colarinho ou Lapela não possuem capuz");
+		if ((decote.contains("colarinho") || decote.contains("lapela") || decote.contains("tomara que caia")) && Boolean.TRUE.equals(dados.getParteDeCima().getCapuz())) {
+			throw new ValidacaoException("Peças Tomara que Caia ou com Colarinho/Lapela não possuem capuz");
 		}
 
 	}

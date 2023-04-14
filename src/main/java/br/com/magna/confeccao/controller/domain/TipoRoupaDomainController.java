@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.magna.confeccao.dto.domain.DadosListagemBarraDTO;
 import br.com.magna.confeccao.dto.domain.DadosListagemTipoRoupaDTO;
-import br.com.magna.confeccao.repository.domain.BarraDomainRepository;
 import br.com.magna.confeccao.repository.domain.TipoRoupaDomainRepository;
 
 @RestController

@@ -2,7 +2,6 @@ package br.com.magna.confeccao.entities.modelagem;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

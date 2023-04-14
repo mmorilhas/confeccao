@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.entities.domain.partecima.ComprimentoDomain;
-import br.com.magna.confeccao.entities.domain.partecima.DecoteDomain;
-import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
 import br.com.magna.confeccao.repository.domain.ComprimentoDomainRepository;
 import br.com.magna.confeccao.repository.domain.TipoRoupaDomainRepository;
 

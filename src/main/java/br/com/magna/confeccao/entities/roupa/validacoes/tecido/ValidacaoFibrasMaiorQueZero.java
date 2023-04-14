@@ -14,11 +14,7 @@ public class ValidacaoFibrasMaiorQueZero implements ValidadorTecido{
 		if(dados.getIdDasFibras().length == 0) {
 			throw new ValidacaoException("Necessário inserir pelo menos uma fibra na composição");
 		}
-		/*
-		 if(dados.idDasFibras().length == 0) {
-			throw new ValidacaoException("Necessário inserir pelo menos uma fibra na composição");
-		}
-		 */
+
 		
 	}
 

@@ -11,11 +11,11 @@ import br.com.magna.confeccao.repository.domain.SilhuetaDomainRepository;
 public class ValidacaoSilhuetaExiste implements ValidadorModelagem{
 	
 	@Autowired
-	private SilhuetaDomainRepository silhuetaRepository;;
+	private SilhuetaDomainRepository silhuetaRepository;
 
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {
-		if (!silhuetaRepository.existsBySilhueta(dados.getSilhueta())) {
+		if (Boolean.FALSE.equals(silhuetaRepository.existsBySilhueta(dados.getSilhueta()))) {
 			throw new ValidacaoException("Id de Silhueta informado não existe");
 		}
 		

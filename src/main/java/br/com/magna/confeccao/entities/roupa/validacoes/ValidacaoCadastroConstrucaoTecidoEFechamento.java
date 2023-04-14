@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
 import br.com.magna.confeccao.entities.tecido.ConstrucaoEnum;
 import br.com.magna.confeccao.repository.domain.FechamentoDomainRepository;
 import br.com.magna.confeccao.repository.domain.SilhuetaDomainRepository;

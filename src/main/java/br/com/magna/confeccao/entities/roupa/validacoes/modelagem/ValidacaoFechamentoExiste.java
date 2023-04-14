@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
 import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.repository.domain.FechamentoDomainRepository;
-import br.com.magna.confeccao.repository.domain.SilhuetaDomainRepository;
 
 @Component
 public class ValidacaoFechamentoExiste implements ValidadorModelagem{

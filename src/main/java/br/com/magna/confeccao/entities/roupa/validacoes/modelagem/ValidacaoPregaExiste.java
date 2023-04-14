@@ -15,7 +15,7 @@ public class ValidacaoPregaExiste implements ValidadorModelagem{
 
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {
-		if (!pregaRepository.existsByPrega(dados.getPrega())) {
+		if (Boolean.FALSE.equals(pregaRepository.existsByPrega(dados.getPrega()))) {
 			throw new ValidacaoException("Id de Prega informado não existe");
 		}
 		
