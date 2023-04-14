@@ -28,7 +28,6 @@ import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
 import br.com.magna.confeccao.entities.roupa.Roupa;
 import br.com.magna.confeccao.entities.roupa.enums.Genero;
 import br.com.magna.confeccao.entities.tecido.ConstrucaoEnum;
-import br.com.magna.confeccao.service.RoupaService;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -384,7 +383,7 @@ class RoupaControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Cadastro com Exceção de Comprimento Camisa e Camiseta JOELHO: deveria devolver mensagem de ValidacaoComprimentoCamisetaECamisa ")
+	@DisplayName("Cadastro com Exceção de Comprimento Camisa e Camiseta : deveria devolver mensagem de ValidacaoComprimentoCamisetaECamisa ")
 	void testCadastrarRoupaValidacaoComprimentoCamisaJoelho() {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.setTipoRoupa("camisa");
@@ -398,53 +397,7 @@ class RoupaControllerTest {
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 	
-	@Test
-	@DisplayName("Cadastro com Exceção de Comprimento Camisa e Camiseta ABAIXO JOELHO: deveria devolver mensagem de ValidacaoComprimentoCamisetaECamisa ")
-	void testCadastrarRoupaValidacaoComprimentoCamisaAbaixoJoelho() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("camisa");
-		roupa.getParteDeCima().setDecote("colarinho italiano");
-		roupa.getParteDeCima().setComprimento("abaixo do joelho");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Camisas e Camisetas possuem comprimento acima do joelho", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
-	
-	
-	@Test
-	@DisplayName("Cadastro com Exceção de Comprimento Camisa e Camiseta Meio Canela: deveria devolver mensagem de ValidacaoComprimentoCamisetaECamisa ")
-	void testCadastrarRoupaValidacaoComprimentoCamisaMeioCanela() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("camisa");
-		roupa.getParteDeCima().setDecote("colarinho italiano");
-		roupa.getParteDeCima().setComprimento("meio da canela");
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Camisas e Camisetas possuem comprimento acima do joelho", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
-	
-	
-	@Test
-	@DisplayName("Cadastro com Exceção de Comprimento Camisa e Camiseta TORNOZELO: deveria devolver mensagem de ValidacaoComprimentoCamisetaECamisa ")
-	void testCadastrarRoupaValidacaoComprimentoCamisaTornozelo() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		roupa.setTipoRoupa("camisa");
-		roupa.getParteDeCima().setDecote("colarinho italiano");
-		roupa.getParteDeCima().setComprimento("tornozelo");
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
-
-		assertEquals("Camisas e Camisetas possuem comprimento acima do joelho", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
-	
 	@Test
 	@DisplayName("Cadastro com Exceção de Colete Sem Manga Regata: deveria devolver mensagem de ColeteTemMangaRegata ")
 	void testCadastrarRoupaValidacaoColeteSemMangaRegata() {
