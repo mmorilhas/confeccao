@@ -9,7 +9,7 @@ public record DadosListagemPregaDTO(
 		) {
 	
 	public DadosListagemPregaDTO(PregaDomain prega) {
-		this(prega.getId(), prega.getDescricao());
+		this(prega.getId(), prega.getDescricaoPrega());
 	}
 
 }

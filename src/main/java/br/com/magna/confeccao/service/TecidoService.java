@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.dto.DadosCadastroTecidoDTO;
 import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
+import br.com.magna.confeccao.entities.roupa.validacoes.tecido.ValidadorTecido;
 import br.com.magna.confeccao.entities.tecido.Tecido;
-import br.com.magna.confeccao.entities.tecido.validacoes.ValidadorTecido;
-import br.com.magna.confeccao.repository.FibraDomainRepository;
 import br.com.magna.confeccao.repository.TecidoRepository;
+import br.com.magna.confeccao.repository.domain.FibraDomainRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -23,8 +23,6 @@ public class TecidoService {
 	@Autowired
 	TecidoRepository tecidoRepository;
 
-	@Autowired
-	private List<ValidadorTecido> validadores;
 
 	private String moderada = "moderada";
 	private String alta = "alta";
@@ -32,8 +30,6 @@ public class TecidoService {
 
 	public Tecido criarTecido(@Valid DadosCadastroTecidoDTO dados) {
 
-		validadores.forEach(v -> v.validar(dados));
-		
 		Collection<FibraDomain> composicao = criarComposicao(dados.getIdDasFibras());
 
 		Tecido tecido = new Tecido();
@@ -46,16 +42,14 @@ public class TecidoService {
 		tecido.setElasticidade(calcularElasticidade(composicao));
 		tecido.setComportamentoTermico(calcularComportamentoTermico(composicao));
 		tecido.setResistencia(calcularResistencia(composicao));
-		tecido.setUser_first_insert("admin");
-		tecido.setUser_last_modified("admin");	
+		tecido.setUserFirstInsert("admin");
+		tecido.setUserLastModified("admin");	
 
 		return tecido;
 
 	}
 
 	public Tecido atualizaTecido(Long idRoupa, @Valid DadosCadastroTecidoDTO dados) {
-		
-		validadores.forEach(v -> v.validar(dados));
 		
 		Tecido tecido = tecidoRepository.getReferenceById(idRoupa);
 

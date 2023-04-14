@@ -6,12 +6,11 @@ public record DadosListagemMangaDTO(
 
 
 		Long id,
-		String comprimento,
-		String tipo
+		String manga
 		
 		) {
 	
 	public DadosListagemMangaDTO(MangaDomain manga) {
-		this(manga.getId(), manga.getComprimento(), manga.getTipo());
+		this(manga.getId(), manga.getDescricaoManga());
 	}
 }

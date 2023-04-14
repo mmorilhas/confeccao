@@ -20,14 +20,14 @@ public class CavaDomain {
 	private Long id;
 
 	@Column(name="VAR_DESCRICAO_CAVA")
-	private String descricao;
+	private String cava;
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDescricaoCava() {
+		return cava;
 	}
 	
 }

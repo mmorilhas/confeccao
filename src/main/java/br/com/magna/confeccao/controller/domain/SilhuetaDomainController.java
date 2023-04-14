@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemSilhuetaDTO;
-import br.com.magna.confeccao.repository.SilhuetaDomainRepository;
+import br.com.magna.confeccao.repository.domain.SilhuetaDomainRepository;
 
 @RestController
 @RequestMapping("silhuetas")

@@ -21,14 +21,14 @@ public class DecoteDomain {
 		private Long id;
 		
 		@Column(name="VAR_DESCRICAO_DECOTE")
-		private String descricao;
+		private String decote;
 
 		public Long getId() {
 			return id;
 		}
 
-		public String getDescricao() {
-			return descricao;
+		public String getDescricaoDecote() {
+			return decote;
 		}
 		
 		

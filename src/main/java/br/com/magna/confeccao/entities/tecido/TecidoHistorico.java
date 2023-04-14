@@ -29,6 +29,10 @@ public class TecidoHistorico extends AbstractEntity<TecidoHistorico, Long>{
 	@Column(name = "PK_ID_TECIDO")
 	private Long id;
 
+	
+	@Column(name="ID_TECIDO")
+	private Long idTecido;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "TB_HIST_TECIDO_FIBRA_COMPOSICAO", joinColumns = {
 			@JoinColumn(name = "FK_ID_TECIDO") }, inverseJoinColumns = { @JoinColumn(name = "FK_ID_FIBRA") })
@@ -95,53 +99,22 @@ public class TecidoHistorico extends AbstractEntity<TecidoHistorico, Long>{
 		this.resistencia = resistencia;
 	}
 
-
-	public Collection<FibraDomain> getComposicao() {
-		return composicao;
+	public void setIdTecido(Long idTecido) {
+		this.idTecido = idTecido;
 	}
 
-	public ConstrucaoEnum getConstrucao() {
-		return construcao;
-	}
-
-	public String getTipoDeTecido() {
-		return tipoDeTecido;
-	}
-
-	public String getTempoSecagem() {
-		return tempoSecagem;
-	}
-
-	public Boolean getRespiravel() {
-		return respiravel;
-	}
-
-	public String getAbsorcaoAgua() {
-		return absorcaoAgua;
-	}
-
-	public String getElasticidade() {
-		return elasticidade;
-	}
-
-	public String getComportamentoTermico() {
-		return comportamentoTermico;
-	}
-
-	public String getResistencia() {
-		return resistencia;
-	}
 
 	@Override
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	@Override
 	public void setId(Long id) {
-		this.id = id;
-		
+		throw new UnsupportedOperationException();
 	}
+
+
 
 	
 	

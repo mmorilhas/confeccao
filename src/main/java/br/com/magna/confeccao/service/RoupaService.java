@@ -1,6 +1,8 @@
 package br.com.magna.confeccao.service;
 
 import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +14,21 @@ import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import br.com.magna.confeccao.dto.DadosDetalhamentoRoupaDTO;
 import br.com.magna.confeccao.dto.DadosListagemRoupaDTO;
+import br.com.magna.confeccao.entities.domain.fibra.FibraDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
 import br.com.magna.confeccao.entities.roupa.RoupaHistorico;
-import br.com.magna.confeccao.entities.roupa.validacoes.cadastro.ValidadorRoupaAtualizar;
-import br.com.magna.confeccao.entities.roupa.validacoes.cadastro.ValidadorRoupaCadastro;
+import br.com.magna.confeccao.entities.roupa.validacoes.ValidadorRoupaAtualizar;
+import br.com.magna.confeccao.entities.roupa.validacoes.ValidadorRoupaCadastro;
+import br.com.magna.confeccao.entities.roupa.validacoes.modelagem.ValidadorModelagem;
+import br.com.magna.confeccao.entities.roupa.validacoes.partecima.ValidadorParteCima;
+import br.com.magna.confeccao.entities.roupa.validacoes.tecido.ValidadorTecido;
 import br.com.magna.confeccao.entities.tecido.Tecido;
 import br.com.magna.confeccao.entities.tecido.TecidoHistorico;
 import br.com.magna.confeccao.repository.RoupaHistRepository;
 import br.com.magna.confeccao.repository.RoupaRepository;
-import br.com.magna.confeccao.repository.TipoRoupaDomainRepository;
+import br.com.magna.confeccao.repository.domain.TipoRoupaDomainRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -45,24 +51,44 @@ public class RoupaService {
 	private RoupaHistRepository roupaHistRepository;
 	
 	@Autowired
-	private List<ValidadorRoupaCadastro> validadoresCadastro;
-	
+	private List<ValidadorTecido> validadoresTecido;
 	
 	@Autowired
-	private List<ValidadorRoupaAtualizar> validadoresAtualizar;
+	private List<ValidadorModelagem> validadoresModelagem;
+	
+	@Autowired
+	private List<ValidadorParteCima> validadoresParteCima;
+	
+	@Autowired
+	private List<ValidadorRoupaCadastro> validadoresRoupaCadastro;
+	
+	@Autowired
+	private List<ValidadorRoupaAtualizar> validadoresRoupaAtualizar;
 	
 
 	public void criarRoupaECadastrar(@Valid DadosCadastroRoupaDTO dados) {
-
-		validadoresCadastro.forEach(v -> v.validarCadastro(dados));
+		
+		validadoresTecido.forEach(v -> v.validar(dados.getTecido()));
+		validadoresModelagem.forEach(v -> v.validar(dados.getModelagem()));
+		validadoresParteCima.forEach(v -> v.validar(dados.getParteDeCima()));
+		validadoresRoupaCadastro.forEach(v -> v.validarCadastro(dados));
 		
 		Modelagem modelagem = modelagemService.criarModelagem(dados.getModelagem());
 		Tecido tecido = tecidoService.criarTecido(dados.getTecido());
 		ParteDeCima parteDeCima = parteDeCimaService.criarParteDeCima(dados.getParteDeCima());
 
+		
+		/*
+		 * ZonedDateTime zonedDateTime = ZonedDateTime.now(); ZoneId z =
+		 * zonedDateTime.getZone(); z.toString(); DateTimeFormatter formatter2 =
+		 * DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z"); String
+		 * formattedString = zonedDateTime.format(formatter2);
+		 */
+		  
+		  
 		Roupa roupa = new Roupa();
 		roupa.setNome(dados.getNome());
-		roupa.setTipoRoupa(tipoRoupaRepository.getReferenceById(dados.getTipoRoupa()));
+		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
 		roupa.setTamanho(dados.getTamanho());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
@@ -72,16 +98,24 @@ public class RoupaService {
 		roupa.setTecido(tecido);
 		roupa.setParteDeCima(parteDeCima);
 		roupa.setAtivo();
-		roupa.setUser_first_insert("admin");
-		roupa.setUser_last_modified("admin");
 		
 		
-		tecido.setTimeStamp(ZonedDateTime.now());
-		roupa.setTimeStamp(ZonedDateTime.now());
+		roupa.setUserFirstInsert("admin");
+		roupa.setUserLastModified("admin");
+		
+		tecido.setTimeStampFirstInsert(ZonedDateTime.now());
+		roupa.setTimeStampFirstInsert(ZonedDateTime.now());
+		tecido.setTimeStampLastModified(ZonedDateTime.now());
+		roupa.setTimeStampLastModified(ZonedDateTime.now());
+		
+		roupaRepository.save(roupa);
 		
 		RoupaHistorico roupaHistorico = criaRoupaHistorico(roupa);
-		roupaRepository.save(roupa);
 		roupaHistRepository.save(roupaHistorico);
+		
+		
+		
+		
 		
 		
 
@@ -98,18 +132,22 @@ public class RoupaService {
 		RoupaHistorico roupaHistorico = criaRoupaHistorico(roupa);
 		roupaHistRepository.save(roupaHistorico);
 		
-		validadoresAtualizar.forEach(v -> v.validarAtualiza(dados));
+		
+		validadoresTecido.forEach(v -> v.validar(dados.getTecido()));
+		validadoresModelagem.forEach(v -> v.validar(dados.getModelagem()));
+		validadoresParteCima.forEach(v -> v.validar(dados.getParteDeCima()));
+		validadoresRoupaAtualizar.forEach(v -> v.validarAtualiza(dados));
 		
 
 		roupa.setNome(dados.getNome());
-		roupa.setTipoRoupa(tipoRoupaRepository.getReferenceById(dados.getTipoRoupa()));
+		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
 		roupa.setTamanho(dados.getTamanho());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
 		roupa.setTemBordado(dados.getTemBordado());
-		roupa.setUser_first_insert("admin");
-		roupa.setUser_last_modified("admin");
+		roupa.setUserFirstInsert("admin");
+		roupa.setUserLastModified("admin");
 		
 
 		if (dados.getModelagem() != null) {
@@ -120,9 +158,8 @@ public class RoupaService {
 		if (dados.getTecido() != null) {
 			Tecido tecido = tecidoService.atualizaTecido(dados.getId(), dados.getTecido());
 			roupa.setTecido(tecido);
-			tecido.setUser_first_insert("admin");
-			tecido.setUser_last_modified("admin");	
-			tecido.setTimeStamp(ZonedDateTime.now());
+			tecido.setUserLastModified("admin");	
+			tecido.setTimeStampLastModified(ZonedDateTime.now());
 		}
 
 		if (dados.getParteDeCima() != null) {
@@ -130,7 +167,7 @@ public class RoupaService {
 			roupa.setParteDeCima(parteDeCima);
 		}
 
-		roupa.setTimeStamp(ZonedDateTime.now());
+		roupa.setTimeStampLastModified(ZonedDateTime.now());
 
 		roupaRepository.save(roupa);
 
@@ -151,9 +188,13 @@ public class RoupaService {
 	
 	
 	private TecidoHistorico criaTecidoHistorico(Tecido tecido) {
+		Collection<FibraDomain> composicao = new HashSet<>(tecido.getComposicao());
+		
+		
+		
 		TecidoHistorico tecidoHistorico = new TecidoHistorico();
-		tecidoHistorico.setId(tecido.getId());
-		tecidoHistorico.setComposicao(tecido.getComposicao());
+		tecidoHistorico.setIdTecido(tecido.getId());
+		tecidoHistorico.setComposicao(composicao);
 		tecidoHistorico.setConstrucao(tecido.getConstrucao());
 		tecidoHistorico.setTipoDeTecido(tecido.getTipoDeTecido());
 		tecidoHistorico.setTempoSecagem(tecido.getTempoSecagem());
@@ -162,9 +203,11 @@ public class RoupaService {
 		tecidoHistorico.setElasticidade(tecido.getElasticidade());
 		tecidoHistorico.setComportamentoTermico(tecido.getComportamentoTermico());
 		tecidoHistorico.setResistencia(tecido.getResistencia());
-		tecidoHistorico.setUser_first_insert(tecido.getUser_first_insert());
-		tecidoHistorico.setUser_last_modified(tecido.getUser_last_modified());
-		tecidoHistorico.setTimeStamp(tecido.getTimeStamp());
+		
+		tecidoHistorico.setUserFirstInsert(tecido.getUserFirstInsert());
+		tecidoHistorico.setUserLastModified(tecido.getUserLastModified());
+		tecidoHistorico.setTimeStampFirstInsert(tecido.getTimeStampLastModified());
+		tecidoHistorico.setTimeStampLastModified(tecido.getTimeStampLastModified());
 		
 		return tecidoHistorico;
 		
@@ -172,7 +215,10 @@ public class RoupaService {
 	
 	private RoupaHistorico criaRoupaHistorico(Roupa roupa) {
 		RoupaHistorico roupaHistorico = new RoupaHistorico();
-		roupaHistorico.setId(roupa.getId());
+		
+		
+		
+		roupaHistorico.setIdRoupa(roupa.getId());
 		roupaHistorico.setNome(roupa.getNome());
 		roupaHistorico.setTipoRoupa(roupa.getTipoRoupa());
 		roupaHistorico.setTamanho(roupa.getTamanho());
@@ -184,9 +230,12 @@ public class RoupaService {
 		roupaHistorico.setTecido(criaTecidoHistorico(roupa.getTecido()));
 		roupaHistorico.setParteDeCima(roupa.getParteDeCima());
 		roupaHistorico.setAtivo(roupa.getAtivo());
-		roupaHistorico.setUser_first_insert(roupa.getUser_first_insert());
-		roupaHistorico.setUser_last_modified(roupa.getUser_last_modified());
-		roupaHistorico.setTimeStamp(roupa.getTimeStamp());
+		
+		
+		roupaHistorico.setUserFirstInsert(roupa.getUserFirstInsert());
+		roupaHistorico.setUserLastModified(roupa.getUserLastModified());
+		roupaHistorico.setTimeStampFirstInsert(roupa.getTimeStampfirstInsert());
+		roupaHistorico.setTimeStampLastModified(roupa.getTimeStampLastModified());
 		
 		return roupaHistorico;
 		

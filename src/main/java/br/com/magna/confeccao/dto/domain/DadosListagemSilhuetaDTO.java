@@ -10,6 +10,6 @@ public record DadosListagemSilhuetaDTO(
 		) {
 	
 	public DadosListagemSilhuetaDTO(SilhuetaDomain silhueta) {
-		this(silhueta.getId(), silhueta.getDescricao());
+		this(silhueta.getId(), silhueta.getDescricaoSilhueta());
 	}
 }

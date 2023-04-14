@@ -7,6 +7,6 @@ public record DadosListagemCavaDTO(Long id, String descricao
 ) {
 
 	public DadosListagemCavaDTO(CavaDomain cava) {
-		this(cava.getId(), cava.getDescricao());
+		this(cava.getId(), cava.getDescricaoCava());
 	}
 }

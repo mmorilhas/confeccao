@@ -36,13 +36,16 @@ public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 	@Column(name="PK_ID_ROUPA")
 	private Long id;
 	
+	
+	@Column(name="ID_ROUPA")
+	private Long idRoupa;
+	
 	@NotBlank
 	@Column(name="VAR_NOME_ROUPA")
 	private String nome;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_TIPO_ROUPA")
-	private TipoRoupaDomain tipoRoupa;
+	@JoinColumn(name = "STR_TIPO_ROUPA")
+	private String tipoRoupa;
 	
 	@Range(min=10, max=70)
 	@Column(name="INT_TAMANHO_ROUPA")
@@ -76,25 +79,12 @@ public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 	private Boolean ativo;
 	
 	
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void excluir() {
-		this.ativo = false;
-	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
-	
-
-	public TipoRoupaDomain getTipoRoupa() {
-		return tipoRoupa;
-	}
-
-	public void setTipoRoupa(TipoRoupaDomain tipoRoupa) {
+	public void setTipoRoupa(String tipoRoupa) {
 		this.tipoRoupa = tipoRoupa;
 	}
 
@@ -134,42 +124,6 @@ public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 		this.ativo = ativo;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public Integer getTamanho() {
-		return tamanho;
-	}
-
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public Boolean getTemEstampa() {
-		return temEstampa;
-	}
-
-	public Boolean getTemBordado() {
-		return temBordado;
-	}
-
-	public Modelagem getModelagem() {
-		return modelagem;
-	}
-
-	public TecidoHistorico getTecido() {
-		return tecido;
-	}
-
-	public ParteDeCima getParteDeCima() {
-		return parteDeCima;
-	}
-
 	@Override
 	public Long getId() {
 		return this.id;
@@ -177,8 +131,11 @@ public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 
 	@Override
 	public void setId(Long id) {
-		this.id = id;
-		
+		throw new UnsupportedOperationException();
+	}
+
+	public void setIdRoupa(Long idRoupa) {
+		this.idRoupa = idRoupa;
 	}
 
 

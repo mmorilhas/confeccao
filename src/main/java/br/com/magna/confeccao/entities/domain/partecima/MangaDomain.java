@@ -20,23 +20,18 @@ public class MangaDomain {
 		@Column(name="PK_ID_MANGA")
 		private Long id;
 		
-		@Column(name="VAR_COMPRIMENTO_MANGA")
-		private String comprimento;
+		@Column(name="VAR_DESCRICAO_MANGA")
+		private String manga;
 		
-		@Column(name="VAR_TIPO_MANGA")
-		private String tipo;
 
 		public Long getId() {
 			return id;
 		}
 
-		public String getComprimento() {
-			return comprimento;
+		public String getDescricaoManga() {
+			return manga;
 		}
 
-		public String getTipo() {
-			return tipo;
-		}
 		
 		
 

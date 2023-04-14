@@ -11,7 +11,7 @@ public record DadosListagemDecoteDTO(
 		) {
 	
 	public DadosListagemDecoteDTO(DecoteDomain decote) {
-		this(decote.getId(), decote.getDescricao());
+		this(decote.getId(), decote.getDescricaoDecote());
 	}
 
 	

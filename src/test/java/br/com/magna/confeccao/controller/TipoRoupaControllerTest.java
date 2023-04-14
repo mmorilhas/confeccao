@@ -23,16 +23,16 @@ import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TipoRoupaControllerTest {
 
-	    @Autowired
-	    private TestRestTemplate restTemplate;
-
-	    @Test
-	    void testListarTipoRoupa() {
-	    	ResponseEntity<List<TipoRoupaDomain>> response = restTemplate.exchange("/tipos", HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-
-	    
-	    	assertTrue(response.getStatusCode().is2xxSuccessful());
-	    }
+	
+	  @Autowired private TestRestTemplate restTemplate;
+	  
+	  @Test void testListarTipoRoupa() { ResponseEntity<List<TipoRoupaDomain>>
+	  response = restTemplate.exchange("/tipos", HttpMethod.GET, null, new
+	  ParameterizedTypeReference<>() {});
+	  
+	  
+	  assertTrue(response.getStatusCode().is2xxSuccessful()); }
+	 
 	    
 
 

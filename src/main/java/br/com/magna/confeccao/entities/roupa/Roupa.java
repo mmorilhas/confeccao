@@ -39,9 +39,8 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 	@Column(name="VAR_NOME_ROUPA")
 	private String nome;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_TIPO_ROUPA")
-	private TipoRoupaDomain tipoRoupa;
+	@JoinColumn(name = "STR_TIPO_ROUPA")
+	private String tipoRoupa;
 	
 	@Range(min=10, max=70)
 	@Column(name="INT_TAMANHO_ROUPA")
@@ -89,11 +88,11 @@ public class Roupa extends AbstractEntity<Roupa, Long>{
 	
 	
 
-	public TipoRoupaDomain getTipoRoupa() {
+	public String getTipoRoupa() {
 		return tipoRoupa;
 	}
 
-	public void setTipoRoupa(TipoRoupaDomain tipoRoupa) {
+	public void setTipoRoupa(String tipoRoupa) {
 		this.tipoRoupa = tipoRoupa;
 	}
 

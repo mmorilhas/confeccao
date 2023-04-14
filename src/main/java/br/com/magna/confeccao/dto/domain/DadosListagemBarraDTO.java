@@ -10,7 +10,7 @@ public record DadosListagemBarraDTO(
 	
 	
 	public DadosListagemBarraDTO(BarraDomain barra) {
-		this(barra.getId(), barra.getDescricao());
+		this(barra.getId(), barra.getDescricaoBarra());
 	}
 
 }
