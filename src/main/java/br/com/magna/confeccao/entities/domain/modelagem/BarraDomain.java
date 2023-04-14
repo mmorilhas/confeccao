@@ -20,14 +20,14 @@ public class BarraDomain {
 		private Long id;
 		
 		@Column(name="VAR_DESCRICAO_BARRA")
-		private String descricao;
+		private String barra;
 
 		public Long getId() {
 			return id;
 		}
 
-		public String getDescricao() {
-			return descricao;
+		public String getDescricaoBarra() {
+			return barra;
 		}
 		
 		

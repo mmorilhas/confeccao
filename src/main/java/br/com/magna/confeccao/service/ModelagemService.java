@@ -1,25 +1,16 @@
 package br.com.magna.confeccao.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
-import br.com.magna.confeccao.entities.ValidacaoException;
-import br.com.magna.confeccao.entities.domain.modelagem.BarraDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.PregaDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
-import br.com.magna.confeccao.entities.modelagem.validacoes.ValidadorModelagem;
-import br.com.magna.confeccao.entities.partecima.validacoes.ValidadorParteCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
-import br.com.magna.confeccao.repository.BarraDomainRepository;
-import br.com.magna.confeccao.repository.FechamentoDomainRepository;
-import br.com.magna.confeccao.repository.PregaDomainRepository;
 import br.com.magna.confeccao.repository.RoupaRepository;
-import br.com.magna.confeccao.repository.SilhuetaDomainRepository;
+import br.com.magna.confeccao.repository.domain.BarraDomainRepository;
+import br.com.magna.confeccao.repository.domain.FechamentoDomainRepository;
+import br.com.magna.confeccao.repository.domain.PregaDomainRepository;
+import br.com.magna.confeccao.repository.domain.SilhuetaDomainRepository;
 import jakarta.validation.Valid;
 
 @Service
@@ -36,26 +27,23 @@ public class ModelagemService {
 	@Autowired
 	private RoupaRepository roupaRepository;
 	
-	@Autowired
-	private List<ValidadorModelagem> validadores;
 
 	public Modelagem criarModelagem(@Valid DadosCadastroModelagemDTO dados) {
 		
-		validadores.forEach(v -> v.validar(dados));
-		
 		Modelagem modelagem = new Modelagem();
-		modelagem.setSilhueta(silhuetaRepository.getReferenceById(dados.getIdSilhueta()));
-		modelagem.setFechamento(fechamentoRepository.getReferenceById(dados.getIdFechamento()));
+		modelagem.setSilhueta(silhuetaRepository.findyBySilhueta(dados.getSilhueta()));
+		modelagem.setFechamento(fechamentoRepository.findyByFechamento(dados.getFechamento()));
 		modelagem.setCinto(dados.getCinto());
 		modelagem.setPassantes(dados.getPassantes());
 		modelagem.setPences(dados.getPences());
 		modelagem.setPala(dados.getPala());
-		modelagem.setPrega(pregaRepository.getReferenceById(dados.getIdPrega()));
+		modelagem.setPrega(pregaRepository.findyByPrega(dados.getPrega()));
 		modelagem.setBabado(dados.getBabado());
 		modelagem.setFenda(dados.getFenda());
 		modelagem.setBolsos(dados.getBolsos());
 		modelagem.setForro(dados.getForro());
-		modelagem.setBarra(barraRepository.getReferenceById(dados.getIdBarra()));
+		modelagem.setBarra( barraRepository.findyByBarra(dados.getBarra()));
+		
 
 		return modelagem;
 
@@ -63,15 +51,12 @@ public class ModelagemService {
 
 	public Modelagem atualizaModelagem(Long idRoupa, @Valid DadosCadastroModelagemDTO dados) {
 		
-		validadores.forEach(v -> v.validar(dados));
-		
 		Roupa roupa = roupaRepository.getReferenceById(idRoupa);
 		Modelagem modelagem = roupa.getModelagem();
-
-		modelagem.setSilhueta(silhuetaRepository.getReferenceById(dados.getIdSilhueta()));
-		modelagem.setFechamento(fechamentoRepository.getReferenceById(dados.getIdFechamento()));
-		modelagem.setPrega(pregaRepository.getReferenceById(dados.getIdPrega()));
-		modelagem.setBarra(barraRepository.getReferenceById(dados.getIdBarra()));
+		modelagem.setSilhueta(silhuetaRepository.findyBySilhueta(dados.getSilhueta()));
+		modelagem.setFechamento(fechamentoRepository.findyByFechamento(dados.getFechamento()));
+		modelagem.setPrega(pregaRepository.findyByPrega(dados.getPrega()));
+		modelagem.setBarra( barraRepository.findyByBarra(dados.getBarra()));
 		modelagem.setCinto(dados.getCinto());
 		modelagem.setPassantes(dados.getPassantes());
 		modelagem.setPences(dados.getPences());

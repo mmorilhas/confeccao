@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemMangaDTO;
-import br.com.magna.confeccao.repository.MangaDomainRepository;
+import br.com.magna.confeccao.repository.domain.MangaDomainRepository;
 
 @RestController
 @RequestMapping("mangas")

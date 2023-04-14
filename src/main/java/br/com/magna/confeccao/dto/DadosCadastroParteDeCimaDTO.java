@@ -4,29 +4,29 @@ import jakarta.validation.constraints.NotNull;
 
 public class DadosCadastroParteDeCimaDTO{
 		
-		@NotNull Long idManga;
-		@NotNull Long idDecote;
-		@NotNull Long idCava;
+		@NotNull String manga;
+		@NotNull String decote;
+		@NotNull String cava;
 		@NotNull Boolean capuz;
-		@NotNull Long idComprimento;
+		@NotNull String comprimento;
 		
-		public Long getIdManga() {
-			return idManga;
+		public String getManga() {
+			return manga;
 		}
-		public void setIdManga(Long idManga) {
-			this.idManga = idManga;
+		public void setManga(String manga) {
+			this.manga = manga;
 		}
-		public Long getIdDecote() {
-			return idDecote;
+		public String getDecote() {
+			return decote;
 		}
-		public void setIdDecote(Long idDecote) {
-			this.idDecote = idDecote;
+		public void setDecote(String decote) {
+			this.decote = decote;
 		}
-		public Long getIdCava() {
-			return idCava;
+		public String getCava() {
+			return cava;
 		}
-		public void setIdCava(Long idCava) {
-			this.idCava = idCava;
+		public void setCava(String cava) {
+			this.cava = cava;
 		}
 		public Boolean getCapuz() {
 			return capuz;
@@ -34,11 +34,11 @@ public class DadosCadastroParteDeCimaDTO{
 		public void setCapuz(Boolean capuz) {
 			this.capuz = capuz;
 		}
-		public Long getIdComprimento() {
-			return idComprimento;
+		public String getComprimento() {
+			return comprimento;
 		}
-		public void setIdComprimento(Long idComprimento) {
-			this.idComprimento = idComprimento;
+		public void setComprimento(String comprimento) {
+			this.comprimento = comprimento;
 		}
 		
 		

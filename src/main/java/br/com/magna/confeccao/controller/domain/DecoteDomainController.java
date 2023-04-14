@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemDecoteDTO;
-import br.com.magna.confeccao.repository.DecoteDomainRepository;
+import br.com.magna.confeccao.repository.domain.DecoteDomainRepository;
 
 @RestController
 @RequestMapping("decotes")

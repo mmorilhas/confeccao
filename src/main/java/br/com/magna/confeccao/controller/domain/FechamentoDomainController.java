@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemFechamentoDTO;
-import br.com.magna.confeccao.repository.FechamentoDomainRepository;
+import br.com.magna.confeccao.repository.domain.FechamentoDomainRepository;
 
 @RestController
 @RequestMapping("fechamentos")

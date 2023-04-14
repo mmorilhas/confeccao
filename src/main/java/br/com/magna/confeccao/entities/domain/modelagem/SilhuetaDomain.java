@@ -20,14 +20,14 @@ public class SilhuetaDomain {
 		private Long id;
 		
 		@Column(name="VAR_DESCRICAO_SILHUETA")
-		private String descricao;
+		private String silhueta;
 
 		public Long getId() {
 			return id;
 		}
 
-		public String getDescricao() {
-			return descricao;
+		public String getDescricaoSilhueta() {
+			return silhueta;
 		}
 		
 		

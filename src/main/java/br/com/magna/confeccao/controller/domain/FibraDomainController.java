@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.magna.confeccao.dto.domain.DadosListagemFibraDTO;
-import br.com.magna.confeccao.repository.FibraDomainRepository;
+import br.com.magna.confeccao.repository.domain.FibraDomainRepository;
 
 @RestController
 @RequestMapping("fibras")

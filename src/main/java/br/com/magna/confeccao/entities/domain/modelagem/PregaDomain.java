@@ -20,14 +20,14 @@ public class PregaDomain {
 		private Long id;
 		
 		@Column(name="VAR_DESCRICAO_PREGA")
-		private String descricao;
+		private String prega;
 
 		public Long getId() {
 			return id;
 		}
 
-		public String getDescricao() {
-			return descricao;
+		public String getDescricaoPrega() {
+			return prega;
 		}
 		
 		

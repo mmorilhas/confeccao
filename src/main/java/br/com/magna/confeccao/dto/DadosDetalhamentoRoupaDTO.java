@@ -1,6 +1,5 @@
 package br.com.magna.confeccao.dto;
 
-import br.com.magna.confeccao.entities.domain.roupa.TipoRoupaDomain;
 import br.com.magna.confeccao.entities.modelagem.Modelagem;
 import br.com.magna.confeccao.entities.partecima.ParteDeCima;
 import br.com.magna.confeccao.entities.roupa.Roupa;
@@ -12,7 +11,7 @@ public record DadosDetalhamentoRoupaDTO(
 		
 		Long id,
 		String nome,
-		TipoRoupaDomain tipoRoupa,
+		String tipoRoupa,
 		Integer tamanho,
 		Genero genero,
 		String cor,

@@ -1,6 +1,5 @@
 package br.com.magna.confeccao.entities;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;
@@ -12,36 +11,46 @@ public abstract class AbstractEntity<T, ID> {
 	
 	protected String userFirstInsert;
 	protected String userLastModified;
-	protected ZonedDateTime timeStamp;
+	protected ZonedDateTime timeStampFirstInsert;
+	protected ZonedDateTime timeStampLastModified;
 	
 	@Column(name="USER_FIRST_INSERT")
-	public String getUser_first_insert() {
+	public String getUserFirstInsert() {
 		return userFirstInsert;
 	}
 
-	public void setUser_first_insert(String user_first_insert) {
-		this.userFirstInsert = user_first_insert;
+	public void setUserFirstInsert(String userFirstInsert) {
+		this.userFirstInsert = userFirstInsert;
 	}
 
 	@Column(name="USER_LAST_MODIFIED")
-	public String getUser_last_modified() {
+	public String getUserLastModified() {
 		return userLastModified;
 	}
 
-	public void setUser_last_modified(String user_last_modified) {
-		this.userLastModified = user_last_modified;
+	public void setUserLastModified(String userLastModified) {
+		this.userLastModified = userLastModified;
 	}
 
-	@Column(name="TIMESTAMP")
-	public ZonedDateTime getTimeStamp() {
-		return timeStamp;
+
+	@Column(name="TIMESTAMP_FIRST_INSERT")
+	public ZonedDateTime getTimeStampfirstInsert() {
+		return timeStampFirstInsert;
 	}
 
-	public void setTimeStamp(ZonedDateTime timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setTimeStampFirstInsert(ZonedDateTime timeStampFirstInsert) {
+		this.timeStampFirstInsert = timeStampFirstInsert;
 	}
 
-	
+	@Column(name="TIMESTAMP_LAST_MODIFIED")
+	public ZonedDateTime getTimeStampLastModified() {
+		return timeStampLastModified;
+	}
+
+	public void setTimeStampLastModified(ZonedDateTime timeStampLastModified) {
+		this.timeStampLastModified = timeStampLastModified;
+	}
+
 	public abstract Long getId();
 	
 	public abstract void setId(ID id);

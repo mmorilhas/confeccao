@@ -2,28 +2,21 @@ package br.com.magna.confeccao.entities.modelagem;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.magna.confeccao.entities.domain.modelagem.BarraDomain;
 import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.PregaDomain;
-import br.com.magna.confeccao.entities.domain.modelagem.SilhuetaDomain;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Positive;
 
 @Embeddable
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Modelagem {
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ID_SILHUETA")
-	private SilhuetaDomain silhueta;
+	@JoinColumn(name = "STR_SILHUETA")
+	private String silhueta;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_ID_FECHAMENTO")
-	private FechamentoDomain fechamento;
+	@JoinColumn(name = "STR_FECHAMENTO")
+	private String fechamento;
 	
 	@Column(name="BOOL_CINTO_ROUPA")
 	private Boolean cinto;
@@ -37,9 +30,8 @@ public class Modelagem {
 	@Column(name="BOOL_PALA_ROUPA")
 	private Boolean pala;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_ID_PREGA")
-	private PregaDomain prega;
+	@JoinColumn(name = "STR_PREGA")
+	private String prega;
 
 	@Column(name="BOOL_BABADO_ROUPA")
 	private Boolean babado;
@@ -54,15 +46,14 @@ public class Modelagem {
 	@Column(name="BOOL_FORRO_ROUPA")
 	private Boolean forro;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "FK_ID_BARRA")
-	private BarraDomain barra;
+	@JoinColumn(name = "STR_BARRA")
+	private String barra;
 
-	public void setSilhueta(SilhuetaDomain silhueta) {
+	public void setSilhueta(String silhueta) {
 		this.silhueta = silhueta;
 	}
 
-	public void setFechamento(FechamentoDomain fechamento) {
+	public void setFechamento(String fechamento) {
 		this.fechamento = fechamento;
 	}
 
@@ -82,7 +73,7 @@ public class Modelagem {
 		this.pala = pala;
 	}
 
-	public void setPrega(PregaDomain prega) {
+	public void setPrega(String prega) {
 		this.prega = prega;
 	}
 
@@ -102,15 +93,15 @@ public class Modelagem {
 		this.forro = forro;
 	}
 
-	public void setBarra(BarraDomain barra) {
+	public void setBarra(String barra) {
 		this.barra = barra;
 	}
 
-	public SilhuetaDomain getSilhueta() {
+	public String getSilhueta() {
 		return silhueta;
 	}
 
-	public FechamentoDomain getFechamento() {
+	public String getFechamento() {
 		return fechamento;
 	}
 
@@ -130,7 +121,7 @@ public class Modelagem {
 		return pala;
 	}
 
-	public PregaDomain getPrega() {
+	public String getPrega() {
 		return prega;
 	}
 
@@ -150,7 +141,7 @@ public class Modelagem {
 		return forro;
 	}
 
-	public BarraDomain getBarra() {
+	public String getBarra() {
 		return barra;
 	}
 	

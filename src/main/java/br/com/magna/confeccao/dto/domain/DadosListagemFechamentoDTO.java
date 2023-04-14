@@ -5,12 +5,11 @@ import br.com.magna.confeccao.entities.domain.modelagem.FechamentoDomain;
 public record DadosListagemFechamentoDTO(
 		
 		Long id,
-		String aviamento,
-		String local
+		String fechamento
 		) {
 
 	public DadosListagemFechamentoDTO(FechamentoDomain fechamento) {
-		this(fechamento.getId(), fechamento.getAviamento(), fechamento.getLocal());
+		this(fechamento.getId(), fechamento.getDescricaoFechamento());
 	}
 
 

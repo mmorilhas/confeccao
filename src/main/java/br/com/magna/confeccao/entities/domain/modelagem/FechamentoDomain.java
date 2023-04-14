@@ -9,32 +9,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name= "TB_DOM_FECHAMENTO")
-@Entity(name = "Fechamento")
+@Table(name="TB_DOM_FECHAMENTO")
+@Entity(name="Fechamento")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class FechamentoDomain {
 
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="PK_ID_FECHAMENTO")
 	private Long id;
 	
-	@Column(name="VAR_AVIAMENTO_FECHAMENTO")
-	private String aviamento;
+	@Column(name="VAR_DESCRICAO_FECHAMENTO")
+	private String fechamento;
 	
-	@Column(name="VAR_LOCAL_FECHAMENTO")
-	private String local;
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getAviamento() {
-		return aviamento;
+	public String getDescricaoFechamento() {
+		return fechamento;
 	}
-
-	public String getLocal() {
-		return local;
-	}
-	
-	
 }

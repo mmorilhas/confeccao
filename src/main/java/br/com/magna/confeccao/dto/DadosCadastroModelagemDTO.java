@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Positive;
 public class DadosCadastroModelagemDTO{
 		
 		
-		@NotNull Long idSilhueta; 
-		@NotNull Long idFechamento;
+		@NotNull String silhueta; 
+		@NotNull String fechamento;
 		
 		@NotNull Boolean cinto;
 		@NotNull Boolean passantes;
@@ -15,7 +15,7 @@ public class DadosCadastroModelagemDTO{
 		@NotNull Boolean pences;
 		@NotNull Boolean pala;
 		
-		@NotNull Long idPrega;
+		@NotNull String prega;
 		
 		@NotNull Boolean babado;
 		@NotNull Boolean fenda;
@@ -23,81 +23,83 @@ public class DadosCadastroModelagemDTO{
 		@NotNull @Positive Integer bolsos;
 		
 		@NotNull Boolean forro;
-		@NotNull Long idBarra;
+		@NotNull String barra;
 		
 		
-		public void setIdSilhueta(Long idSilhueta) {
-			this.idSilhueta = idSilhueta;
+		public String getSilhueta() {
+			return silhueta;
 		}
-		public void setIdFechamento(Long idFechamento) {
-			this.idFechamento = idFechamento;
+		public void setSilhueta(String silhueta) {
+			this.silhueta = silhueta;
 		}
-		public void setCinto(Boolean cinto) {
-			this.cinto = cinto;
+		public String getFechamento() {
+			return fechamento;
 		}
-		public void setPassantes(Boolean passantes) {
-			this.passantes = passantes;
-		}
-		public void setPences(Boolean pences) {
-			this.pences = pences;
-		}
-		public void setPala(Boolean pala) {
-			this.pala = pala;
-		}
-		public void setIdPrega(Long idPrega) {
-			this.idPrega = idPrega;
-		}
-		public void setBabado(Boolean babado) {
-			this.babado = babado;
-		}
-		public void setFenda(Boolean fenda) {
-			this.fenda = fenda;
-		}
-		public void setBolsos(Integer bolsos) {
-			this.bolsos = bolsos;
-		}
-		public void setForro(Boolean forro) {
-			this.forro = forro;
-		}
-		public void setIdBarra(Long idBarra) {
-			this.idBarra = idBarra;
-		}
-		public Long getIdSilhueta() {
-			return idSilhueta;
-		}
-		public Long getIdFechamento() {
-			return idFechamento;
+		public void setFechamento(String fechamento) {
+			this.fechamento = fechamento;
 		}
 		public Boolean getCinto() {
 			return cinto;
 		}
+		public void setCinto(Boolean cinto) {
+			this.cinto = cinto;
+		}
 		public Boolean getPassantes() {
 			return passantes;
+		}
+		public void setPassantes(Boolean passantes) {
+			this.passantes = passantes;
 		}
 		public Boolean getPences() {
 			return pences;
 		}
+		public void setPences(Boolean pences) {
+			this.pences = pences;
+		}
 		public Boolean getPala() {
 			return pala;
 		}
-		public Long getIdPrega() {
-			return idPrega;
+		public void setPala(Boolean pala) {
+			this.pala = pala;
+		}
+		public String getPrega() {
+			return prega;
+		}
+		public void setPrega(String prega) {
+			this.prega = prega;
 		}
 		public Boolean getBabado() {
 			return babado;
 		}
+		public void setBabado(Boolean babado) {
+			this.babado = babado;
+		}
 		public Boolean getFenda() {
 			return fenda;
+		}
+		public void setFenda(Boolean fenda) {
+			this.fenda = fenda;
 		}
 		public Integer getBolsos() {
 			return bolsos;
 		}
+		public void setBolsos(Integer bolsos) {
+			this.bolsos = bolsos;
+		}
 		public Boolean getForro() {
 			return forro;
 		}
-		public Long getIdBarra() {
-			return idBarra;
+		public void setForro(Boolean forro) {
+			this.forro = forro;
 		}
+		public String getBarra() {
+			return barra;
+		}
+		public void setBarra(String barra) {
+			this.barra = barra;
+		}
+		
+		
 		
 		
 
