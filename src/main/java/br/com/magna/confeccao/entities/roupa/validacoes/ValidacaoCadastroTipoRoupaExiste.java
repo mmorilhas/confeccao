@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
-import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.repository.domain.TipoRoupaDomainRepository;
 
 @Component

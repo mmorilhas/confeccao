@@ -22,7 +22,7 @@ import jakarta.persistence.Table;
 @Table(name = "TB_HIST_TECIDO")
 @Entity(name = "TecidoHistorico")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class TecidoHistorico extends AbstractEntity<TecidoHistorico, Long>{
+public class TecidoHistorico extends AbstractEntity<Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

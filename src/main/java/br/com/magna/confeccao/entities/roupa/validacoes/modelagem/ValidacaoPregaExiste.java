@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosCadastroModelagemDTO;
-import br.com.magna.confeccao.entities.ValidacaoException;
+import br.com.magna.confeccao.entities.roupa.validacoes.ValidacaoException;
 import br.com.magna.confeccao.repository.domain.PregaDomainRepository;
 
 @Component

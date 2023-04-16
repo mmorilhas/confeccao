@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.magna.confeccao.dto.DadosCadastroParteDeCimaDTO;
-import br.com.magna.confeccao.entities.ValidacaoException;
 import br.com.magna.confeccao.entities.roupa.validacoes.partecima.ValidadorParteCima;
 import br.com.magna.confeccao.repository.domain.CavaDomainRepository;
 import br.com.magna.confeccao.repository.domain.MangaDomainRepository;

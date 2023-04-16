@@ -82,8 +82,10 @@ public class RoupaService {
 		  
 		Roupa roupa = new Roupa();
 		roupa.setNome(dados.getNome());
+		roupa.setColecao(dados.getColecao());
 		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
-		roupa.setTamanho(dados.getTamanho());
+		roupa.setTamanhoInicial(dados.getTamanhoInicial());
+		roupa.setTamanhoFinal(dados.getTamanhoFinal());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
@@ -106,18 +108,17 @@ public class RoupaService {
 		
 		RoupaHistorico roupaHistorico = criaRoupaHistorico(roupa);
 		roupaHistRepository.save(roupaHistorico);
-		
-		
-		
-		
-		
-		
 
 	}
 
 	public Page<DadosListagemRoupaDTO> listar(Pageable paginacao) {
 		return roupaRepository.findAllByAtivoTrue(paginacao).map(DadosListagemRoupaDTO::new);
 	}
+	
+	public Page<DadosListagemRoupaDTO> listarPorColecao(Pageable paginacao, String colecao) {
+		return roupaRepository.findAllByColecao(paginacao, colecao).map(DadosListagemRoupaDTO::new);
+	}
+	
 
 	public DadosDetalhamentoRoupaDTO atualizar(@Valid DadosAtualizaRoupaDTO dados) {
 		
@@ -134,8 +135,10 @@ public class RoupaService {
 		
 
 		roupa.setNome(dados.getNome());
+		roupa.setColecao(dados.getColecao());
 		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
-		roupa.setTamanho(dados.getTamanho());
+		roupa.setTamanhoInicial(dados.getTamanhoInicial());
+		roupa.setTamanhoFinal(dados.getTamanhoFinal());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
@@ -214,8 +217,10 @@ public class RoupaService {
 		
 		roupaHistorico.setIdRoupa(roupa.getId());
 		roupaHistorico.setNome(roupa.getNome());
+		roupaHistorico.setColecao(roupa.getColecao());
 		roupaHistorico.setTipoRoupa(roupa.getTipoRoupa());
-		roupaHistorico.setTamanho(roupa.getTamanho());
+		roupaHistorico.setTamanhoInicial(roupa.getTamanhoInicial());
+		roupaHistorico.setTamanhoFinal(roupa.getTamanhoFinal());
 		roupaHistorico.setGenero(roupa.getGenero());
 		roupaHistorico.setCor(roupa.getCor());
 		roupaHistorico.setTemEstampa(roupa.getTemEstampa());

@@ -23,70 +23,82 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-
 @Table(name = "TB_HIST_ROUPA")
-@Entity (name = "RoupaHistorico")
+@Entity(name = "RoupaHistorico")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
+public class RoupaHistorico extends AbstractEntity<Long> {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="PK_ID_ROUPA")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PK_ID_ROUPA")
 	private Long id;
-	
-	
-	@Column(name="ID_ROUPA")
+
+	@Column(name = "ID_ROUPA")
 	private Long idRoupa;
-	
+
 	@NotBlank
-	@Column(name="VAR_NOME_ROUPA")
+	@Column(name = "VAR_NOME_ROUPA")
 	private String nome;
-	
+
+	@NotBlank
+	@Column(name = "VAR_COLECAO_ROUPA")
+	private String colecao;
+
 	@JoinColumn(name = "STR_TIPO_ROUPA")
 	private String tipoRoupa;
-	
-	@Range(min=10, max=70)
-	@Column(name="INT_TAMANHO_ROUPA")
-	private Integer tamanho;
-	
+
+	@Range(min = 10, max = 70)
+	@Column(name = "INT_TAMANHO_INICIAL_ROUPA")
+	private Integer tamanhoInicial;
+
+	@Range(min = 10, max = 70)
+	@Column(name = "INT_TAMANHO_FINAL_ROUPA")
+	private Integer tamanhoFinal;
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="VAR_GENERO_ROUPA")
+	@Column(name = "VAR_GENERO_ROUPA")
 	private Genero genero;
-	
-	@Column(name="VAR_COR_ROUPA")
+
+	@Column(name = "VAR_COR_ROUPA")
 	private String cor;
-	
-	@Column(name="BOOL_ESTAMPA_ROUPA")
+
+	@Column(name = "BOOL_ESTAMPA_ROUPA")
 	private Boolean temEstampa;
-	
-	@Column(name="BOOL_BORDADO_ROUPA")
+
+	@Column(name = "BOOL_BORDADO_ROUPA")
 	private Boolean temBordado;
-	
+
 	@Embedded
 	private Modelagem modelagem;
-	
-	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "FK_ID_TECIDO")
 	private TecidoHistorico tecido;
-	
+
 	@Embedded
 	private ParteDeCima parteDeCima;
 
-	@Column(name="BOOL_ATIVO")
+	@Column(name = "BOOL_ATIVO")
 	private Boolean ativo;
-	
-	
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public void setColecao(String colecao) {
+		this.colecao = colecao;
+	}
+
 	public void setTipoRoupa(String tipoRoupa) {
 		this.tipoRoupa = tipoRoupa;
 	}
 
-	public void setTamanho(Integer tamanho) {
-		this.tamanho = tamanho;
+	public void setTamanhoInicial(Integer tamanhoInicial) {
+		this.tamanhoInicial = tamanhoInicial;
+	}
+
+	public void setTamanhoFinal(Integer tamanhoFinal) {
+		this.tamanhoFinal = tamanhoFinal;
 	}
 
 	public void setGenero(Genero genero) {
@@ -135,11 +147,4 @@ public class RoupaHistorico extends AbstractEntity<RoupaHistorico, Long>{
 		this.idRoupa = idRoupa;
 	}
 
-
-
-	
-
-	
-	
-	
 }

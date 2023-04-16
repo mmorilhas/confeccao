@@ -10,8 +10,10 @@ import jakarta.validation.constraints.NotNull;
 public class DadosCadastroRoupaDTO{
 		
 		@NotBlank String nome;
+		@NotBlank String colecao;
 		@NotBlank String tipoRoupa;
-		@NotNull @Range(min=10, max=70) Integer tamanho;
+		@NotNull @Range(min=10, max=70) Integer tamanhoInicial;
+		@NotNull @Range(min=10, max=70) Integer tamanhoFinal;
 		@NotNull Genero genero;
 		@NotBlank String cor;
 		@NotNull Boolean temEstampa;
@@ -23,11 +25,17 @@ public class DadosCadastroRoupaDTO{
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
+		public void setColecao(String colecao) {
+			this.colecao = colecao;
+		}
 		public void setTipoRoupa(String tipoRoupa) {
 			this.tipoRoupa = tipoRoupa;
 		}
-		public void setTamanho(Integer tamanho) {
-			this.tamanho = tamanho;
+		public void setTamanhoInicial(Integer tamanhoInicial) {
+			this.tamanhoInicial = tamanhoInicial;
+		}
+		public void setTamanhoFinal(Integer tamanhoFinal) {
+			this.tamanhoFinal = tamanhoFinal;
 		}
 		public void setGenero(Genero genero) {
 			this.genero = genero;
@@ -53,11 +61,17 @@ public class DadosCadastroRoupaDTO{
 		public String getNome() {
 			return nome;
 		}
+		public String getColecao() {
+			return colecao;
+		}
 		public String getTipoRoupa() {
 			return tipoRoupa;
 		}
-		public Integer getTamanho() {
-			return tamanho;
+		public Integer getTamanhoInicial() {
+			return tamanhoInicial;
+		}
+		public Integer getTamanhoFinal() {
+			return tamanhoFinal;
 		}
 		public Genero getGenero() {
 			return genero;
@@ -80,7 +94,6 @@ public class DadosCadastroRoupaDTO{
 		public DadosCadastroParteDeCimaDTO getParteDeCima() {
 			return parteDeCima;
 		}
-		
 		
 	
 		

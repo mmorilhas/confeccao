@@ -7,7 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public abstract class AbstractEntity<T, ID> {
+public abstract class AbstractEntity<T> {
 	
 	protected String userFirstInsert;
 	protected String userLastModified;
@@ -53,7 +53,7 @@ public abstract class AbstractEntity<T, ID> {
 
 	public abstract Long getId();
 	
-	public abstract void setId(ID id);
+	public abstract void setId(T id);
 	
 	
 

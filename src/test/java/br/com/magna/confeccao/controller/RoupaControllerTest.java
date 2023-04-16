@@ -70,10 +70,12 @@ class RoupaControllerTest {
 
 		DadosCadastroRoupaDTO roupa = new DadosCadastroRoupaDTO();
 		roupa.setNome("roupa-");
+		roupa.setColecao("colecao teste");
 		roupa.setTipoRoupa("casaco");
 		roupa.setGenero(Genero.FEMININO);
 		roupa.setCor("rosa");
-		roupa.setTamanho(34);
+		roupa.setTamanhoInicial(34);
+		roupa.setTamanhoFinal(44);
 		roupa.setTemEstampa(true);
 		roupa.setTemBordado(false);
 		roupa.setModelagem(modelagem);
@@ -113,10 +115,12 @@ class RoupaControllerTest {
 		DadosAtualizaRoupaDTO roupa = new DadosAtualizaRoupaDTO();
 		roupa.setId(1l);
 		roupa.setNome("mudei o nome eba");
+		roupa.setColecao("colecao teste");
 		roupa.setTipoRoupa("camiseta");
 		roupa.setGenero(Genero.FEMININO);
 		roupa.setCor("rosa");
-		roupa.setTamanho(34);
+		roupa.setTamanhoInicial(34);
+		roupa.setTamanhoFinal(44);
 		roupa.setTemEstampa(true);
 		roupa.setTemBordado(false);
 		roupa.setModelagem(modelagem);
@@ -360,16 +364,41 @@ class RoupaControllerTest {
 	@Test
 	@DisplayName("Cadastro com Exceção de Comprimento Top: deveria devolver mensagem de ValidacaoComprimentoTop ")
 	void testCadastrarRoupaValidacaoComprimentoTop() {
-		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
+		String tipoRoupa = "top";
+		String comprimento = "abaixo do quadril";
+		String msgExcecao = "Top possui comprimento na cintura ou acima";
+		
+		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
+		roupaCadastro.setTipoRoupa(tipoRoupa);
+		roupaCadastro.getParteDeCima().setComprimento(comprimento);
+
+		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupaCadastro),
+				String.class);
+
+		assertEquals(msgExcecao, responseCadastro.getBody());
+		assertTrue(responseCadastro.getStatusCode().is4xxClientError());
+		
+		
+	}
+	
+	
+	@Test
+	@DisplayName("Atualizar: Excecao Comprimento Top")
+	void testAtualizarRoupaExcecaoComprimentoTop() {
+		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
+		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		
+		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.setTipoRoupa("top");
 		roupa.getParteDeCima().setComprimento("abaixo do quadril");
-
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
-				String.class);
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/atualizar",
+				HttpMethod.PUT, new HttpEntity<>(roupa), String.class);
+		
 
 		assertEquals("Top possui comprimento na cintura ou acima", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
+	
 	
 	@Test
 	@DisplayName("Cadastro com Exceção de Comprimento Jaqueta Colete Blazer: deveria devolver mensagem de ValidacaoComprimentoJaquetaColeteBlazer ")
@@ -446,6 +475,36 @@ class RoupaControllerTest {
 	}
 
 	
+	@Test
+	@DisplayName("Cadastro e Atualizar:  Exceção de TamanhoInicialMaiorTamanhoFinal")
+	void testValidacaoExcecoesTamanhoRoupa() {
+		Integer tamanhoInicial = 42;
+		Integer tamanhoFinal = 34;
+		String msgExcecao = "Tamanho Final precisa ser igual ou maior que Tamanho Inicial";
+		
+		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
+		roupa.setTamanhoInicial(tamanhoInicial);
+		roupa.setTamanhoFinal(tamanhoFinal);
+
+		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+				String.class);
+
+		assertEquals(msgExcecao, responseCadastro.getBody());
+		assertTrue(responseCadastro.getStatusCode().is4xxClientError());
+		
+		DadosAtualizaRoupaDTO roupaAtualizar = criaRoupaAtualizar();
+		roupaAtualizar.setTamanhoInicial(tamanhoInicial);
+		roupaAtualizar.setTamanhoFinal(tamanhoFinal);
+
+		ResponseEntity<String> responseAtualizar = restTemplate.exchange("/confeccao/atualizar",
+				HttpMethod.PUT, new HttpEntity<>(roupaAtualizar), String.class);
+
+		assertEquals(msgExcecao, responseAtualizar.getBody());
+		assertTrue(responseAtualizar.getStatusCode().is4xxClientError());
+		
+		
+	}
+	
 	
 	@Test
 	@DisplayName("Atualizar: deveria devolver codigo http 200 quando infos estao validas")
@@ -465,22 +524,7 @@ class RoupaControllerTest {
 	}
 
 	
-	@Test
-	@DisplayName("Atualizar: Excecao Comprimento Top")
-	void testAtualizarRoupaExcecaoComprimentoTop() {
-		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
-		
-		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
-		roupa.setTipoRoupa("top");
-		roupa.getParteDeCima().setComprimento("abaixo do quadril");
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao/atualizar",
-				HttpMethod.PUT, new HttpEntity<>(roupa), String.class);
-		
 
-		assertEquals("Top possui comprimento na cintura ou acima", response.getBody());
-		assertTrue(response.getStatusCode().is4xxClientError());
-	}
 	
 	
 	@ParameterizedTest(name= "{index} {0}: [tipoRoupa]={1}, [msgExcecao]={2}")
@@ -630,8 +674,23 @@ class RoupaControllerTest {
 	
 	
 	@Test
+	@DisplayName("Listagem de colecao: deveria devolver codigo http 200 quando infos estao validas")
+	void testListarRoupaColecao() {
+		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
+		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/colecao/colecao%20teste", Roupa.class);
+
+		assertTrue(response.getStatusCode().is2xxSuccessful());
+
+	}
+	
+	
+	@Test
 	@DisplayName("Detalhar: deveria devolver codigo http 200 quando infos estao validas")
 	void testDetalharRoupaPorIdValido() {
+		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
+		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
 
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/1", Roupa.class);
 
@@ -661,5 +720,6 @@ class RoupaControllerTest {
 		assertTrue(response.getStatusCode().is4xxClientError());
 
 	}
+	
 
 }
