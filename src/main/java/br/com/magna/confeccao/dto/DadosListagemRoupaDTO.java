@@ -10,8 +10,10 @@ public record DadosListagemRoupaDTO(
 		
 		Long id,
 		String nome,
+		String colecao,
 		String tipoRoupa,
-		Integer tamanho,
+		Integer tamanhoInicial,
+		Integer tamanhoFinal,
 		Genero genero,
 		String cor,
 		Boolean temEstampa,
@@ -26,8 +28,10 @@ public record DadosListagemRoupaDTO(
 	public DadosListagemRoupaDTO(Roupa roupa) {
 		this(roupa.getId(),
 				roupa.getNome(), 
+				roupa.getColecao(),
 				roupa.getTipoRoupa(),
-				roupa.getTamanho(),
+				roupa.getTamanhoInicial(),
+				roupa.getTamanhoFinal(),
 				roupa.getGenero(),
 				roupa.getCor(),
 				roupa.getTemEstampa(),

@@ -9,8 +9,6 @@ import br.com.magna.confeccao.dto.DadosAtualizaRoupaDTO;
 import
   br.com.magna.confeccao.dto.DadosCadastroRoupaDTO;
 import
-  br.com.magna.confeccao.entities.ValidacaoException;
-import
   br.com.magna.confeccao.repository.domain.DecoteDomainRepository;
 import
   br.com.magna.confeccao.repository.domain.TipoRoupaDomainRepository;

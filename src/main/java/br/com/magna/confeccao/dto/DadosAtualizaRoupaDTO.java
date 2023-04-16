@@ -1,5 +1,7 @@
 package br.com.magna.confeccao.dto;
 
+import org.hibernate.validator.constraints.Range;
+
 import br.com.magna.confeccao.entities.roupa.enums.Genero;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -8,9 +10,11 @@ import jakarta.validation.constraints.NotNull;
 public class DadosAtualizaRoupaDTO{
 		
 		@NotNull Long id;
-		@NotNull String nome;
+		@NotBlank String nome;
+		@NotBlank String colecao;
 		@NotBlank String tipoRoupa;
-		@NotNull Integer tamanho;
+		@NotNull @Range(min=10, max=70) Integer tamanhoInicial;
+		@NotNull @Range(min=10, max=70) Integer tamanhoFinal;
 		@NotNull Genero genero;
 		@NotNull String cor;
 		@NotNull Boolean temEstampa;
@@ -28,11 +32,17 @@ public class DadosAtualizaRoupaDTO{
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
+		public void setColecao(String colecao) {
+			this.colecao = colecao;
+		}
 		public void setTipoRoupa(String tipoRoupa) {
 			this.tipoRoupa = tipoRoupa;
 		}
-		public void setTamanho(Integer tamanho) {
-			this.tamanho = tamanho;
+		public void setTamanhoInicial(Integer tamanhoInicial) {
+			this.tamanhoInicial = tamanhoInicial;
+		}
+		public void setTamanhoFinal(Integer tamanhoFinal) {
+			this.tamanhoFinal = tamanhoFinal;
 		}
 		public void setGenero(Genero genero) {
 			this.genero = genero;
@@ -63,11 +73,17 @@ public class DadosAtualizaRoupaDTO{
 		public String getNome() {
 			return nome;
 		}
+		public String getColecao() {
+			return colecao;
+		}
 		public String getTipoRoupa() {
 			return tipoRoupa;
 		}
-		public Integer getTamanho() {
-			return tamanho;
+		public Integer getTamanhoInicial() {
+			return tamanhoInicial;
+		}
+		public Integer getTamanhoFinal() {
+			return tamanhoFinal;
 		}
 		public Genero getGenero() {
 			return genero;

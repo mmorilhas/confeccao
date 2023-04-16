@@ -42,10 +42,13 @@ public class RoupaController {
 
 	@GetMapping(value = "/listagem")
 	public ResponseEntity<Page<DadosListagemRoupaDTO>> listar(
-			@PageableDefault(size = 10, sort = { "id", "nome", "tamanho" }) Pageable paginacao) {
+			@PageableDefault(size = 10, sort = { "id", "nome", "tamanhoInicial" }) Pageable paginacao) {
 
 		return ResponseEntity.ok(roupaService.listar(paginacao));
 	}
+	
+	
+	
 
 	@PutMapping(value = "/atualizar")
 	@Transactional
@@ -56,6 +59,14 @@ public class RoupaController {
 	@GetMapping(value = "/listagem/{id}")
 	public ResponseEntity<DadosDetalhamentoRoupaDTO> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok(roupaService.detalharPorId(id));
+	}
+	
+	
+	@GetMapping(value = "/listagem/colecao/{colecao}")
+	public ResponseEntity<Page<DadosListagemRoupaDTO>> listarPorColecao(
+			@PageableDefault(size = 10, sort = { "id", "nome" }) Pageable paginacao, @PathVariable String colecao) {
+
+		return ResponseEntity.ok(roupaService.listarPorColecao(paginacao, colecao));
 	}
 	
 

@@ -1,4 +1,4 @@
-package br.com.magna.confeccao.entities;
+package br.com.magna.confeccao.entities.roupa.validacoes;
 
 public class ValidacaoException extends RuntimeException {
 
