@@ -86,6 +86,7 @@ public class RoupaService {
 		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
 		roupa.setTamanhoInicial(dados.getTamanhoInicial());
 		roupa.setTamanhoFinal(dados.getTamanhoFinal());
+		roupa.setQuantidadePorTamanho(dados.getQuantidadePorTamanho());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
@@ -139,6 +140,7 @@ public class RoupaService {
 		roupa.setTipoRoupa(tipoRoupaRepository.findByTipoRoupa(dados.getTipoRoupa()));
 		roupa.setTamanhoInicial(dados.getTamanhoInicial());
 		roupa.setTamanhoFinal(dados.getTamanhoFinal());
+		roupa.setQuantidadePorTamanho(dados.getQuantidadePorTamanho());
 		roupa.setGenero(dados.getGenero());
 		roupa.setCor(dados.getCor());
 		roupa.setTemEstampa(dados.getTemEstampa());
@@ -221,6 +223,7 @@ public class RoupaService {
 		roupaHistorico.setTipoRoupa(roupa.getTipoRoupa());
 		roupaHistorico.setTamanhoInicial(roupa.getTamanhoInicial());
 		roupaHistorico.setTamanhoFinal(roupa.getTamanhoFinal());
+		roupaHistorico.setQuantidadePorTamanho(roupa.getQuantidadePorTamanho());
 		roupaHistorico.setGenero(roupa.getGenero());
 		roupaHistorico.setCor(roupa.getCor());
 		roupaHistorico.setTemEstampa(roupa.getTemEstampa());

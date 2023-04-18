@@ -21,6 +21,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Table(name = "TB_HIST_ROUPA")
@@ -55,6 +56,10 @@ public class RoupaHistorico extends AbstractEntity<Long> {
 	@Column(name = "INT_TAMANHO_FINAL_ROUPA")
 	private Integer tamanhoFinal;
 
+	@Min(1)
+	@Column(name = "INT_QUANTIDADE_POR_TAMANHO_ROUPA")
+	private Integer quantidadePorTamanho;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VAR_GENERO_ROUPA")
 	private Genero genero;
@@ -81,6 +86,7 @@ public class RoupaHistorico extends AbstractEntity<Long> {
 	@Column(name = "BOOL_ATIVO")
 	private Boolean ativo;
 
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -99,6 +105,10 @@ public class RoupaHistorico extends AbstractEntity<Long> {
 
 	public void setTamanhoFinal(Integer tamanhoFinal) {
 		this.tamanhoFinal = tamanhoFinal;
+	}
+
+	public void setQuantidadePorTamanho(Integer quantidadePorTamanho) {
+		this.quantidadePorTamanho = quantidadePorTamanho;
 	}
 
 	public void setGenero(Genero genero) {
@@ -124,13 +134,14 @@ public class RoupaHistorico extends AbstractEntity<Long> {
 	public void setTecido(TecidoHistorico tecido) {
 		this.tecido = tecido;
 	}
-
-	public void setParteDeCima(ParteDeCima parteDeCima) {
-		this.parteDeCima = parteDeCima;
-	}
+	
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public void setParteDeCima(ParteDeCima parteDeCima) {
+		this.parteDeCima = parteDeCima;
 	}
 
 	@Override

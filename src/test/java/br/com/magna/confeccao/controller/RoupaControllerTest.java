@@ -76,6 +76,7 @@ class RoupaControllerTest {
 		roupa.setCor("rosa");
 		roupa.setTamanhoInicial(34);
 		roupa.setTamanhoFinal(44);
+		roupa.setQuantidadePorTamanho(12);
 		roupa.setTemEstampa(true);
 		roupa.setTemBordado(false);
 		roupa.setModelagem(modelagem);
@@ -121,6 +122,7 @@ class RoupaControllerTest {
 		roupa.setCor("rosa");
 		roupa.setTamanhoInicial(34);
 		roupa.setTamanhoFinal(44);
+		roupa.setQuantidadePorTamanho(12);
 		roupa.setTemEstampa(true);
 		roupa.setTemBordado(false);
 		roupa.setModelagem(modelagem);
