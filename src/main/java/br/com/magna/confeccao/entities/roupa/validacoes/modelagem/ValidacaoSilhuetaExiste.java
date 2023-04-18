@@ -16,7 +16,7 @@ public class ValidacaoSilhuetaExiste implements ValidadorModelagem{
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {
 		if (Boolean.FALSE.equals(silhuetaRepository.existsBySilhueta(dados.getSilhueta()))) {
-			throw new ValidacaoException("Id de Silhueta informado não existe");
+			throw new ValidacaoException("Silhueta informada não existe");
 		}
 		
 	}

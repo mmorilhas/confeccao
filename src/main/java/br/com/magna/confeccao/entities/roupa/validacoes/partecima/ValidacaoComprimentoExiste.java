@@ -16,7 +16,7 @@ public class ValidacaoComprimentoExiste implements ValidadorParteCima{
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {
 		if (Boolean.FALSE.equals(comprimentoRepository.existsByComprimento(dados.getComprimento()))) {
-			throw new ValidacaoException("Id de Comprimento informado não existe");
+			throw new ValidacaoException("Comprimento informado não existe");
 		}
 	}
 

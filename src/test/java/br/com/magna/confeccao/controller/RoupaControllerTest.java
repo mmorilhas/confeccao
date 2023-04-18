@@ -267,7 +267,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Manga informado não existe", response.getBody());
+		assertEquals("Manga informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -280,7 +280,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Decote informado não existe", response.getBody());
+		assertEquals("Decote informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -306,7 +306,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Comprimento informado não existe", response.getBody());
+		assertEquals("Comprimento informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -319,7 +319,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Silhueta informado não existe", response.getBody());
+		assertEquals("Silhueta informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -332,7 +332,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Fechamento informado não existe", response.getBody());
+		assertEquals("Fechamento informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -345,7 +345,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Barra informado não existe", response.getBody());
+		assertEquals("Barra informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -358,7 +358,7 @@ class RoupaControllerTest {
 		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Prega informado não existe", response.getBody());
+		assertEquals("Prega informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 	

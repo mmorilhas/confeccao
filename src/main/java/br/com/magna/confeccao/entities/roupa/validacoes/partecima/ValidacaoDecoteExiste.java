@@ -16,7 +16,7 @@ public class ValidacaoDecoteExiste implements ValidadorParteCima{
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {
 		if (Boolean.FALSE.equals(decoteRepository.existsByDecote(dados.getDecote()))) {
-			throw new ValidacaoException("Id de Decote informado não existe");
+			throw new ValidacaoException("Decote informado não existe");
 		}
 	}
 
