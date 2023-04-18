@@ -21,6 +21,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Table(name = "TB_ROUPA")
@@ -52,6 +53,10 @@ public class Roupa extends AbstractEntity<Long> {
 	@Column(name = "INT_TAMANHO_FINAL_ROUPA")
 	private Integer tamanhoFinal;
 
+	@Min(1)
+	@Column(name = "INT_QUANTIDADE_POR_TAMANHO_ROUPA")
+	private Integer quantidadePorTamanho;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VAR_GENERO_ROUPA")
 	private Genero genero;
@@ -82,108 +87,92 @@ public class Roupa extends AbstractEntity<Long> {
 		this.ativo = false;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getColecao() {
-		return colecao;
-	}
-
-	public void setColecao(String colecao) {
-		this.colecao = colecao;
-	}
-
-	public String getTipoRoupa() {
-		return tipoRoupa;
-	}
-
-	public void setTipoRoupa(String tipoRoupa) {
-		this.tipoRoupa = tipoRoupa;
-	}
-
-	public Integer getTamanhoInicial() {
-		return tamanhoInicial;
-	}
-
-	public void setTamanhoInicial(Integer tamanhoInicial) {
-		this.tamanhoInicial = tamanhoInicial;
-	}
-
-	public Integer getTamanhoFinal() {
-		return tamanhoFinal;
-	}
-
-	public void setTamanhoFinal(Integer tamanhoFinal) {
-		this.tamanhoFinal = tamanhoFinal;
-	}
-
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
-
-	public Boolean getTemEstampa() {
-		return temEstampa;
-	}
-
-	public void setTemEstampa(Boolean temEstampa) {
-		this.temEstampa = temEstampa;
-	}
-
-	public Boolean getTemBordado() {
-		return temBordado;
-	}
-
-	public void setTemBordado(Boolean temBordado) {
-		this.temBordado = temBordado;
-	}
-
-	public Modelagem getModelagem() {
-		return modelagem;
-	}
-
-	public void setModelagem(Modelagem modelagem) {
-		this.modelagem = modelagem;
-	}
-
-	public Tecido getTecido() {
-		return tecido;
-	}
-
-	public void setTecido(Tecido tecido) {
-		this.tecido = tecido;
-	}
-
-	public ParteDeCima getParteDeCima() {
-		return parteDeCima;
-	}
-
-	public void setParteDeCima(ParteDeCima parteDeCima) {
-		this.parteDeCima = parteDeCima;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
 
 	public void setAtivo() {
 		this.ativo = true;
+	}
+	
+	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getColecao() {
+		return colecao;
+	}
+	public void setColecao(String colecao) {
+		this.colecao = colecao;
+	}
+	public String getTipoRoupa() {
+		return tipoRoupa;
+	}
+	public void setTipoRoupa(String tipoRoupa) {
+		this.tipoRoupa = tipoRoupa;
+	}
+	public Integer getTamanhoInicial() {
+		return tamanhoInicial;
+	}
+	public void setTamanhoInicial(Integer tamanhoInicial) {
+		this.tamanhoInicial = tamanhoInicial;
+	}
+	public Integer getTamanhoFinal() {
+		return tamanhoFinal;
+	}
+	public void setTamanhoFinal(Integer tamanhoFinal) {
+		this.tamanhoFinal = tamanhoFinal;
+	}
+	public Integer getQuantidadePorTamanho() {
+		return quantidadePorTamanho;
+	}
+	public void setQuantidadePorTamanho(Integer quantidadePorTamanho) {
+		this.quantidadePorTamanho = quantidadePorTamanho;
+	}
+	public Genero getGenero() {
+		return genero;
+	}
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+	public String getCor() {
+		return cor;
+	}
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+	public Boolean getTemEstampa() {
+		return temEstampa;
+	}
+	public void setTemEstampa(Boolean temEstampa) {
+		this.temEstampa = temEstampa;
+	}
+	public Boolean getTemBordado() {
+		return temBordado;
+	}
+	public void setTemBordado(Boolean temBordado) {
+		this.temBordado = temBordado;
+	}
+	public Modelagem getModelagem() {
+		return modelagem;
+	}
+	public void setModelagem(Modelagem modelagem) {
+		this.modelagem = modelagem;
+	}
+	public Tecido getTecido() {
+		return tecido;
+	}
+	public void setTecido(Tecido tecido) {
+		this.tecido = tecido;
+	}
+	public ParteDeCima getParteDeCima() {
+		return parteDeCima;
+	}
+	public void setParteDeCima(ParteDeCima parteDeCima) {
+		this.parteDeCima = parteDeCima;
 	}
 
 	@Override

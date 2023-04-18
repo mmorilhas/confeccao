@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Range;
 
 import br.com.magna.confeccao.entities.roupa.enums.Genero;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -15,6 +16,7 @@ public class DadosAtualizaRoupaDTO{
 		@NotBlank String tipoRoupa;
 		@NotNull @Range(min=10, max=70) Integer tamanhoInicial;
 		@NotNull @Range(min=10, max=70) Integer tamanhoFinal;
+		@NotNull @Min(1) Integer quantidadePorTamanho;
 		@NotNull Genero genero;
 		@NotNull String cor;
 		@NotNull Boolean temEstampa;
@@ -23,91 +25,94 @@ public class DadosAtualizaRoupaDTO{
 		@Valid DadosCadastroTecidoDTO tecido;
 		@Valid DadosCadastroParteDeCimaDTO parteDeCima;
 		
-		
-		
-		
+		public Long getId() {
+			return id;
+		}
 		public void setId(Long id) {
 			this.id = id;
+		}
+		public String getNome() {
+			return nome;
 		}
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
+		public String getColecao() {
+			return colecao;
+		}
 		public void setColecao(String colecao) {
 			this.colecao = colecao;
+		}
+		public String getTipoRoupa() {
+			return tipoRoupa;
 		}
 		public void setTipoRoupa(String tipoRoupa) {
 			this.tipoRoupa = tipoRoupa;
 		}
+		public Integer getTamanhoInicial() {
+			return tamanhoInicial;
+		}
 		public void setTamanhoInicial(Integer tamanhoInicial) {
 			this.tamanhoInicial = tamanhoInicial;
+		}
+		public Integer getTamanhoFinal() {
+			return tamanhoFinal;
 		}
 		public void setTamanhoFinal(Integer tamanhoFinal) {
 			this.tamanhoFinal = tamanhoFinal;
 		}
+		public Integer getQuantidadePorTamanho() {
+			return quantidadePorTamanho;
+		}
+		public void setQuantidadePorTamanho(Integer quantidadePorTamanho) {
+			this.quantidadePorTamanho = quantidadePorTamanho;
+		}
+		public Genero getGenero() {
+			return genero;
+		}
 		public void setGenero(Genero genero) {
 			this.genero = genero;
+		}
+		public String getCor() {
+			return cor;
 		}
 		public void setCor(String cor) {
 			this.cor = cor;
 		}
+		public Boolean getTemEstampa() {
+			return temEstampa;
+		}
 		public void setTemEstampa(Boolean temEstampa) {
 			this.temEstampa = temEstampa;
+		}
+		public Boolean getTemBordado() {
+			return temBordado;
 		}
 		public void setTemBordado(Boolean temBordado) {
 			this.temBordado = temBordado;
 		}
+		public DadosCadastroModelagemDTO getModelagem() {
+			return modelagem;
+		}
 		public void setModelagem(DadosCadastroModelagemDTO modelagem) {
 			this.modelagem = modelagem;
 		}
+		public DadosCadastroTecidoDTO getTecido() {
+			return tecido;
+		}
 		public void setTecido(DadosCadastroTecidoDTO tecido) {
 			this.tecido = tecido;
+		}
+		public DadosCadastroParteDeCimaDTO getParteDeCima() {
+			return parteDeCima;
 		}
 		public void setParteDeCima(DadosCadastroParteDeCimaDTO parteDeCima) {
 			this.parteDeCima = parteDeCima;
 		}
 		
 		
-		public Long getId() {
-			return id;
-		}
-		public String getNome() {
-			return nome;
-		}
-		public String getColecao() {
-			return colecao;
-		}
-		public String getTipoRoupa() {
-			return tipoRoupa;
-		}
-		public Integer getTamanhoInicial() {
-			return tamanhoInicial;
-		}
-		public Integer getTamanhoFinal() {
-			return tamanhoFinal;
-		}
-		public Genero getGenero() {
-			return genero;
-		}
-		public String getCor() {
-			return cor;
-		}
-		public Boolean getTemEstampa() {
-			return temEstampa;
-		}
-		public Boolean getTemBordado() {
-			return temBordado;
-		}
-		public DadosCadastroModelagemDTO getModelagem() {
-			return modelagem;
-		}
-		public DadosCadastroTecidoDTO getTecido() {
-			return tecido;
-		}
-		public DadosCadastroParteDeCimaDTO getParteDeCima() {
-			return parteDeCima;
-		}
-	
 		
+
 		
 
 	
