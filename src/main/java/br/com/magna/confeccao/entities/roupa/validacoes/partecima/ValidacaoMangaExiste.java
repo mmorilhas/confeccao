@@ -16,7 +16,7 @@ public class ValidacaoMangaExiste implements ValidadorParteCima{
 	@Override
 	public void validar(DadosCadastroParteDeCimaDTO dados) {
 		if (Boolean.FALSE.equals(mangaRepository.existsByManga(dados.getManga()))) {
-			throw new ValidacaoException("Id de Manga informado não existe");
+			throw new ValidacaoException("Manga informada não existe");
 		}
 		
 	}

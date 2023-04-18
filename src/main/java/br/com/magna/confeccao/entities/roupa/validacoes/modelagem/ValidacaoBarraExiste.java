@@ -16,7 +16,7 @@ public class ValidacaoBarraExiste implements ValidadorModelagem{
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {
 		if (Boolean.FALSE.equals(barraRepository.existsByBarra(dados.getBarra()))) {
-			throw new ValidacaoException("Id de Barra informado não existe");
+			throw new ValidacaoException("Barra informada não existe");
 		}
 		
 	}

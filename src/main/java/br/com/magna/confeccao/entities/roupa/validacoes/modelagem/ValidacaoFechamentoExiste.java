@@ -16,7 +16,7 @@ public class ValidacaoFechamentoExiste implements ValidadorModelagem{
 	@Override
 	public void validar(DadosCadastroModelagemDTO dados) {
 		if (Boolean.FALSE.equals(fechamentoRepository.existsByFechamento(dados.getFechamento()))) {
-			throw new ValidacaoException("Id de Fechamento informado não existe");
+			throw new ValidacaoException("Fechamento informado não existe");
 		}
 		
 	}

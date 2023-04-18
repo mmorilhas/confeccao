@@ -139,7 +139,7 @@ class RoupaControllerTest {
 	void testCadastrarRoupaInfosValidas() {
 
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
-		ResponseEntity<Roupa> response = restTemplate.postForEntity("/confeccao", roupa, Roupa.class);
+		ResponseEntity<Roupa> response = restTemplate.postForEntity("/confeccao/cadastrar", roupa, Roupa.class);
 		assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
 	}
 
@@ -149,7 +149,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setSilhueta(null);
 
-		ResponseEntity<List> response = restTemplate.postForEntity("/confeccao", roupa, List.class);
+		ResponseEntity<List> response = restTemplate.postForEntity("/confeccao/cadastrar", roupa, List.class);
 
 		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 
@@ -163,7 +163,7 @@ class RoupaControllerTest {
 		roupa.getTecido().setConstrucao(ConstrucaoEnum.PLANO);
 		roupa.getModelagem().setSilhueta("justa");
 		
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Roupas sem fechamento precisam ter silhueta larga ou a construção do tecido precisa ser em malha",
@@ -179,7 +179,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getTecido().setIdDasFibras(fibras);
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals(msgExcecao, response.getBody());
@@ -206,7 +206,7 @@ class RoupaControllerTest {
 		roupa.getParteDeCima().setCapuz(true);
 		roupa.getParteDeCima().setDecote(decote);
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals(msgExcecao, response.getBody());
@@ -226,7 +226,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setDecote("tomara que caia");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Peças tomara-que-caia não possuem cava", response.getBody());
@@ -241,7 +241,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.setTipoRoupa(tipoRoupa);
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals(msgExcecao, response.getBody());
@@ -264,10 +264,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setManga("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Manga informado não existe", response.getBody());
+		assertEquals("Manga informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -277,10 +277,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setDecote("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Decote informado não existe", response.getBody());
+		assertEquals("Decote informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -290,7 +290,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setCava("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Cava informada não existe", response.getBody());
@@ -303,10 +303,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setComprimento("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Comprimento informado não existe", response.getBody());
+		assertEquals("Comprimento informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -316,10 +316,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setSilhueta("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Silhueta informado não existe", response.getBody());
+		assertEquals("Silhueta informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -329,10 +329,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setFechamento("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Fechamento informado não existe", response.getBody());
+		assertEquals("Fechamento informado não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -342,10 +342,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setBarra("teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Barra informado não existe", response.getBody());
+		assertEquals("Barra informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 
@@ -355,10 +355,10 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getModelagem().setPrega("Teste");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
-		assertEquals("Id de Prega informado não existe", response.getBody());
+		assertEquals("Prega informada não existe", response.getBody());
 		assertTrue(response.getStatusCode().is4xxClientError());
 	}
 	
@@ -374,7 +374,7 @@ class RoupaControllerTest {
 		roupaCadastro.setTipoRoupa(tipoRoupa);
 		roupaCadastro.getParteDeCima().setComprimento(comprimento);
 
-		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupaCadastro),
+		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupaCadastro),
 				String.class);
 
 		assertEquals(msgExcecao, responseCadastro.getBody());
@@ -388,7 +388,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Comprimento Top")
 	void testAtualizarRoupaExcecaoComprimentoTop() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.setTipoRoupa("top");
@@ -409,7 +409,7 @@ class RoupaControllerTest {
 		roupa.setTipoRoupa("jaqueta");
 		roupa.getParteDeCima().setComprimento("joelho");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Colete, Blazer e Jaqueta possuem comprimento acima do meio da coxa", response.getBody());
@@ -424,7 +424,7 @@ class RoupaControllerTest {
 		roupa.getParteDeCima().setDecote("colarinho italiano");
 		roupa.getParteDeCima().setComprimento("joelho");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Camisas e Camisetas possuem comprimento acima do joelho", response.getBody());
@@ -439,7 +439,7 @@ class RoupaControllerTest {
 		roupa.setTipoRoupa("colete");
 		roupa.getParteDeCima().setManga("regata alcinha");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Coletes possuem manga regata", response.getBody());
@@ -453,7 +453,7 @@ class RoupaControllerTest {
 		roupa.setTipoRoupa("colete");
 		roupa.getParteDeCima().setManga("curta solta");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Coletes possuem manga regata", response.getBody());
@@ -469,7 +469,7 @@ class RoupaControllerTest {
 		DadosCadastroRoupaDTO roupa = criaRoupaCadastro();
 		roupa.getParteDeCima().setCava("sem");
 
-		ResponseEntity<String> response = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> response = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals("Peças regatas precisam possuir cava", response.getBody());
@@ -488,7 +488,7 @@ class RoupaControllerTest {
 		roupa.setTamanhoInicial(tamanhoInicial);
 		roupa.setTamanhoFinal(tamanhoFinal);
 
-		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao", HttpMethod.POST, new HttpEntity<>(roupa),
+		ResponseEntity<String> responseCadastro = restTemplate.exchange("/confeccao/cadastrar", HttpMethod.POST, new HttpEntity<>(roupa),
 				String.class);
 
 		assertEquals(msgExcecao, responseCadastro.getBody());
@@ -512,7 +512,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: deveria devolver codigo http 200 quando infos estao validas")
 	void testAtualizarRoupaInfosValidas() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		Long[] fibras = {6l,7l,8l};
@@ -534,7 +534,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Tipo De Roupa: deveria devolver mensagem de ValidacaoException")
 	void testAtualizarRoupaValidacaoExcecoes(String nomeTeste, String tipoRoupa, String msgExcecao) {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.setTipoRoupa(tipoRoupa);
@@ -558,7 +558,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Comprimento Camisa e Camiseta")
 	void testAtualizarRoupaExcecaoComprimentoCamisaCamiseta() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.setTipoRoupa("camisa");
@@ -575,7 +575,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Comprimento Jaqueta Colete Blazer")
 	void testAtualizarRoupaExcecaoComprimentoJaquetaColeteBlazer() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.getModelagem().setFechamento("ziper lateral");
@@ -593,7 +593,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Colete Tem Manga")
 	void testAtualizarRoupaExcecaoColeteTemManga() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.setTipoRoupa("colete");
@@ -613,7 +613,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Excecao Sem Fechamento Com Construcao Tecido ")
 	void testAtualizarRoupaExcecaoSemFechamentoConstrucaoTecido() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.getModelagem().setFechamento("sem");
@@ -632,7 +632,7 @@ class RoupaControllerTest {
 	@DisplayName("Atualizar: Validando Atributos Tecido Passando Composicao de Fibras Diferentes")
 	void testAtualizarRoupaInfosValidasParaValidacaoTecido(Long[] fibras, Integer length) {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		DadosAtualizaRoupaDTO roupa = criaRoupaAtualizar();
 		roupa.getTecido().setIdDasFibras(fibras);
@@ -679,7 +679,7 @@ class RoupaControllerTest {
 	@DisplayName("Listagem de colecao: deveria devolver codigo http 200 quando infos estao validas")
 	void testListarRoupaColecao() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 		
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/colecao/colecao%20teste", Roupa.class);
 
@@ -692,7 +692,7 @@ class RoupaControllerTest {
 	@DisplayName("Detalhar: deveria devolver codigo http 200 quando infos estao validas")
 	void testDetalharRoupaPorIdValido() {
 		DadosCadastroRoupaDTO roupaCadastro = criaRoupaCadastro();
-		restTemplate.postForEntity("/confeccao", roupaCadastro, Roupa.class);
+		restTemplate.postForEntity("/confeccao/cadastrar", roupaCadastro, Roupa.class);
 
 		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/listagem/1", Roupa.class);
 
@@ -706,8 +706,8 @@ class RoupaControllerTest {
 	@DisplayName("Deletar: deveria devolver codigo http 204 quando infos estao validas")
 	void testDeletarRoupaValida() {
 
-		restTemplate.delete("/confeccao/1");
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/1", Roupa.class);
+		restTemplate.delete("/confeccao/delete/1");
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/delete/1", Roupa.class);
 		assertEquals(HttpStatus.METHOD_NOT_ALLOWED, response.getStatusCode());
 
 	}
@@ -716,8 +716,8 @@ class RoupaControllerTest {
 	@DisplayName("Deletar: deveria devolver codigo http 400 quando infos estao invalidas")
 	void testDeletarRoupaInvalido() throws Exception {
 
-		restTemplate.delete("/confeccao/100");
-		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/100", Roupa.class);
+		restTemplate.delete("/confeccao/delete/100");
+		ResponseEntity<Roupa> response = restTemplate.getForEntity("/confeccao/delete/100", Roupa.class);
 
 		assertTrue(response.getStatusCode().is4xxClientError());
 

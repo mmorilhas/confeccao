@@ -31,7 +31,7 @@ public class RoupaController {
 	@Autowired
 	private RoupaService roupaService;
 
-	@PostMapping
+	@PostMapping(value = "/cadastrar")
 	@Transactional
 	public ResponseEntity<Roupa> cadastrar(@RequestBody @Valid DadosCadastroRoupaDTO dados) {
 		roupaService.criarRoupaECadastrar(dados);
@@ -70,7 +70,7 @@ public class RoupaController {
 	}
 	
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	@Transactional
 	public ResponseEntity<Roupa> deletar(@PathVariable Long id) {
 		roupaService.tornarInativo(id);
