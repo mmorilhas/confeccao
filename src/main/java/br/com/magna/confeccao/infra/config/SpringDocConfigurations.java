@@ -12,11 +12,12 @@ public class SpringDocConfigurations {
 
 	@Bean
 	public OpenAPI customOpenAPI() {
-		return new OpenAPI().info(new Info().title("Confeccao API").description("API Rest da aplicação Confecção.\n"
-				+ "Simplifica a comunicação entre marca e confecção: \n"
-				+ "o sistema visa facilitar a consulta feita pela confecção dos dados técnicos que são geralmente enviados no desenho técnico"
-				+ " e manter um histórico das modelagens criadas pela marca.\n\n"
-				+ "Contém as funcionalidades de CRUD de peças de roupa superiores.\n\n")
+		return new OpenAPI().info(new Info().title("Confeccao API").description("""
+				API Rest da aplicação Confecção.
+				Simplifica a comunicação entre marca e confecção: 
+				o sistema visa facilitar a consulta feita pela confecção dos dados técnicos que são geralmente enviados no desenho técnico e manter um histórico das modelagens criadas pela marca.
+				Contém as funcionalidades de CRUD de peças de roupa superiores.
+				""")
 				.contact(new Contact().name("Desenvolvedora").email("mmorilhas@gmail.com"))
 
 		);

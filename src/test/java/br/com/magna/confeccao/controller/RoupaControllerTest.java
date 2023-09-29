@@ -37,7 +37,7 @@ import br.com.magna.confeccao.entities.tecido.ConstrucaoEnum;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RoupaControllerTest {
-
+	
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -132,7 +132,7 @@ class RoupaControllerTest {
 		return roupa;
 	}
 
-	
+
 
 	@Test
 	@DisplayName("Cadastro: deveria devolver codigo http 200 quando infos estao validas")
